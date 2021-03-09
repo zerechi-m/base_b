@@ -1,16 +1,19 @@
 class TeamsController < ApplicationController
   before_action :authenticate_team!, except: :index
-  before_action :team_match, only: [:edit]
+  before_action :set_team, only: [:edit, :show]
+  before_action :team_match, only: [:edit, :update]
 
   def index
     
   end
 
+  def show
+
+  end
 
 
   def edit
-    team_match
-    @team = Team.find(current_team.id)
+    
   end
 
   def update
@@ -22,8 +25,13 @@ class TeamsController < ApplicationController
   end
 
   private
+  def set_team
+    @team = Team.find(current_team.id)
+  end
+
   def team_match
-    unless current_team.id == params[:id]
+    binding.pry
+    unless current_team.id == @team.id
       redirect_to root_path
     end
   end
