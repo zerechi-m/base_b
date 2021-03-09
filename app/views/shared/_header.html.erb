@@ -1,11 +1,19 @@
 <header class="header">
   <div class="header_container">
-    <div class="header_logo"><a href="/">Base_B</a></div>
-    <div >
+    <div class="header_logo"><a href="/">Base_B</a>
+    </div>
+
+    <%if team_signed_in? %>
       <ul class="header_lists">
-        <li class="header_list"><a class="header-link" href="#">ログインする</a></li>
+        <li class="header_list_user">ログイン: <%= link_to current_team.name, root_path ,class: "login-user" %></li>
+        <li class="header_list"><%= link_to "ログアウト", destroy_team_session_path, method: :delete, class: "header-link" %></li>
+      </ul>
+    <%else%>
+      <ul class="header_lists">
+        <li class="header_list_user">ゲストさん</li>
+        <li class="header_list"><%= link_to "ログインする", new_team_session_path ,class: "header-link" %></li>
         <li class="header_list"><%= link_to "新規登録", new_team_registration_path, class: "header-link" %></li>
       </ul>
-    </div>
+    <%end%>
   </div>
 </header>

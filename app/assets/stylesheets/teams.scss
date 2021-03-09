@@ -34,11 +34,26 @@ header{
     display: flex;
     align-items: center;
   }
-    li{
+   .header_list_user{
+      width:30vw;
+      font-size: 14px;
+      text-align: right;
+      margin-right: 10px;
+      color: whitesmoke;
+
+      .login-user{
+         color: whitesmoke;
+         font-size: 14px;
+         padding: 20px 10px;
+       }
+    }
+
+    .header_list{
       text-align: center;
       margin-left: 10px;
       width: 180px;
-      
+
+
       .header-link{ 
         color: whitesmoke;
         display: block;
