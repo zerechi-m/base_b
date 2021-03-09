@@ -56,7 +56,7 @@
 - has_many :room_teams
 - has_many :rooms ,through :room_teams
 
-
+do
 
 **Member**
 
