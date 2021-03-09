@@ -5,8 +5,9 @@
 
     <%if team_signed_in? %>
       <ul class="header_lists">
-        <li class="header_list_user">ログイン: <%= link_to current_team.name, root_path ,class: "login-user" %></li>
+        <li class="header_list_user">ログイン: <%= link_to current_team.name, edit_team_registration_path ,class: "login-user" %></li>
         <li class="header_list"><%= link_to "ログアウト", destroy_team_session_path, method: :delete, class: "header-link" %></li>
+        
       </ul>
     <%else%>
       <ul class="header_lists">
