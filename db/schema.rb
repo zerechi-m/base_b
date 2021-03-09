@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 2021_03_09_060437) do
   create_table "teams", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "rep_name", null: false
-    t.integer "started", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
