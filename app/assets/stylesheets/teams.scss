@@ -1,3 +1,81 @@
 // Place all the styles related to the teams controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+* {
+  font-family: 'Hiragino Maru Gothic ProN';
+}
+
+header{
+  height: 10vh;
+  width: 100vw;
+  letter-spacing: 3px;
+  background-color: rgba($color: #0068b7, $alpha: 0.8) ;
+  z-index: 10;
+  position: fixed;
+
+  .header_container{
+    margin: 0 auto;
+    height: 100%;
+    width: 90vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header_logo a{
+    font-weight: bold;
+    padding: 5px 35px;
+    color: whitesmoke;
+    font-size: 20px;
+    text-align: center;
+  }
+  
+  ul{
+    display: flex;
+    align-items: center;
+  }
+    li{
+      text-align: center;
+      margin-left: 10px;
+      width: 180px;
+      
+      a{ 
+        color: whitesmoke;
+        display: block;
+        border: 1.5px solid whitesmoke;
+        border-radius: 8px;
+        padding: 15px 18px;
+
+      }
+
+      &:hover{
+        background-color:rgba($color: #001e43, $alpha: 0.4);
+      }
+
+    }
+
+}
+
+.wrapper{
+  width: 100vw;
+  height: 92vh;
+  background-image: url("top.jpg");
+  background-size: cover;
+  background-position: top center;
+}
+
+.footer{
+  background-color: #001e43;
+  height: calc(100vh - 92vh);
+
+   .copy {
+     color: whitesmoke;
+     height: 100%;
+     padding: 15px;
+     text-align: center;
+   }
+
+   span{
+     font-size: 6px;
+   }
+}
