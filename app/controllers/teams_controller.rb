@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
   before_action :authenticate_team!, except: :index
+  before_action :team_match, only: [:edit]
 
   def index
     
@@ -8,6 +9,7 @@ class TeamsController < ApplicationController
 
 
   def edit
+    team_match
     @team = Team.find(current_team.id)
   end
 
@@ -20,6 +22,12 @@ class TeamsController < ApplicationController
   end
 
   private
+  def team_match
+    unless current_team.id == params[:id]
+      redirect_to root_path
+    end
+  end
+
   def update_params
     params.require(:team).permit(:name, :rep_name)
   end
