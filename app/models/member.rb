@@ -9,5 +9,6 @@ class Member < ApplicationRecord
   end
 
   belongs_to :team
+  has_one_attached :image
 
 end
