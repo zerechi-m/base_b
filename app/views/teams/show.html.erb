@@ -4,7 +4,11 @@
   <div class="top-height"></div>
   <div class="show-container">
     <div class="profiles">
-      <img src="" alt="" class="show-img">
+      <% if @team.image.attached? %>
+        <%= image_tag @team.tag.variant(resize: "200x180"), class: "team-logo" %>
+      <%else%>
+        <%= image_tag "noimage.png", class: "team-logo" %>
+      <%end%>  
       <div class="profile">
         <div class="left-pro">
           チーム名:
