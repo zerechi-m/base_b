@@ -1,9 +1,18 @@
-.account-page .account-page__inner {
-  width: 980px;
-  margin: 60px auto;
-  padding: 60px;
+.account-page  {
+  width: 70vw;
+  height: 82vh;
+  margin: 0 auto ;
+}
+
+.top-height{
+  height: 10vh;
+  width:100%;
+}
+
+.account-page__inner{
+  padding: 50px 50px 20px 50px;
   background-color: #fff;
-  border: 1px solid #ddd;
+  border: 0px solid #ddd;
   border-radius: 5px;
 }
 .account-page .account-page__inner .account-page__inner--left, .account-page .account-page__inner .account-page__inner--right {
