@@ -161,9 +161,9 @@ header{
         margin: 20px auto;
       }
     
-      .edit-container{
+      .btn-container{
         height: 50px;
-        width: 60%;
+        width: 65%;
         margin-top: 20px;
         margin: 0 auto;
         display: flex;
@@ -172,6 +172,7 @@ header{
         .show-btn{
           height: 100%;
           width: 40%;
+          letter-spacing: 2px;
           border: 1px solid;
           border-radius: 8px;
           padding: 10px 20px;
@@ -179,16 +180,23 @@ header{
           text-align: center;
           color: #fff
         }
-        .edit{
+        .team-edit{
           background-color: #00a968;
           &:hover{
             background-color:rgba($color: #00a968, $alpha: 0.8)
           }
         }
-        .member{
+        .member-edit{
           background-color: #00a1e9;
           &:hover{
             background-color:rgba($color: #00a1e9, $alpha: 0.8)
+          }
+        }
+        .member-index{
+          width: 100%;
+          background-color: #ffa07a;
+          &:hover{
+            background-color:rgba($color: #ffa07a, $alpha: 0.8)
           }
         }
       }
