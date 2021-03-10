@@ -1,0 +1,28 @@
+<%= render "shared/header" %>
+
+<div class="show-main-wrapper">
+  <div class="top-height"></div>
+  <div class="show-container">
+    <div class="profiles">
+      <img src="" alt="" class="show-img">
+      <div class="profile">
+        <div class="left-pro">
+          チーム名:
+        </div>
+        <div class="right-pro">
+          <%= @team.name %>
+        </div>
+      </div>
+      <div class="profile">
+        <div class="left-pro">
+          代表者名:
+        </div>
+        <div class="right-pro">
+          <%= @team.rep_name %>
+        </div>
+      </div>
+    </div>  
+  </div>
+</div>
+
+<%= render 'shared/footer' %>

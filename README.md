@@ -43,13 +43,10 @@
 | Column             | Type            | Options                       |
 |--------------------|-----------------| ------------------------------|
 | team_name          | string          | null: false                   |
-| status             | integer         |                               |
 | rep_name           | string          | null: false                   |
+| started            | integer         | null: false, active hash      |
 | email              | string          | null: false , uniqueness: true|
 | encrypted_password | string          | null: false                   |
-| home               | integer         | null: false, active hash      |
-| start              | integer         | null: false, active hash      |
-| game_team          | references      | null: false, foreign_key      | 
 
 ### Association
 - has_many :members
@@ -59,7 +56,7 @@
 - has_many :room_teams
 - has_many :rooms ,through :room_teams
 
-
+do
 
 **Member**
 

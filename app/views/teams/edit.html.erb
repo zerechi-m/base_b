@@ -1,0 +1,50 @@
+<%= render "shared/header" %>
+
+<div class='account-page' id='account-page'>
+  <div class='account-page__inner clearfix'>
+    <div class='account-page__inner--left account-page__header'>
+      <h2>Edit Account</h2>
+      <h5>チームの編集</h5>
+      <div></div>
+    </div>
+    <div class='account-page__inner--right user-form'>
+      <%= form_with model: @team, url: team_path(params[:id]), method: :put, local: true do |f|%>
+        <div class='field'>
+          <div class='field-label'>
+            チームロゴ
+          </div>
+          <div class='field-input'>
+            <%= f.file_field :team_image%>
+          </div>
+        </div>  
+        <div class='field'>
+          <div class='field-label'>
+            チーム名
+          </div>
+          <div class='field-input'>
+            <%= f.text_field :name, autofocus: true, maxlength: 15%>
+          </div>
+          <div class='field-label'>
+            代表者名
+          </div>
+          <div class='field-input'>
+            <%= f.text_field :rep_name %>
+          </div>
+        </div>
+        <div class='field'>
+          <div class='field-label'>
+            <%= f.label :email%>
+          </div>
+          <div class='field-input'>
+            <%= f.email_field :email%>
+          </div>
+        </div>
+        <div class='actions'>
+          <%= f.submit "Edit Account", class: 'btn'%>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= render "shared/footer" %>
