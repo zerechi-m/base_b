@@ -8,8 +8,16 @@
 
 .mem-index-main-wrapper{
   width: 100vw;
-  height: 92vh;
+  height: 82vh;
   background-image: url("dagout.jpg");
   background-size: cover;
   background-position: top center;
+
+  .mem-index-container{
+    width: 70vw;
+    height:100%;
+    padding: 20px 10px;
+    margin: 0 auto;
+    background-color: hotpink;
+  }
 }

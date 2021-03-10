@@ -1,7 +1,21 @@
 <%= render "shared/main_header" %>
 
+<div class="top-height"></div>
 <div class="mem-index-main-wrapper">
-
+  <div class="mem-index-container">
+    <% if @team.image.attached? %>
+        <%= image_tag @team.image.variant(resize: "200x180"), class: "team-logo" %>
+      <%else%>
+        <%= image_tag "noimage.png", class: "team-logo" %>  <%#画像がなければデフォルト画像の表示 %>
+      <%end%>
+    <div class="index-btn-container">
+      <%= link_to "選手の追加", "#", class:"" %>
+    </div>
+    <div class="mem-pitcher">
+    </div>
+    <div class="mem-batter">
+    </div>
+  </div>
 </div>
 
 
