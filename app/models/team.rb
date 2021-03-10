@@ -9,5 +9,6 @@ class Team < ApplicationRecord
     validates :rep_name, length: {maximum: 15}, format: { with: /\A[ぁ-ん一-龥]+\z/ }
   end
 
-  has_one_attached :image
+  has_many :members, dependent: :destroy
+  has_one_attached :image, dependent: :destroy
 end
