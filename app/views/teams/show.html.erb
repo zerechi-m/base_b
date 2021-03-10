@@ -4,7 +4,17 @@
   <div class="top-height"></div>
   <div class="show-container">
     <div class="profiles">
-      <img src="" alt="" class="show-img">
+      <% if @team.image.attached? %>
+        <%= image_tag @team.image.variant(resize: "200x180"), class: "team-logo" %>
+      <%else%>
+        <%= image_tag "noimage.png", class: "team-logo" %>  <%#画像がなければデフォルト画像の表示 %>
+      <%end%>
+      <% if team_signed_in? && current_team.id == @team.id %>
+        <div class="edit-container">
+          <%= link_to "編集", edit_team_path(@team.id), class: "show-btn edit" %>
+          <%= link_to "選手編集", "#", class: "show-btn member" %>
+        </div> 
+      <%end%>
       <div class="profile">
         <div class="left-pro">
           チーム名:
