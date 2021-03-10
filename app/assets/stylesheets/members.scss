@@ -1,3 +1,15 @@
 // Place all the styles related to the members controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+* {
+  font-family: 'Hiragino Maru Gothic ProN';
+}
+
+.mem-index-main-wrapper{
+  width: 100vw;
+  height: 92vh;
+  background-image: url("dagout.jpg");
+  background-size: cover;
+  background-position: top center;
+}
