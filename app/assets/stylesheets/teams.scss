@@ -10,7 +10,7 @@ header{
   height: 10vh;
   width: 100vw;
   letter-spacing: 3px;
-  background-color: rgba($color: #0068b7, $alpha: 0.8) ;
+  background-color: rgba($color: #0068b7, $alpha: 0.9) ;
   z-index: 10;
   top: 0;
   position: fixed;
@@ -126,4 +126,59 @@ header{
    span{
      font-size: 6px;
    }
+}
+
+
+// teams#showページ
+
+.show-main-wrapper{
+  width: 100vw;
+  height: 92vh;
+  background-image: url("show1.jpg");
+  background-size: cover;
+  background-position: top center;
+
+  .top-height{
+    height: 10vh;
+    width:100%;
+  }
+
+  .show-container{
+    margin:0 auto;
+    background-color: rgba($color: #fbfaf5, $alpha: 0.8);
+    display: flex;
+    justify-content: center;
+    width: 70vw;
+    height: 82vh;
+
+    .profiles{
+      width: 90%;
+
+
+      .show-img{
+        height: 200px;
+        width: 180px;
+        display: block;
+        margin: 10px auto;
+      }
+
+      .profile{
+        height: 50px;
+        width: 100%;
+        margin: 30px auto;
+        background-color: #ffffff;
+        display: flex;
+        align-items: center;
+        .left-pro{
+          margin:0 20px 0 30px;
+          width: 100px;
+        }
+        .right-pro{
+          padding: 10px 20px;
+        }
+      }
+
+      
+    }
+  }
 }
