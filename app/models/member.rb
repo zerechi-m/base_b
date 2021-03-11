@@ -1,7 +1,8 @@
 class Member < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
     belongs_to :position
-  
+    belongs_to :base_hist
+
   with_options presence: true do
     validates :name
     validates :uni_no
