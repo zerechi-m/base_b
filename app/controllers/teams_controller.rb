@@ -4,16 +4,14 @@ class TeamsController < ApplicationController
   before_action :team_match, only: [:edit, :update]
 
   def index
-    
   end
 
-  def show #set_teamで @teamを作成
-    
+  # set_teamで @teamを作成
+  def show
   end
 
-
-  def edit #set_teamで @teamを作成
-    
+  # set_teamで @teamを作成
+  def edit
   end
 
   def update
@@ -25,14 +23,13 @@ class TeamsController < ApplicationController
   end
 
   private
+
   def set_team
     @team = Team.find(params[:id])
   end
 
   def team_match
-    unless current_team.id == @team.id
-      redirect_to root_path
-    end
+    redirect_to root_path unless current_team.id == @team.id
   end
 
   def update_params

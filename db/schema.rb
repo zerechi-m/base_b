@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2021_03_10_112013) do
   create_table "members", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.integer "uni_no", null: false
-    t.integer "age", null: false
+    t.integer "dominant_hand_id", null: false
     t.integer "position_id", null: false
     t.integer "base_hist_id"
     t.bigint "team_id"
