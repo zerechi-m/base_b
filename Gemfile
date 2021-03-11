@@ -61,3 +61,6 @@ gem "devise"
 # Activestorage関連 gem
 gem "mini_magick"
 gem "image_processing", "~> 1.2"
+
+# Active_Hashの追加
+gem "active_hash"

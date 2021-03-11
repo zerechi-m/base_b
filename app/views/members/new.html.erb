@@ -1,0 +1,17 @@
+<%= render "shared/main_header" %>
+
+<div class="show-main-wrapper">
+<div class="top-height"></div>
+  <div class="show-container">
+    <%= form_with model: @member, url: team_members_path(@team.id), method: :post,  local: true do |f|%>
+      <%= f.text_field :name %>
+      <%= f.text_field :age %>
+      <%= f.text_field :uni_no %>
+      <%# <%= f.select_collection :position_id %> %>
+      <%# <%= f.select_collection :base_hist_id %> %>
+      <%= f.submit "選手登録" %>
+    <%end%>
+  </div>
+</div>
+
+<%= render 'shared/footer' %>
