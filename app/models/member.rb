@@ -1,4 +1,6 @@
 class Member < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
+    belongs_to :position
   
   with_options presence: true do
     validates :name
