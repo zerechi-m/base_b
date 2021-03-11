@@ -30,6 +30,7 @@
   width: 500px;
   height: 82vh;
   
+  
   .title{
     margin:10px 10px 25px;
     width: 90%;
@@ -81,6 +82,7 @@
     width: 150px;
     padding: 10px;
     margin: 0px auto;
+    
     &:hover{
       background-color: rgba($color: #00a1e9, $alpha: 0.8);
       cursor: pointer;

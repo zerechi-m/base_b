@@ -116,7 +116,7 @@
 
 .footer{
   background-color: #001e43;
-  height: calc(100vh - 92vh);
+  height: calc(100vh - 90vh);
 
    .copy {
      color: whitesmoke;
@@ -151,14 +151,16 @@
     display: flex;
     justify-content: center;
     width: 500px;
-    height: 82vh;
+    height: 100%;
 
     .profiles{
       width: 90%;
+      height: 82vh;
+      overflow: scroll;
 
       .team-logo{
-        height: 200px;
-        width: 180px;
+        height: 160px;
+        width: 140px;
         display: block;
         margin: 20px auto;
       }
@@ -210,11 +212,12 @@
         display: flex;
         align-items: center;
         .left-pro{
-          margin:0 20px 0 30px;
+          margin:0 20px 0 40px;
           width: 100px;
         }
         .right-pro{
-          padding: 10px 20px;
+          padding: 10px;
+          text-align: center;
         }
       }
     }

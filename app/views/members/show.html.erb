@@ -1,0 +1,69 @@
+<%= render "shared/main_header" %>
+
+<div class="show-main-wrapper">
+  <div class="top-height"></div>
+  <div class="show-container">
+    <div class="profiles">
+      <% if @member.mem_image.attached? %>
+        <%= image_tag @member.mem_image.variant(resize: "200x180"), class: "team-logo" %>
+      <%else%>
+        <%= image_tag "noimage.png", class: "team-logo" %>  <%#画像がなければデフォルト画像の表示 %>
+      <%end%>
+      <% if team_signed_in? && current_team.id == @member.id %>
+        <div class="btn-container">
+          <%= link_to "編集", edit_team_path(@member.id), class: "show-btn team-edit" %>
+          <%= link_to "選手編集", "#", class: "show-btn member-edit" %>
+        </div>
+        <div class="btn-container">
+          <%= link_to "選手一覧", team_members_path(@member.team.id), class: "show-btn member-index" %>
+        </div> 
+      <%else%>
+        <div class="btn-container">
+          <%= link_to "選手一覧", team_members_path(@member.team.id), class: "show-btn member-index" %>
+        </div> 
+      <%end%>
+      <div class="profile">
+        <div class="left-pro">
+          選手名:
+        </div>
+        <div class="right-pro">
+          <%= @member.name %>
+        </div>
+      </div>
+      <div class="profile">
+        <div class="left-pro">
+          ポジション:
+        </div>
+        <div class="right-pro">
+          <%= @member.position.name %>
+        </div>
+      </div>
+      <div class="profile">
+        <div class="left-pro">
+          背番号:
+        </div>
+        <div class="right-pro">
+          <%= @member.uni_no %>
+        </div>
+      </div>
+      <div class="profile">
+        <div class="left-pro">
+          投打:
+        </div>
+        <div class="right-pro">
+          <%= @member.dominant_hand.name %>
+        </div>
+      </div>
+            <div class="profile">
+        <div class="left-pro">
+          ポジション:
+        </div>
+        <div class="right-pro">
+          <%= @member.position.name %>
+        </div>
+      </div>
+    </div>  
+  </div>
+</div>
+
+<%= render 'shared/footer' %>
