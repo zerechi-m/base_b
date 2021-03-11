@@ -7,7 +7,7 @@
       <%= f.text_field :name %>
       <%= f.text_field :age %>
       <%= f.text_field :uni_no %>
-      <%= f.select_collection :position_id %>
+      <%= f.collection_select :position_id, Position.where.not(id: 8), :id, :name, {include_blank: "----"} %>
       <%# <%= f.select_collection :base_hist_id %> %>
       <%= f.submit "選手登録" %>
     <%end%>
