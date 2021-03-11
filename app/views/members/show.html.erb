@@ -9,17 +9,17 @@
       <%else%>
         <%= image_tag "noimage.png", class: "team-logo" %>  <%#画像がなければデフォルト画像の表示 %>
       <%end%>
-      <% if team_signed_in? && current_team.id == @member.id %>
+      <% if team_signed_in? && current_team.id == @member.team_id %>
         <div class="btn-container">
-          <%= link_to "編集", edit_team_path(@member.id), class: "show-btn team-edit" %>
-          <%= link_to "選手編集", "#", class: "show-btn member-edit" %>
+          <%= link_to "選手編集", edit_team_member_path(@member.team_id, @member.id), class: "show-btn member-edit" %>
+          <%= link_to "選手削除", "#", class: "show-btn team-edit" %>
         </div>
         <div class="btn-container">
-          <%= link_to "選手一覧", team_members_path(@member.team.id), class: "show-btn member-index" %>
+          <%= link_to "選手一覧", team_members_path(@member.team_id), class: "show-btn member-index" %>
         </div> 
       <%else%>
         <div class="btn-container">
-          <%= link_to "選手一覧", team_members_path(@member.team.id), class: "show-btn member-index" %>
+          <%= link_to "選手一覧", team_members_path(@member.team_id), class: "show-btn member-index" %>
         </div> 
       <%end%>
       <div class="profile">

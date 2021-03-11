@@ -12,5 +12,5 @@ class Member < ApplicationRecord
   end
 
   belongs_to :team
-  has_one_attached :mem_image
+  has_one_attached :mem_image, dependent: :destoroy
 end
