@@ -1,7 +1,7 @@
 class MembersController < ApplicationController
   def index
     @team = Team.find(params[:team_id])
-    @members = @team.members
+    @members = @team.members.order(position_id: "ASC")
   end
 
   def new
@@ -10,7 +10,6 @@ class MembersController < ApplicationController
   end
 
   def create
-    binding.pry
     @member = Member.new(member_params)
 
     if @member.save

@@ -13,13 +13,96 @@
     <div class="index-btn-container">
       <%= link_to "選手の追加", new_team_member_path(@team.id), class:"index-btn" %>
     </div>
-    <% @members.each do |member|%>
-      <%= link_to member.name, team_member_path(@team.id, member.id) %>
-    <%end%>
-    <div class="mem-pitcher">
-    </div>
-    <div class="mem-batter">
-    </div>
+      
+    <div class="mem-container">
+        <div class="mem-pitcher">
+          <h2>投手一覧</h2>
+            <% @members.each do |member|%>
+              <% if member.position_id == 1 %>
+                <div class="person-container">
+                  <% if member.mem_image.attached? %>
+                    <%= link_to image_tag(member.mem_image, class: "person-image"), team_member_path(@team.id, member.id)  %>
+                  <%else%>
+                    <%= link_to image_tag("noimage.png", class: "person-image"), team_member_path(@team.id, member.id)  %>
+                  <%end%>
+                  <div class="person-profile-left">
+                    <div class="profile-tag">
+                      No: <%= member.uni_no %>
+                    </div>
+                    <div class="profile-tag">
+                      <%= member.name%>
+                    </div>
+                    <div class="profile-tag">
+                      <%= member.position.name %>
+                    </div>
+                    <div class="profile-tag">
+                      <%= member.dominant_hand.name %>
+                    </div>
+                  </div>
+                  <div class="person-profile-right">
+                    <div class="profile-tag">
+                      登板回数
+                    </div>
+                    <div class="profile-tag">
+                      7勝 2敗
+                    </div>
+                    <div class="profile-tag">
+                      奪三振数
+                    </div>
+                    <div class="profile-tag">
+                      四球 20/死球 5
+                    </div>
+                    <div class="profile-tag">
+                      被安打
+                    </div>
+                  </div>
+                </div>
+              <%end%>
+            <%end%>
+        </div>
+
+        <div class="mem-batter">
+          <h2>打者一覧</h2>
+          <% @members.each do |member|%>
+          <% unless member.position_id == 1 %>
+            <div class="person-container">
+              <%= link_to image_tag(member.mem_image, class: "person-image"), team_member_path(@team.id, member.id)  %>
+              <div class="person-profile-left">
+                <div class="profile-tag">
+                  No: <%= member.uni_no %>
+                </div>
+                <div class="profile-tag">
+                  <%= member.name%>
+                </div>
+                <div class="profile-tag">
+                  <%= member.position.name %>
+                </div>
+                <div class="profile-tag">
+                  <%= member.dominant_hand.name %>
+                </div>
+              </div>
+              <div class="person-profile-right">
+                <div class="profile-tag">
+                  打率
+                </div>
+                <div class="profile-tag">
+                  打席数
+                </div>
+                <div class="profile-tag">
+                  打点
+                </div>
+                <div class="profile-tag">
+                  本塁打
+                </div>
+                <div class="profile-tag">
+                  盗塁
+                </div>
+              </div>
+            </div>
+          <%end%>
+          <%end%>
+        </div>
+      </div>
   </div>
 </div>
 
