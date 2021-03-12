@@ -1,0 +1,46 @@
+<%= render "shared/main_header" %>
+
+<div class="show-main-wrapper">
+<div class="top-height"></div>
+  <div class="new-container">
+    <div class="field-container">
+    <h2 class="title">選手登録 : <%= @team.name %></h2>
+      <%= form_with model: @member, url: team_members_path(@team.id), method: :post,  local: true do |f|%>
+        <div class='field-input'>
+          選手名を入力<i> ＊空白を含めない＊</i>
+        </div>
+        <div class='field-input'>
+          <%= f.text_field :name, placeholder: "入力例 : 田中太郎" %>
+        </div>
+        <div class='field-input'>
+          写真を登録
+        </div>
+        <div class='field-input'>
+          <%= f.file_field :mem_image, class: "image-input" %>
+        </div>
+        <div class='field-input'>
+          <span class="span-form-label">背番号入力</span>
+          <%= f.text_field :uni_no, placeholder: "0 ~ 100", class: "select-input"%>
+          <span class="span-form-label">番</span>
+        </div>
+        <div class='field-input'>
+        <span class="span-form-label">利投・利打</span>
+          <%= f.collection_select :dominant_hand_id, DominantHand.all, :id, :name, { include_blank: "----"}, class: "select-input" %>
+        </div>
+        <div class='field-input'>
+          <span class="span-form-label">ポジション</span>
+          <%= f.collection_select :position_id, Position.where.not(id: 8), :id, :name, {include_blank: "----"}, class: "select-input" %>
+        </div>
+        <div class='field-input'>
+          <span class="span-form-label">最終野球歴</span>
+          <%= f.collection_select :base_hist_id, BaseHist.all, :id, :name, {include_blank: "----"}, class: "select-input"  %>
+        </div>
+        <div class='actions'>
+          <%= f.submit "選手登録", class: "submit-btn" %>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<%= render 'shared/footer' %>

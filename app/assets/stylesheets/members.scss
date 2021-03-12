@@ -1,0 +1,199 @@
+// Place all the styles related to the members controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+* {
+  font-family: 'Hiragino Maru Gothic ProN';
+}
+
+// member#index 
+.mem-index-main-wrapper{
+  width: 100vw;
+  height: 82vh;
+  background-image: url("dagout.jpg");
+  background-size: cover;
+  background-position: top center;
+
+  .mem-index-container{
+    width: 80vw;
+    height:100%;
+    padding: 20px 10px;
+    margin: 0 auto;
+    background-color: rgba($color: #dcdcdc, $alpha: 0.9);
+    overflow: scroll;
+  }
+}
+
+//member#new
+.new-container{
+  margin:0 auto;
+  background-color: rgba($color: #fbfaf5, $alpha: 0.8);
+  width: 500px;
+  height: 82vh;
+  
+  
+  .title{
+    margin:10px 10px 25px;
+    width: 90%;
+    height: 30px;
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+  }
+
+  .field-container{
+    width: 80%;
+    padding: 15px 0 15px;
+    margin:0 auto;
+    height: 100%;
+
+
+  .field-input {
+    width: 70%;
+    margin: 20px auto;
+   }
+  
+  .span-form-label{
+    width: 170px;
+  }
+
+
+  input{
+    width: 80%;
+    padding: 5px 8px;
+   }
+
+  .select-input{
+    padding: 10px 7px;
+    width: 120px;
+   }
+  .image-input{
+    width: 300px;
+  }
+  
+  .actions{
+    margin:30px 20px;
+  }
+  .submit-btn{
+    background-color: #00a1e9;
+    color: white;
+    border: 1px solid;
+    border-radius: 8px;
+    display: block;
+    width: 150px;
+    padding: 10px;
+    margin: 0px auto;
+    
+    &:hover{
+      background-color: rgba($color: #00a1e9, $alpha: 0.8);
+      cursor: pointer;
+    }
+   }
+ } 
+}
+
+// member#index
+.team-name{
+  width: 400px;
+  height: 40px;
+  font-size: 20px;
+  padding: 5px;
+  background-color: #fffaf0;;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.image-container{
+  height: 180px;
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.team-grades{
+  width: 100%;
+  height: 130px;
+  margin: 5px;
+  padding: 5px;
+  margin: 0 auto;
+  background-color: #fffaf0;
+  border: 1px solid;
+}
+
+.index-btn{
+  width: 200px;
+  height: 50px;
+  letter-spacing: 2px;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 10px 15px;
+  display: block;
+  margin: 0 auto 30px;
+  text-align: center;
+  color: #fff;
+  background-color: #ffa07a;
+  &:hover{
+    background-color:rgba($color: #ffa07a, $alpha: 0.8);
+  }
+}
+
+.mem-container{
+  height: 100%;
+  font-size: 16px;
+  margin: 25px 0;
+  display: flex;
+
+
+  h2{
+    text-align: center;
+    margin: 0 auto;
+    width: 150px;
+    height: 30px;
+    font-weight: bold;
+    background-color: #fffaf0;
+    border: 1px solid;
+    border-radius: 4px;
+    padding: 2px 0;
+  }
+
+  .mem-pitcher{
+    width: 50%;
+    padding: 5px;
+  }
+  
+  .mem-batter{
+    width: 50%;
+    padding: 5px;
+  }
+
+  .person-container{
+    background-color: #fffaf0;
+    width: 100%;
+    height: 130px;
+    margin: 5px 0;
+    padding: 5px;
+    display: flex;
+    border: 1px solid;
+
+    .person-image{
+      height: 120px;
+      width: 100px;
+      margin-right: 8px;
+      border: 1px solid;
+    }
+
+    .person-profile-left{
+      padding: 5px;
+      width: 200px;
+
+      .profile-tag{
+        margin-bottom:5px;
+      }
+    }
+
+    .person-profile-right{
+      width: 100%;
+      padding: 5px;
+    }
+  }
+}
+  
