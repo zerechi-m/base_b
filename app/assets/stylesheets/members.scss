@@ -91,3 +91,26 @@
  } 
 }
 
+// member#index
+.image-container{
+  height: 160px;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.index-btn{
+  width: 140px;
+  letter-spacing: 2px;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 10px 15px;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  color: #fff;
+  background-color: #ffa07a;
+  &:hover{
+    background-color:rgba($color: #ffa07a, $alpha: 0.8);
+  }
+}
+

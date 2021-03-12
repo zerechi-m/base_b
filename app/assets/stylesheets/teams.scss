@@ -157,13 +157,6 @@
       width: 90%;
       height: 82vh;
       overflow: scroll;
-
-      .team-logo{
-        height: 160px;
-        width: 140px;
-        display: block;
-        margin: 20px auto;
-      }
     
       .btn-container{
         height: 50px;
@@ -187,6 +180,12 @@
           background-color: #00a968;
           &:hover{
             background-color:rgba($color: #00a968, $alpha: 0.8)
+          }
+        }
+        .delete-edit{
+          background-color: #ff4500;
+          &:hover{
+            background-color:rgba($color: #ff4500, $alpha: 0.8)
           }
         }
         .member-edit{
@@ -224,8 +223,17 @@
   }
 }
 
+// team-image
+.team-logo{
+  height: 160px;
+  width: 140px;
+  display: block;
+  margin: 10px auto;
+}
+
 // team#editページ
 .wrapper{
   width: 100vw;
   height: 92vh;
 }
+
