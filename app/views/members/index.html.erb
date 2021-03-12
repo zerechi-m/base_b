@@ -12,6 +12,16 @@
       <%end%>
     </div>
 
+    <% if team_signed_in? && current_team == @team.id %>
+      <div class="index-btn-container">
+        <%= link_to "選手の追加", new_team_member_path(@team.id), class:"index-btn" %>
+      </div>
+    <%else%>
+      <div class="index-btn-container">
+        <%= link_to "対戦申し込み", "#", class:"index-btn" %>
+      </div>
+    <%end%>
+
     <div class="team-grades">
       <div>対戦回数</div>
       <div>勝敗</div>
@@ -21,11 +31,7 @@
       <div>高校野球出身者</div>
     </div>
     
-    <% if team_signed_in? && current_team == params[:team_id] %>
-      <div class="index-btn-container">
-        <%= link_to "選手の追加", new_team_member_path(@team.id), class:"index-btn" %>
-      </div>
-    <%end%>
+
     <div class="mem-container">
         <div class="mem-pitcher">
           <h2>投手一覧</h2>
@@ -78,7 +84,12 @@
           <% @members.each do |member|%>
           <% unless member.position_id == 1 %>
             <div class="person-container">
-              <%= link_to image_tag(member.mem_image, class: "person-image"), team_member_path(@team.id, member.id)  %>
+              <% if member.mem_image.attached? %>
+                <%= link_to image_tag(member.mem_image, class: "person-image"), team_member_path(@team.id, member.id)  %>
+              <%else%>
+                <%= link_to image_tag("noimage.png", class: "person-image"), team_member_path(@team.id, member.id)  %>
+              <%end%>
+
               <div class="person-profile-left">
                 <div class="profile-tag">
                   No: <%= member.uni_no %>
