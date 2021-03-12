@@ -1,4 +1,8 @@
 class MembersController < ApplicationController
+  before_action :authenticate_team!, except: [:index, :show]
+  before_action :member_match, only: [:edit, :update]
+  before_action :set_member, only: [:show, :edit, :update ]
+
   def index
     @team = Team.find(params[:team_id])
     @members = @team.members.order(position_id: "ASC")
@@ -21,16 +25,16 @@ class MembersController < ApplicationController
   end
 
   def show
-    @member = Member.find(params[:id])
+    # set_member でインスタンスの生成
   end
 
   def edit
-    @member = Member.find(params[:id])
+    # set_member でインスタンスの生成
   end
 
   def update
-    @member = Member.find(params[:id])
-    
+    # set_member でインスタンスの生成
+
     if @member.update(member_params)
       redirect_to team_member_path(@member.team_id, @member.id)
     else
@@ -39,6 +43,13 @@ class MembersController < ApplicationController
   end
 
   private
+  def set_member
+    @member = Member.find(params[:id])
+  end
+
+  def member_match
+    redirect_to team_members_path(params[:team_id]) unless current_team.id == @member.team_id
+  end
 
   def member_params
     params.require(:member).permit(:name, :uni_no, :dominant_hand_id, :position_id, :base_hist_id,
