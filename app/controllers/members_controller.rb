@@ -1,7 +1,6 @@
 class MembersController < ApplicationController
   before_action :authenticate_team!, except: [:index, :show]
-  before_action :member_match, only: [:edit, :update]
-  before_action :set_member, only: [:show, :edit, :update ]
+  before_action :member_match, only: [:edit, :update, :destroy]
 
   def index
     @team = Team.find(params[:team_id])
@@ -25,15 +24,15 @@ class MembersController < ApplicationController
   end
 
   def show
-    # set_member でインスタンスの生成
+    @member = Member.find(params[:id])
   end
 
   def edit
-    # set_member でインスタンスの生成
+    # member_matchで インスタンスの生成・チームのオーナーのみ編集可能
   end
 
   def update
-    # set_member でインスタンスの生成
+    # member_matchで インスタンスの生成・チームのオーナーのみ更新可能
 
     if @member.update(member_params)
       redirect_to team_member_path(@member.team_id, @member.id)
@@ -42,13 +41,20 @@ class MembersController < ApplicationController
     end
   end
 
-  private
-  def set_member
-    @member = Member.find(params[:id])
+  def destroy
+
+    # member_matchで インスタンスの生成・チームのオーナーのみ削除可能
+
+    if @member.destroy
+      redirect_to team_members_path( params[:team_id])
+    end
   end
 
+  private
+
   def member_match
-    redirect_to team_members_path(params[:team_id]) unless current_team.id == @member.team_id
+    @member = Member.find(params[:id])
+    redirect_to team_members_path(@member.team_id) unless current_team.id == @member.team_id
   end
 
   def member_params
