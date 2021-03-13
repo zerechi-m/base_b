@@ -1,0 +1,2 @@
+class RoomTeam < ApplicationRecord
+end

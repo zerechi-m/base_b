@@ -10,5 +10,7 @@ class Team < ApplicationRecord
   end
 
   has_many :members, dependent: :destroy
+  has_many :rooms, through: :room_teams
+  has_many :room_teams
   has_one_attached :image, dependent: :destroy
 end
