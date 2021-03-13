@@ -5,11 +5,13 @@
 
   <div class="side-bar">
     <div class="rooms">
-      <div class="room">
-        <div class="room-name">
-          ああああああ
+      <% current_team.rooms.each do |room| %>
+        <div class="room">
+          <div class="room-name">
+            <%= link_to room.name, "#"%>
+          </div>
         </div>
-      </div>
+      <%end%>
     </div>
   </div>
 
