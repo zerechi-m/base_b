@@ -4,6 +4,7 @@ class TeamsController < ApplicationController
   before_action :team_match, only: [:edit, :update]
 
   def index
+    @teams = Team.all.order(id: "ASC")
   end
 
   # set_teamで @teamを作成
