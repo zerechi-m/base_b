@@ -5,7 +5,9 @@
   <div class="main-container">
     <div class="main_menus">
       <% if team_signed_in? %>
-        <div class="main_menu"><a href="#">メッセージ</a></div>
+        <div class="main_menu">
+          <%= link_to "メッセージ", team_rooms_path(current_team.id)%>
+        </div>
         <div class="main_menu">
           <%= link_to current_team.name, team_path(current_team.id) %>
         </div>

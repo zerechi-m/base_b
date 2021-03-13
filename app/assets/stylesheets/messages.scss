@@ -1,17 +1,16 @@
-// Place all the styles related to the rooms controller here.
+// Place all the styles related to the messages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.wrapper {
+.side-bar-header {
+  height: 100px;
+  padding: 0 20px;
+  background-color: #253141;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-// side-bar
-.side-bar {
-  background-color: #253141;
-  width: 300px;
-  height: 100vh;
-}
 .header-name a{
   font-size: 16px;
   color: #FAFAFA;
@@ -40,10 +39,4 @@
 .room-name a {
   text-decoration: none;
   color: white;
-}
-
-// chat文
-.chat {
-  background-color: #FFFFFF;
-  width: calc(100vw - 300px);
 }
