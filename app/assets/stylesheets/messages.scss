@@ -2,14 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.side-bar-header {
-  height: 100px;
-  padding: 0 20px;
-  background-color: #253141;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+
 
 .header-name a{
   font-size: 16px;
@@ -27,7 +20,7 @@
 
 .rooms {
   background-color: #2F3E51;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 10vh);
   padding: 0 20px;
   overflow: scroll;
 }
@@ -39,4 +32,43 @@
 .room-name a {
   text-decoration: none;
   color: white;
+}
+
+// message部分
+.messages {
+  background-color: #FAFAFA;
+  height: calc(90vh - 90px);
+  padding: 46px 40px 0;
+}
+
+
+// form部分
+.form {
+  background-color: #DDDDDD;
+  height: 90px;
+  padding: 20px 40px;
+  display: flex;
+}
+
+.form-input {
+  background-color: white;
+  width: 100%;
+  display: flex;
+}
+
+.form-message {
+  border: none;
+  height: 50px;
+  width: 100%;
+  padding-left: 10px;
+}
+
+.form-submit {
+  background-color: #38AEF0;
+  border: none;
+  color: white;
+  font-size: 16px;
+  height: 50px;
+  margin-left: 15px;
+  padding: 0 20px;
 }
