@@ -1,7 +1,7 @@
 class RoomsController < ApplicationController
   before_action :authenticate_team!
   
-  def index
+  def index 
     
   end
   

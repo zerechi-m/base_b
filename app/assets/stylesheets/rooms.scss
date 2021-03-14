@@ -1,6 +1,9 @@
 // Place all the styles related to the rooms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.hidden{
+  display: none;
+}
 
 .wrapper {
   display: flex;
@@ -10,7 +13,7 @@
 .side-bar {
   background-color: #253141;
   width: 300px;
-  height: 100vh;
+  height: 90vh;
 }
 
 .rooms {
@@ -20,13 +23,27 @@
   overflow: scroll;
 }
 
-.room {
+.room-container {
   padding: 20px 0 40px;
 }
 
-.room-name a {
+.room-name {
+  display: flex;
+  align-items: center;
   text-decoration: none;
   color: white;
+  
+  a{
+    margin-left: 10px;
+    padding: 8px;
+    font-size: 85%;
+    
+  }
+}
+
+.room-icon{
+  width: 50px;
+  height: 50px;
 }
 
 // chat文
