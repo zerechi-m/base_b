@@ -6,7 +6,7 @@
   <div class="side-bar">
     <div class="rooms">
       <% current_team.rooms.each do |room| %>
-        <div class="room-container">
+        <div class="room" id="room">
           <div class="room-name">
             <%= image_tag (room.teams.select{|team| team.id != current_team.id }[0].image), class: "room-icon"%>
             <%= link_to room.teams.select{|team| team.id != current_team.id }[0].name, team_room_messages_path(current_team.id, room.id) %>
@@ -18,6 +18,39 @@
 
   <div class="chat">
     <div class="messages">
+      <% @messages.each do |message|%>
+        <div class="message message-container">
+          <%if message.team != current_team%>
+            <div class="upper-message">
+          <%else%>
+            <div class="upper-message right-box-upper">
+          <%end%>
+            <div class="message-icon">
+              <%= image_tag message.team.image ,class: "room-icon"%>
+            </div>
+            <div class="message-date">
+              <%= l message.created_at%>
+              <div class="message-user">
+                <%= message.team.name%>
+              </div>
+            </div>
+          </div>
+          <div class="lower-container">
+            <%if message.team != current_team%>
+              <div class="lower-message">
+                <div class="message-content">
+                  <%= message.content%>
+                </div>
+            <%else%>
+              <div class="lower-message right-box-lower">
+                <div class="message-content right">
+                  <%= message.content%>
+                </div>
+            <%end%>
+              </div>
+            </div>
+          </div>
+      <%end%>
     </div>
 
 

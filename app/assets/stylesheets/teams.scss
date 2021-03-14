@@ -137,6 +137,12 @@ $tab: 800px;
           width: 100%;
           height: 200px;
         };
+        
+        .top-height{
+          height: 10vh;
+          width:100%;
+          position: fixed;
+        }
 
         .team-container{
           padding: 5px 10px;
@@ -189,11 +195,6 @@ $tab: 800px;
   background-size: cover;
   background-position: top center;
 
-  .top-height{
-    height: 10vh;
-    width:100%;
-    position: fixed;
-  }
 
   .show-container{
     margin:0 auto;

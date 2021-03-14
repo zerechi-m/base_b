@@ -39,7 +39,54 @@
   background-color: #FAFAFA;
   height: calc(90vh - 90px);
   padding: 46px 40px 0;
+  overflow: scroll;
+
+  .message-container{
+    margin: 20px 0 40px;
+  }
+    .right-box-upper{
+      margin-left: 55%;
+    }
+ 
+    .message{
+      font-size: 80%;
+
+      .upper-message{
+        height: 50px;
+        display: flex;
+        
+        .message-icon{
+          height: 50px;
+          width: 50px;
+        }
+      }
+      
+      .right-box-lower{
+        margin-left: 40%;
+      }
+
+      .lower-container{
+        margin: 8px 10px;
+      }
+      
+      .lower-message{
+        border: 1px solid;
+        border-radius: 5px;
+        width: 50%;
+        
+        .message-content{
+          padding: 10px;
+      }
+
+      .right {
+        background-color: rgba($color: #90ee90, $alpha: 0.9) ;
+      }
+    }
+  }
 }
+
+
+
 
 
 // form部分
