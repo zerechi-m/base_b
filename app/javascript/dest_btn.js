@@ -29,5 +29,5 @@ function destroyBtn(){
 };
 
 if (document.URL.match(/rooms/) || document.URL.match(/messages/)){
-  window.addEventListener("load", destroyBtn)
+  setInterval( destroyBtn , 1000);
 }

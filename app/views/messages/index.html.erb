@@ -45,6 +45,19 @@
           </div>
       <%end%>
     </div>
+<%# ---  ---ここまで-%>
+<div class="tab-container">
+  <ul class="tab-lists">
+    <li id="tab1" class="active">タブ１</li>
+    <li id="tab2">タブ２</li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab1-content tab-active" id="tab1-cont">タブ１のコンテンツです。</div>
+    <div class="tab2-content" id="tab2-cont">タブ２のコンテンツです。</div>
+  </div>
+</div>
+<%# ---  ---ここまで-%>
+
 
     <%= form_with model: [@room, @message], url: team_room_messages_path(current_team.id, @room.id), method: :post, local: true, class: "form" do |f| %>
       <div class="form-input">
