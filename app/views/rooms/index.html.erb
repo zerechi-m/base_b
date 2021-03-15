@@ -2,21 +2,8 @@
 <div class="top-height"></div>
 
 <div class="wrapper">
-
   <div class="side-bar">
-    <div class="rooms">
-      <% current_team.rooms.each do |room| %>
-        <div class="room-container">
-          <div class="room-name">
-            <%= image_tag (room.teams.select{|team| team.id != current_team.id }[0].image), class: "room-icon"%>
-            <%= link_to room.teams.select{|team| team.id != current_team.id }[0].name, team_room_messages_path(current_team.id, room.id) %>
-          </div>
-        </div>
-      <%end%>
-    </div>
+    <%= render "shared/sidebar" %>
   </div>
-
-  <div class="chat">
-  </div>
-
+  
 </div>

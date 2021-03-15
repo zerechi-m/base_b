@@ -2,20 +2,13 @@
 <div class="top-height"></div>
 
 <div class="wrapper">
-
+  <%# --- サイドバーの実装 --ここから--%>
   <div class="side-bar">
-    <div class="rooms">
-      <% current_team.rooms.each do |room| %>
-        <div class="room" id="room">
-          <div class="room-name">
-            <%= image_tag (room.teams.select{|team| team.id != current_team.id }[0].image), class: "room-icon"%>
-            <%= link_to room.teams.select{|team| team.id != current_team.id }[0].name, team_room_messages_path(current_team.id, room.id) %>
-          </div>
-        </div>
-      <%end%>
-    </div>
+    <%= render "shared/sidebar" %>
   </div>
+  <%# --- サイドバーの実装 ---ここまで-%>
 
+  <%# --- チャット画面 ---ここから-%>
   <div class="chat">
     <div class="messages">
       <% @messages.each do |message|%>
@@ -53,7 +46,6 @@
       <%end%>
     </div>
 
-
     <%= form_with model: [@room, @message], url: team_room_messages_path(current_team.id, @room.id), method: :post, local: true, class: "form" do |f| %>
       <div class="form-input">
         <%= f.text_field :content ,class: "form-message", placeholder: "メッセージを入力" %>
@@ -61,5 +53,5 @@
         <%= f.submit "送信" ,class: "form-submit" %>
     <%end%>
   </div>
-
+  <%# --- チャット画面 ---ここまで-%>
 </div>
