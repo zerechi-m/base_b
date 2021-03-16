@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :teams, only: [:index, :show, :edit, :update] do
     resources :members
     resources :rooms, only: [:index, :create, :destroy] do
-      resources :messages, only: [:index, :create]
+      resources :messages, only: [:index, :create, :destroy]
     end
   end
 end

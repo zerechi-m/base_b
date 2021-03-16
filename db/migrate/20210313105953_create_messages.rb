@@ -3,6 +3,7 @@ class CreateMessages < ActiveRecord::Migration[6.0]
     create_table :messages do |t|
       t.string :content, null: false
       t.date :game_day
+      t.time :game_time
       t.string :stadium
       t.string :address
       t.references :room, foreign_key: true

@@ -2,11 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.notice-message{
-  width: 100%;
+.flash-message{
+  width: calc(100vw - 300px);
   height: 30px;
   color: white;
   z-index: 10;
+  top: auto;
+  position: fixed;
   text-align: center;
   letter-spacing: 2px;
   background-color: #ea5549;
@@ -59,7 +61,7 @@
   padding: 10px;
 
   .destroy-call-btn{
-    width: 200px;
+    width: 80%;
     height: 50px;
     padding: 10px;
     color: white;
@@ -146,8 +148,8 @@
       }
       
       .lower-message{
-        border: 1px solid;
-        border-radius: 5px;
+        border: 1.3px solid;
+        border-radius: 8px;
         width: 50%;
         
         .message-content{
@@ -156,6 +158,57 @@
 
       .right {
         background-color: rgba($color: #90ee90, $alpha: 0.9) ;
+      }
+
+      .format-display{
+
+        .format-title{
+          border-bottom: 1px solid;
+          width: 100%;
+          margin: 0 auto 10px;
+          text-align: center;
+          background-color: #f6ad49;
+        }
+        p{
+          margin: 5px auto 0px;
+          width: 80%;
+          padding: 2px;
+          font-size: 1.2rem;
+        }
+        .offer-btn-container{
+          margin: 15px 0px 0px;
+          background-color: #001e43;
+          height: 80px;
+          display: flex;
+          align-items: center;
+
+          .offer-btn{
+            height: 60%;
+            padding: 10px;
+            color: white;
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            width: 40%;
+            letter-spacing: 3px;
+            border: 1px double red;
+            border-radius: 5px;
+            font-size: 18px;
+            background-color: #ea5549;
+            &:hover{
+              background-color: rgba($color: #ea5549, $alpha: 0.7);
+            }
+          }
+          .contract{
+            border: 1px solid #006400;
+            background-color: #008000;
+            &:hover{
+              background-color: rgba($color: #008000, $alpha: 0.7);
+            }
+          }
+
+        }
+
       }
     }
   }
@@ -209,13 +262,18 @@
   display: flex;
   height: 40px;
   width: 100%;
-  select{
-    width: 100px;
-  }
   p{
-    padding: 10px;
-    margin-right: 10px;
+    margin-right: 5px;
+    padding: 8px 0;
   }
+  .game-day{
+    width: 20%;
+    margin-right: 20px;
+  }
+  .game-time{
+    width: 10%;
+  }
+
 }
 
 
