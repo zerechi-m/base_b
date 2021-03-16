@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2021_03_13_105953) do
   create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "content", null: false
     t.date "game_day"
+    t.string "stadium"
     t.string "address"
     t.bigint "room_id"
     t.bigint "team_id"

@@ -13,12 +13,13 @@ class MessagesController < ApplicationController
       redirect_to action: :index
     else
       @messages = @room.messages.includes(:team)
+      flash[:notice] = "メッセージの送信が失敗しました! 空白を無くしてください"
       render :index
     end
   end
 
   private
   def message_params
-    params.require(:message).permit(:content, :game_day, :address,:room_id).merge(team_id: current_team.id)
+    params.require(:message).permit(:content, :game_day, :stadium,:address,:room_id).merge(team_id: current_team.id)
   end
 end

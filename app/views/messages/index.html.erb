@@ -10,7 +10,10 @@
 
   <%# --- チャット画面 ---ここから-%>
   <div class="chat">
-    <div class="messages">
+  <% if flash[:notice]%>
+    <p class="notice-message"><%= flash[:notice] %>
+  <%end%>
+    <div class="messages" id="messages-height">
       <% @messages.each do |message|%>
         <div class="message message-container">
           <%if message.team != current_team%>
@@ -22,7 +25,7 @@
               <%= image_tag message.team.image ,class: "room-icon"%>
             </div>
             <div class="message-date">
-              <%= l message.created_at%>
+              <%= message.created_at%>
               <div class="message-user">
                 <%= message.team.name%>
               </div>
@@ -45,26 +48,59 @@
           </div>
       <%end%>
     </div>
-<%# ---  ---ここまで-%>
-<div class="tab-container">
-  <ul class="tab-lists">
-    <li id="tab1" class="active">タブ１</li>
-    <li id="tab2">タブ２</li>
-  </ul>
-  <div class="tab-content">
-    <div class="tab1-content tab-active" id="tab1-cont">タブ１のコンテンツです。</div>
-    <div class="tab2-content" id="tab2-cont">タブ２のコンテンツです。</div>
-  </div>
-</div>
-<%# ---  ---ここまで-%>
 
-
-    <%= form_with model: [@room, @message], url: team_room_messages_path(current_team.id, @room.id), method: :post, local: true, class: "form" do |f| %>
-      <div class="form-input">
-        <%= f.text_field :content ,class: "form-message", placeholder: "メッセージを入力" %>
+    <%# ---タブの実装 ---ここから-%>
+    <div class="tab-container">
+      <ul class="tab-lists">
+        <li id="tab1" class="active">
+          <div class="tab-title">
+            メッセージ
+          </div>
+        </li>
+        <li id="tab2">
+          <div class="tab-title">
+            フォーム
+          </div>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-active"  id="tab1-cont">
+          <%= form_with model: [@room, @message], url: team_room_messages_path(current_team.id, @room.id), method: :post, local: true, class: "form" do |f| %>
+            <div class="form-input">
+              <%= f.text_field :content ,class: "form-message", placeholder: "メッセージを入力" %>
+            </div>
+              <%= f.submit "送信" ,class: "form-submit" %>
+          <%end%>
+        </div>
+        <div class="tab-none" id="tab2-cont">
+          <%= form_with model: [@room, @message], url: team_room_messages_path(current_team.id, @room.id), method: :post, local: true, class: "format" do |f| %>
+              <div class="input-gameday">
+               <p>試合予定日</p> <%= raw sprintf(
+                  f.date_select(
+                    :game_day,
+                    class:'select-gameday',
+                    use_month_numbers: true,
+                    prompt: "---",
+                    start_year: Time.now.year,
+                    end_year: Time.now.year + 1,
+                    date_separator: '%s'),
+                  "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>
+              </div>
+            <div class="format-input">
+              <%= f.text_field :stadium ,class: "format-message", placeholder: "球場名" %>
+            </div>
+            <div class="position">
+              <div class="format-input">
+                <%= f.text_field :address ,class: "format-message", placeholder: "球場の住所" %>
+              </div>
+                <%= f.text_field :content, style: "display: none;"%>
+                <%= f.submit "送信" ,class: "form-submit format-submit" %>
+            </div>
+          <%end%>
+        </div>
       </div>
-        <%= f.submit "送信" ,class: "form-submit" %>
-    <%end%>
+    </div>
+    <%# ---タブの実装  ---ここまで-%>
+    
   </div>
-  <%# --- チャット画面 ---ここまで-%>
 </div>
