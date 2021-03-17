@@ -28,6 +28,6 @@ function destroyBtn(){
   });
 };
 
-if (document.URL.match(/rooms/) || document.URL.match(/messages/)){
+if (document.URL.match(/rooms/) || document.URL.match(/rooms,messages/)){
   setInterval( destroyBtn , 1000);
 }
