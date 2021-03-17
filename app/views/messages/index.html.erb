@@ -10,9 +10,12 @@
 
   <%# --- チャット画面 ---ここから-%>
   <div class="chat">
-  <% if flash[:alert]%>
-    <p class="flash-message"><%= flash[:alert] %></p>
-  <%end%>
+    <%if flash[:alert] %>
+      <p class="flash-message alert"><%= flash[:alert] %></p>
+    <% elsif flash[:notice] %>
+      <p class="flash-message notice"><%= flash[:notice] %></p>
+    <%end%>
+
     <div class="messages" id="messages-height">
       <% @messages.each do |message|%>
         <div class="message message-container">
@@ -22,7 +25,12 @@
             <div class="upper-message right-box-upper">
           <%end%>
             <div class="message-icon">
-              <%= image_tag message.team.image ,class: "room-icon"%>
+
+              <%if message.team.image.attached?%>
+                <%= image_tag message.team.image ,class: "room-icon"%>
+              <%else%>
+                <%= image_tag "noimage.png" ,class: "room-icon"%>
+              <%end%>
             </div>
             <div class="message-date">
               <%= message.created_at%>

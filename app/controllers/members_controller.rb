@@ -15,11 +15,12 @@ class MembersController < ApplicationController
 
   def create
     @member = Member.new(member_params)
-
     if @member.save
+      flash[:notice] = "#{@member.name}選手の登録が完了しました"
       redirect_to action: :index
     else
       @team = Team.find(params[:team_id])
+      flash[:alert] = "選手の登録ができませんでした"
       render action: :new
     end
   end
@@ -43,23 +44,24 @@ class MembersController < ApplicationController
   end
 
   def destroy
-
     # member_matchで インスタンスの生成・チームのオーナーのみ削除可能
-
     if @member.destroy
       redirect_to team_members_path( params[:team_id])
     end
   end
+  
 
   private
-
+  
   def member_match
     @member = Member.find(params[:id])
     redirect_to team_members_path(@member.team_id) unless current_team.id == @member.team_id
   end
 
+  
   def member_params
     params.require(:member).permit(:name, :uni_no, :dominant_hand_id, :position_id, :base_hist_id,
-                                   :mem_image).merge(team_id: current_team.id)
-  end
+      :mem_image).merge(team_id: current_team.id)
+    end
 end
+

@@ -13,6 +13,7 @@ class MessagesController < ApplicationController
     @message = @room.messages.new(message_params)
     if @message.valid?
       @message.save
+      flash.now[:notice] = "メッセージが送信されました"
       redirect_to action: :index
     else
       @messages = @room.messages.includes(:team)

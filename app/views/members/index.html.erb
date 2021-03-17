@@ -1,6 +1,9 @@
 <%= render "shared/main_header" %>
 
 <div class="top-height"></div>
+  <%if flash[:notice] %>
+    <p class="flash-message2 notice"><%= flash[:notice] %></p>
+  <%end%>
 <div class="mem-index-main-wrapper">
   <div class="mem-index-container">
     <div class="team-name"><%= @team.name %></div>
