@@ -49,7 +49,7 @@
                 <%else%>
                   <div class="format-display">
                     <p class="format-title">試合が申込まれました</p>
-                    <p>◯試合予定日: <%= message.game_day %>(<%= %w(日 月 火 水 木 金 土)[message.game_day.wday] %>)</p>
+                    <p>◯試合予定日: <%= message.game_day.strftime("%Y年%m月%d日") %>(<%= %w(日 月 火 水 木 金 土)[message.game_day.wday] %>)</p>
                     <p>◯球場: <%= message.stadium %></p>
                     <p>◯球場住所: <%= message.address %></p>
                     <div class="offer-btn-container">
