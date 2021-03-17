@@ -9,6 +9,7 @@ class Member < ApplicationRecord
     validates :uni_no,     numericality: { in: 0..100 }
     validates :dominant_hand
     validates :position_id
+
   end
 
   belongs_to :team

@@ -2,7 +2,11 @@
   <% current_team.rooms.each do |room| %>
     <div class="room" id="room">
       <div class="room-name">
-        <%= image_tag (room.teams.select{|team| team.id != current_team.id }[0].image), class: "room-icon"%>
+        <%if room.teams.select{|team| team.id != current_team.id }[0].image.attached?%>
+          <%= image_tag (room.teams.select{|team| team.id != current_team.id }[0].image), class: "room-icon"%>
+        <%else%>
+          <%= image_tag "noimage.png" ,class: "room-icon"%>
+        <%end%>
         <%= link_to room.teams.select{|team| team.id != current_team.id }[0].name, team_room_messages_path(current_team.id, room.id), id: "room-color", class: "room-color" %>
       </div>
       <div class="d-button" style="display: none">

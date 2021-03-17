@@ -2,6 +2,11 @@
 
 <div class="show-main-wrapper">
 <div class="top-height"></div>
+
+  <%if flash[:alert] %>
+    <p class="flash-message2 alert"><%= flash[:alert] %></p>
+  <%end%>
+
   <div class="new-container">
     <div class="field-container">
     <h2 class="title">選手登録 : <%= @team.name %></h2>
