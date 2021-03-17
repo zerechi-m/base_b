@@ -1,4 +1,7 @@
 class MessagesController < ApplicationController
+  before_action :authenticate_team!
+  before_action :team_match 
+
   def index
       @message = Message.new
       @room = Room.find(params[:room_id])
@@ -27,6 +30,10 @@ class MessagesController < ApplicationController
   end
 
   private
+  def team_match
+    redirect_to root_path unless current_team.id == params[:team_id].to_i
+  end
+
   def message_params
     params.require(:message).permit(:content, :game_day, :game_time, :stadium,:address,:room_id).merge(team_id: current_team.id)
   end
