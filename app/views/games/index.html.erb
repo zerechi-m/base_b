@@ -1,1 +1,8 @@
-<h1>無事保存</h1>
+<%= render "shared/main_header" %>
+<div class="top-height"></div>
+
+<% current_team.games.each do |game| %>
+  <%= game.stadium%>
+<%end%>
+
+<%= render 'shared/footer' %>
