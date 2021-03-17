@@ -1,6 +1,13 @@
 // Place all the styles related to the teams controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$tab: 800px;
+
+@mixin tab {
+  @media(max-width: ($tab)){
+    @content;
+  }
+}
 
 * {
   font-family: 'Hiragino Maru Gothic ProN';
@@ -78,22 +85,20 @@
   background-image: url("top.jpg");
   background-size: cover;
   background-position: top center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
+  
   .main-container {
-    width: 600px;
-    height: 320px;
+    width: 90vw;
+    height: 82vh;
+    margin: 0 auto;
+    overflow: scroll;
       
     .main_menus{
-      margin: 0 auto;
+      margin: 30px auto 0;
       display: flex;
       justify-content: center;
       
       .main_menu{
-        width: 50%;
-        height: 130px;
+        width: 400px;
         text-align: center;
 
         a{
@@ -109,6 +114,56 @@
             background-color:rgba($color: #001e43, $alpha: 1.0);
           }
         }
+      }
+    }
+
+    .team-index{
+
+      width: 100%;
+      margin: 20px 5px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      overflow: auto;
+
+
+      .team-index-container{
+        width: 48%;
+        height: 200px;
+        margin: 10px 10px;
+        background-color: #fffaf0;
+        border: 1px solid;
+        @include tab {
+          width: 100%;
+          height: 200px;
+        };
+        
+        .top-height{
+          height: 10vh;
+          width:100%;
+          position: fixed;
+        }
+
+        .team-container{
+          padding: 5px 10px;
+          margin: 5px;
+          display: flex;
+
+
+          .inner-left{
+            width: 180px;
+          }
+
+          .inner-right{
+            width: 100%;
+            padding: 0 5px;
+
+            .team-tag{
+              margin: 0 5px 5px 0;
+            }
+          }
+        }
+
       }
     }
   }
@@ -140,10 +195,6 @@
   background-size: cover;
   background-position: top center;
 
-  .top-height{
-    height: 10vh;
-    width:100%;
-  }
 
   .show-container{
     margin:0 auto;

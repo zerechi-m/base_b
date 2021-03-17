@@ -4,6 +4,7 @@ class MembersController < ApplicationController
 
   def index
     @team = Team.find(params[:team_id])
+    @room = Room.new
     @members = @team.members.order(position_id: "ASC")
   end
 

@@ -12,7 +12,7 @@
       <% if team_signed_in? && current_team.id == @team.id %>
         <div class="btn-container">
           <%= link_to "編集", edit_team_path(@team.id), class: "show-btn team-edit" %>
-          <%= link_to "選手編集", "#", class: "show-btn member-edit" %>
+          <%= link_to "オーダー", "#", class: "show-btn member-edit" %>
         </div>
         <div class="btn-container">
           <%= link_to "選手一覧", team_members_path(@team), class: "show-btn member-index" %>

@@ -2,6 +2,7 @@
   width: 70vw;
   height: 82vh;
   margin: 0 auto ;
+  overflow: scroll;
 }
 
 .top-height{
@@ -14,6 +15,7 @@
   background-color: #fff;
   border: 0px solid #ddd;
   border-radius: 5px;
+
 }
 .account-page .account-page__inner .account-page__inner--left, .account-page .account-page__inner .account-page__inner--right {
   float: left;

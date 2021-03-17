@@ -1,19 +1,57 @@
 <%= render "shared/main_header" %>
 
 <div class="main-wrapper">
+<div class="top-height"></div>
   <div class="main-container">
     <div class="main_menus">
-        <div class="main_menu"><a href="#">対戦相手を探す</a></div>
-        <div class="main_menu"><a href="#">チーム情報</a></div>
+      <% if team_signed_in? %>
+        <div class="main_menu">
+          <%= link_to "メッセージ", team_rooms_path(current_team.id)%>
+        </div>
+        <div class="main_menu">
+          <%= link_to current_team.name, team_path(current_team.id) %>
+        </div>
+      <%end%>
     </div>
-    <div class="main_menus">
-        <div class="main_menu"><a href="#">対戦相手を探す</a></div>
-        <div class="main_menu"><a href="#">チーム情報</a></div>
+
+    <div class="team-index">
+      <% @teams.each do | team |%>
+        <div class="team-index-container">
+          <div class="team-container">
+            <div class="inner-left">
+              <div class="team-logo">
+                <% if team.image.attached? %>
+                  <%= link_to image_tag(team.image, class: "team-logo"), team_members_path(team.id) %>
+                <%else%>
+                  <%= link_to image_tag("noimage.png", class: "team-logo"), team_members_path(team.id) %>
+                <%end%>
+              </div>
+            </div>
+            <div class="inner-right">
+              <div class="team-tag">
+                <%= team.name%>
+              </div>
+              <div class="team-tag">
+                勝敗
+              </div>
+              <div class="team-tag">
+                チーム打率
+              </div>
+              <div class="team-tag">
+                チーム打点
+              </div>
+              <div class="team-tag">
+                選手人数<%= team.members.count%>人 投手:<%= team.members.where(position_id: 1).count%>人  野手:<%= team.members.where.not(position_id: 1).count%>人
+              </div>
+              <div class="team-tag">
+                野球経験/ 中学野球:<%= team.members.where(base_hist_id: 1).count%>人 / 高校野球:<%= team.members.where(base_hist_id: 3).count%>人 / 大学野球:<%= team.members.where(base_hist_id: 4).count%>人
+              </div>
+            </div>
+          </div>
+        </div>
+      <%end%>
     </div>
-    <div class="main_menus">
-        <div class="main_menu"><a href="#">対戦相手を探す</a></div>
-        <div class="main_menu"><a href="#">チーム情報</a></div>
-    </div>   
+
   </div>
 </div>
 

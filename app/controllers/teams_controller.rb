@@ -4,6 +4,11 @@ class TeamsController < ApplicationController
   before_action :team_match, only: [:edit, :update]
 
   def index
+    if team_signed_in?
+      @teams = Team.where.not(id: current_team.id).order(id: "ASC")
+    else
+      @teams = Team.all.order(id: "DESC")
+    end
   end
 
   # set_teamで @teamを作成

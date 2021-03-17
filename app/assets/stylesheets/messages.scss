@@ -1,0 +1,352 @@
+// Place all the styles related to the messages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.flash-message{
+  width: calc(100vw - 300px);
+  height: 30px;
+  color: white;
+  z-index: 10;
+  top: auto;
+  position: fixed;
+  text-align: center;
+  letter-spacing: 2px;
+  background-color: #ea5549;
+}
+
+.side-bar {
+  background-color: #253141;
+  width: 300px;
+  height: calc( 100vh - 10vh);
+}
+
+
+.rooms {
+  background-color: #2F3E51;
+  height: calc(90vh - 70px);
+  padding: 0 10px 0 20px;
+  overflow: scroll;
+}
+
+.room {
+  padding: 20px 0 40px;
+  width:100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  
+}
+
+.room-name a {
+  text-decoration: none;
+  width: 200px;
+  padding: 10px;
+  color: white;
+  font-size: 85%;
+  margin: 0 10px;
+}
+
+
+.room-name {
+  display: flex;
+  align-items: center;
+  
+}
+
+
+// メッセージ削除ボタン部分
+.destroy-call{
+  width: 100%;
+  height: 70px;
+  padding: 10px;
+
+  .destroy-call-btn{
+    width: 80%;
+    height: 50px;
+    padding: 10px;
+    color: white;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    border: 1px solid c;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #ea5549;
+    &:hover{
+      background-color: rgba($color: #ea5549, $alpha: 0.8);
+    }
+  }
+}
+
+.d-button{
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+
+
+  a{
+    display: block;
+    padding: 10px;
+    margin: auto;
+    background-color: #ea5549;
+    border-radius: 5px;
+    border: 1px solid hotpink;
+    font-size: 75%;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 2px;
+    &:hover{
+      background-color: rgba($color: #ea5549, $alpha: 0.8);
+    }
+  }
+}
+
+
+// メッセージ表示
+
+.chat {
+  width: calc(100vw - 300px);
+  height: 90vh;
+}
+
+
+
+// message部分
+.messages {
+  background-color: #FAFAFA;
+  height: calc(90vh - 150px);
+  padding: 46px 40px 0;
+  overflow: scroll;
+
+  .message-container{
+    margin: 20px 0 40px;
+  }
+    .right-box-upper{
+      margin-left: 55%;
+    }
+ 
+    .message{
+      font-size: 80%;
+
+      .upper-message{
+        height: 50px;
+        display: flex;
+        
+        .message-icon{
+          height: 50px;
+          width: 50px;
+        }
+      }
+      
+      .right-box-lower{
+        margin-left: 40%;
+      }
+
+      .lower-container{
+        margin: 8px 10px;
+      }
+      
+      .lower-message{
+        border: 1.3px solid;
+        border-radius: 8px;
+        width: 50%;
+        
+        .message-content{
+          padding: 10px;
+      }
+
+      .right {
+        background-color: rgba($color: #90ee90, $alpha: 0.9) ;
+      }
+
+      .format-display{
+
+        .format-title{
+          border-bottom: 1px solid;
+          width: 100%;
+          margin: 0 auto 10px;
+          text-align: center;
+          background-color: #f6ad49;
+        }
+        p{
+          margin: 5px auto 0px;
+          width: 80%;
+          padding: 2px;
+          font-size: 1.2rem;
+        }
+        .offer-btn-container{
+          margin: 15px 0px 0px;
+          background-color: #001e43;
+          height: 80px;
+          display: flex;
+          align-items: center;
+
+          .offer-btn{
+            height: 60%;
+            padding: 10px;
+            color: white;
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            width: 40%;
+            letter-spacing: 3px;
+            border: 1px double red;
+            border-radius: 5px;
+            font-size: 18px;
+            background-color: #ea5549;
+            &:hover{
+              background-color: rgba($color: #ea5549, $alpha: 0.7);
+            }
+          }
+          .contract{
+            border: 1px solid #006400;
+            background-color: #008000;
+            &:hover{
+              background-color: rgba($color: #008000, $alpha: 0.7);
+            }
+          }
+
+        }
+
+      }
+    }
+  }
+}
+
+
+
+
+
+
+// message-form部分
+.form {
+  background-color: #DDDDDD;
+  height: 90px;
+  padding: 20px 40px;
+  display: flex;
+}
+
+.form-input {
+  background-color: white;
+  width: 100%;
+  display: flex;
+}
+
+.form-message {
+  border: none;
+  height: 50px;
+  width: 100%;
+  padding-left: 10px;
+}
+
+.form-submit {
+  background-color: #38AEF0;
+  border: none;
+  color: white;
+  font-size: 16px;
+  height: 50px;
+  margin-left: 15px;
+  padding: 0 20px;
+}
+
+// format部分
+.format{
+  background-color: #DDDDDD;
+  height: 210px;
+  padding: 10px 40px; 
+}
+
+.input-gameday{
+  margin: 10px;
+  display: flex;
+  height: 40px;
+  width: 100%;
+  p{
+    margin-right: 5px;
+    padding: 8px 0;
+  }
+  .game-day{
+    width: 20%;
+    margin-right: 20px;
+  }
+  .game-time{
+    width: 10%;
+  }
+
+}
+
+
+.format-input {
+  width: 70%;
+  height: 60px;
+  margin: 10px;
+}
+
+.format-message {
+  border: none;
+  margin: 5px 0;
+  height: 50px;
+  width: 100%;
+  padding-left: 10px;
+}
+.position{
+  height: 60px;
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+}
+
+
+
+
+// タブ
+.tab-container{
+  height: 130px;
+
+  .tab-lists{
+    margin:0;
+
+    li{
+      width: 200px;
+      height: 40px;
+      border:1px solid #888;
+      border-radius: 5px;
+      border-bottom-color:transparent;
+      list-style:none;
+      display:inline-block;
+      background:#888;
+      color:#fff;
+      padding: 5px;
+      margin-left: 5px;
+      .tab-title{
+        margin: 0 auto;
+        text-align: center;
+      }
+    }
+
+    .active{
+      background:#fff;
+      color:#000;
+    }
+  }
+
+  .tab-content{
+    border: 1px solid #888;
+    padding: 10px;
+    margin-top:-1px;
+    overflow:hidden;
+
+    .tab-active{
+      display:block;
+    }
+
+    .tab-none {
+      display:none;
+    }
+  }
+}
+ 
+
+ 
+ 

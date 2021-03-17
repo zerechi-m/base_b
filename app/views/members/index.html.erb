@@ -16,9 +16,18 @@
       <div class="index-btn-container">
         <%= link_to "選手の追加", new_team_member_path(@team.id), class:"index-btn" %>
       </div>
-    <%else%>
+    <%elsif team_signed_in? %>
       <div class="index-btn-container">
-        <%= link_to "対戦申し込み", "#", class:"index-btn" %>
+        <%= form_with model: @room, url: team_rooms_path(current_team), method: :post, local: :true do |f| %>
+          <%= f.hidden_field :name, value: @team.name %>
+
+          <select name="room[team_ids][]" class="hidden">
+            <option value=<%=@team.id%> class="hidden"><%=@team.name%> </option>
+          </select>
+          
+          <input name="room[team_ids][]" type="hidden" value=<%= current_team.id%>> 
+          <%= f.submit "対戦申し込み", class:"index-btn" %>
+        <%end%>
       </div>
     <%end%>
 

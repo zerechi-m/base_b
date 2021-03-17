@@ -1,0 +1,19 @@
+<div class="rooms">
+  <% current_team.rooms.each do |room| %>
+    <div class="room" id="room">
+      <div class="room-name">
+        <%= image_tag (room.teams.select{|team| team.id != current_team.id }[0].image), class: "room-icon"%>
+        <%= link_to room.teams.select{|team| team.id != current_team.id }[0].name, team_room_messages_path(current_team.id, room.id), id: "room-color", class: "room-color" %>
+      </div>
+      <div class="d-button" style="display: none">
+        <%= link_to "削除", team_room_path(current_team.id, room.id), method: :delete, data: {confirm: "ルームを削除してもいいですか？"},id:"dest-btn"%>
+      </div>
+    </div>
+  <%end%>
+</div>
+<div class="destroy-call" id="dest-call">
+  <div class="destroy-call-btn" id="call-btn">
+    トークルームの削除
+  </div>
+</div>
+ 
