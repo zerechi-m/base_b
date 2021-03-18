@@ -11,6 +11,6 @@ function color_change(){
   });
 };
 
-if (document.URL.match(/rooms, messages/)){
+if (document.URL.match(/[rooms][messages]/)){
   setInterval(color_change, 700)
 }

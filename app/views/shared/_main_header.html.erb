@@ -5,7 +5,11 @@
 
     <%if team_signed_in? %>
       <ul class="header_lists">
+        <% if current_team.image.attached?%>
         <li class="header_list_user">ログイン:<%= image_tag current_team.image, class: "header-icon"%>
+        <%else%>
+        <li class="header_list_user">ログイン:<%= image_tag "noimage.png", class: "header-icon"%>
+        <%end%>
            <%= link_to current_team.name, team_path(current_team.id) ,class: "login-user" %>
         </li>
         <li class="header_list"><%= link_to "ログアウト", destroy_team_session_path, method: :delete, class: "header-link" %></li>

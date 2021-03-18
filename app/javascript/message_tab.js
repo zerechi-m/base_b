@@ -28,6 +28,6 @@ function tab() {
   });
 };
 
-if (document.URL.match(/rooms, messages/)){
+if (document.URL.match(/[rooms][messages]/)){
   setInterval(tab, 1000);
 };
