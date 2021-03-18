@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root to: "teams#index"
   resources :teams, only: [:index, :show, :edit, :update] do
     resources :members
-    resources :games, only: [:index, :create, :destroy]
+    resources :games, only: [:index, :create, :destroy] do
+      resources :results, only: [:index]
+    end
     resources :rooms, only: [:index, :create, :destroy] do
       resources :messages, only: [:index, :create, :destroy]
     end

@@ -5,7 +5,7 @@ class TeamsController < ApplicationController
 
   def index
     if team_signed_in?
-      @teams = Team.where.not(id: current_team.id).order(id: "ASC")
+      @teams = Team.where.not(id: current_team.id).includes(:members).order(id: "ASC")
     else
       @teams = Team.all.order(id: "DESC")
     end
