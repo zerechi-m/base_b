@@ -47,21 +47,31 @@ $tab: 800px;
    .header_list_user{
       width:30vw;
       font-size: 14px;
-      text-align: right;
+      text-align: center;
+      padding: 10px;
       margin-right: 10px;
       color: whitesmoke;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       .login-user{
          color: whitesmoke;
          font-size: 14px;
          padding: 20px 10px;
        }
+       .header-icon{
+        height: 40px;
+        width: 40px;
+        margin: 0 5px;
+      }
     }
 
     .header_list{
       text-align: center;
       margin-left: 10px;
       width: 180px;
+ 
 
 
       .header-link{ 

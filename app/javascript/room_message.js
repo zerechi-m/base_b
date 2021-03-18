@@ -11,6 +11,6 @@ function color_change(){
   });
 };
 
-// window.addEventListener("load", color_change)
-setInterval(color_change, 700)
-
+if (document.URL.match(/[rooms][messages]/)){
+  setInterval(color_change, 700)
+}

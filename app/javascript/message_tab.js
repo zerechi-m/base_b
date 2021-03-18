@@ -26,7 +26,8 @@ function tab() {
     tab1Cont.classList.remove("tab-none");
     tab1Cont.classList.add("tab-active");
   });
-}
+};
 
-
-setInterval(tab, 1000)
+if (document.URL.match(/[rooms][messages]/)){
+  setInterval(tab, 1000);
+};

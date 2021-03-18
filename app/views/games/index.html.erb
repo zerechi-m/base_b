@@ -1,0 +1,57 @@
+<%= render "shared/main_header" %>
+<div class="top-height"></div>
+
+<div class="game-index-wrapper">
+  <div class="game-index-container">
+    <div class="game-index-title">
+      <h1>試合日程画面</h1>
+    </div>
+
+    <%# --- ここからは試合の日程 ----  %>
+    <% current_team.games.each do |game|%>
+      <% away_team = game.teams.select{|team| team != current_team}[0] %> <%# ログインチーム以外を away_teamに格納 %>
+      <div class="game-card-wrapper">
+        <div class="card-title">
+          <p><%= game.game_day.strftime( "%Y年%m月%d日") %>(<%= %w(日 月 火 水 木 金 土)[game.game_day.wday] %>)</p>
+        </div>
+        <div class="game-card-upper-container">
+          <div class="card-inner">      <%# --- カード左 %>        
+            <% if current_team.image.attached? %>
+              <%= image_tag current_team.image, class: "card-icon" %>
+            <%else%>
+              <%= image_tag "noimage.png", class: "card-icon" %>
+            <%end%>
+            <div class="card-team-name">
+              <%= current_team.name%>
+            </div>
+          </div>
+          <div class="card-middle">
+            <p>対</p>
+          </div>
+          <div class="card-inner">      <%# --- カード右 %>
+            <% if away_team.image.attached? %>
+              <%= image_tag away_team.image, class: "card-icon" %>
+            <%else%>
+              <%= image_tag "noimage.png", class: "card-icon" %>
+            <%end%>
+              <div class="card-team-name">
+                <%= link_to away_team.name, team_members_path(away_team.id) %> 
+              </div>
+          </div>
+        </div>
+        <div class="game-card-bottom-container">
+          <p>開始時間：<%= game.game_time.strftime("%H時%M分")%></p>
+          <p>球場：<%= game.stadium%></p>
+          <p>住所：<%= game.address%></p>
+        </div>
+        <div class="game-card-btn-container">
+          <%= link_to "対戦画面", "#", class: "game-card-btn" %>
+        </div>
+      </div>
+    <%end%>
+    <%# --- ここからは試合の日程 ----  %>
+
+  </div>
+</div>
+
+<%= render 'shared/footer' %>

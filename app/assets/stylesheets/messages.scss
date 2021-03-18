@@ -181,12 +181,37 @@
           padding: 2px;
           font-size: 1.2rem;
         }
+
         .offer-btn-container{
           margin: 15px 0px 0px;
           background-color: #001e43;
           height: 80px;
           display: flex;
           align-items: center;
+
+          form{
+            width: 50%;
+
+            .offer-btn-left{
+              height: 60%;
+              padding: 10px;
+              color: white;
+              display: block;
+              margin: 0 auto;
+              text-align: center;
+              width: 80%;
+              letter-spacing: 3px;
+              border-radius: 5px;
+              font-size: 18px;
+            }
+          }
+          .contract{
+            border: 1px solid #006400;
+            background-color: #008000;
+            &:hover{
+              background-color: rgba($color: #008000, $alpha: 0.7);
+            }
+          }
 
           .offer-btn{
             height: 60%;
@@ -205,13 +230,7 @@
               background-color: rgba($color: #ea5549, $alpha: 0.7);
             }
           }
-          .contract{
-            border: 1px solid #006400;
-            background-color: #008000;
-            &:hover{
-              background-color: rgba($color: #008000, $alpha: 0.7);
-            }
-          }
+         
 
         }
 

@@ -49,13 +49,22 @@
                 <%else%>
                   <div class="format-display">
                     <p class="format-title">試合が申込まれました</p>
-                    <p>◯試合予定日: <%= message.game_day %>(<%= %w(日 月 火 水 木 金 土)[message.game_day.wday] %>)</p>
+                    <p>◯試合予定日: <%= message.game_day.strftime("%Y年%m月%d日") %>(<%= %w(日 月 火 水 木 金 土)[message.game_day.wday] %>)</p>
                     <p>◯球場: <%= message.stadium %></p>
                     <p>◯球場住所: <%= message.address %></p>
                     <div class="offer-btn-container">
-                      <%= link_to "承諾", "#", class: "offer-btn contract" %>
+                      <%= form_with model: @game, url: team_games_path(current_team.id), method: :post, local: :true do |f| %>
+                        <%= f.hidden_field :game_day, value: message.game_day %>
+                        <%= f.hidden_field :game_time, value: message.game_time %>
+                        <%= f.hidden_field :stadium, value: message.stadium %>
+                        <%= f.hidden_field :address, value: message.address %>
+                        <%= hidden_field_tag "team_ids[]", message.room.teams.select{ |team| team.id != current_team.id}[0].id %>
+                        <%= hidden_field_tag "team_ids[]", current_team.id %>
+                        <%= f.submit "承諾", class: "offer-btn-left contract" %>
+                      <%end%>
                       <%= link_to "辞退", team_room_message_path(current_team.id, message.room.id, message.id), method: :delete, data: {confirm: "#{message.room.teams.select{ |team| team.id != current_team.id}[0].name}からのオファーを辞退しますか？"} , class: "offer-btn" %>
                     </div>
+
                   </div>
                 <%end%>
               </div>

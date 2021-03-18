@@ -9,6 +9,9 @@
           <%= link_to "メッセージ", team_rooms_path(current_team.id)%>
         </div>
         <div class="main_menu">
+          <%= link_to "試合日程",  team_games_path(current_team.id) %>
+        </div>
+        <div class="main_menu">
           <%= link_to current_team.name, team_path(current_team.id) %>
         </div>
       <%end%>
