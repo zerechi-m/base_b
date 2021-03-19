@@ -8,7 +8,7 @@
     </div>
 
     <%# --- ここからは試合の日程 ----  %>
-    <% current_team.games.each do |game|%>
+    <% @games.each do |game|%>
       <% away_team = game.teams.select{|team| team != current_team}[0] %> <%# ログインチーム以外を away_teamに格納 %>
       <div class="game-card-wrapper">
         <div class="card-title">

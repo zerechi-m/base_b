@@ -4,6 +4,7 @@ class MessagesController < ApplicationController
 
   def index
       @message = Message.new
+      @rooms = Team.find(params[:team_id]).rooms
       @room = Room.find(params[:room_id])
       @messages = @room.messages.includes(:team)
   end

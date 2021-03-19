@@ -7,8 +7,9 @@ class TeamsController < ApplicationController
     if team_signed_in?
       @teams = Team.where.not(id: current_team.id).includes(:members).order(id: "ASC")
     else
-      @teams = Team.all.order(id: "DESC")
+      @teams = Team.includes(:members).order(id: "DESC")
     end
+    
   end
 
   # set_teamで @teamを作成
