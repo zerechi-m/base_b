@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_18_102344) do
+ActiveRecord::Schema.define(version: 2021_03_19_023355) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -31,6 +31,32 @@ ActiveRecord::Schema.define(version: 2021_03_18_102344) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "at_bats", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "batting_result_id"
+    t.bigint "pitching_result_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["batting_result_id"], name: "index_at_bats_on_batting_result_id"
+    t.index ["pitching_result_id"], name: "index_at_bats_on_pitching_result_id"
+  end
+
+  create_table "batting_results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "hit_id"
+    t.integer "time_base_id"
+    t.integer "steal"
+    t.integer "point"
+    t.integer "four_ball"
+    t.integer "dead_ball"
+    t.bigint "game_id"
+    t.bigint "team_id"
+    t.bigint "member_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_id"], name: "index_batting_results_on_game_id"
+    t.index ["member_id"], name: "index_batting_results_on_member_id"
+    t.index ["team_id"], name: "index_batting_results_on_team_id"
   end
 
   create_table "games", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -66,6 +92,17 @@ ActiveRecord::Schema.define(version: 2021_03_18_102344) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["room_id"], name: "index_messages_on_room_id"
     t.index ["team_id"], name: "index_messages_on_team_id"
+  end
+
+  create_table "pitching_results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "member_id"
+    t.bigint "team_id"
+    t.bigint "game_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_id"], name: "index_pitching_results_on_game_id"
+    t.index ["member_id"], name: "index_pitching_results_on_member_id"
+    t.index ["team_id"], name: "index_pitching_results_on_team_id"
   end
 
   create_table "results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -120,9 +157,17 @@ ActiveRecord::Schema.define(version: 2021_03_18_102344) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "at_bats", "batting_results"
+  add_foreign_key "at_bats", "pitching_results"
+  add_foreign_key "batting_results", "games"
+  add_foreign_key "batting_results", "members"
+  add_foreign_key "batting_results", "teams"
   add_foreign_key "members", "teams"
   add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "teams"
+  add_foreign_key "pitching_results", "games"
+  add_foreign_key "pitching_results", "members"
+  add_foreign_key "pitching_results", "teams"
   add_foreign_key "room_teams", "rooms"
   add_foreign_key "room_teams", "teams"
 end
