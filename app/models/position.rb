@@ -7,7 +7,10 @@ class Position < ActiveHash::Base
     { id: 5, name: '三塁手' },
     { id: 6, name: '遊撃手' },
     { id: 7, name: '外野手' },
-    { id: 8, name: 'DH' }
+    { id: 8, name: 'レフト' },
+    { id: 9, name: 'センター' },
+    { id: 10, name: 'ライト' },
+    { id: 11, name: 'DH' },
   ]
 
   include ActiveHash::Associations

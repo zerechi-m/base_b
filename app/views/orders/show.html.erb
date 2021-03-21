@@ -1,0 +1,38 @@
+<%= render "shared/main_header" %>
+<div class="top-height"></div>
+
+<div class="order-wrapper">
+  <div class="order-container">
+    <div class="order-container-inner">
+      <div class="order-title">
+        <p>スターティングメンバー</p>
+      </div>
+      <div class="order-team-wrapper">
+      </div>
+      <div class="order-team-member-container">
+        <table border="1" class="order-table">
+          <tr class="order-title">
+            <th class="order-number">打順</th>
+            <th class="order-name">選手名</th>
+            <th class="order-position">ポジション</th>
+          </tr>
+          <% @order.each do |order|%>
+            <% i = 1%>
+              <tr>
+                <td><%= order.batting_order%></td>
+                <td><%=current_team.members.where(id: order.member_id)[0].name%></td>
+                <td><%=Position.find(order.position_id).name%></td>
+              </tr>
+            <% i += 1%>
+          <%end%>
+        </table>
+        <div class="order-btn-container">
+          <%= link_to "オーダー再編成", team_game_order_path(current_team.id, @game.id, @game.orders.where(team_id: current_team.id).ids), method: :delete, class: "order-submit-btn red" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%= render 'shared/footer' %>

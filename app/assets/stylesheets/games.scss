@@ -131,12 +131,25 @@
           margin: 0 auto;
           text-align: center;
           color: white;
-          background-color: #f39800;
           border-radius: 6px;
+        }
+        .green{
+          background-color: green;
           &:hover{
-            background-color: rgba($color: #f39800, $alpha: 0.8);
+            background-color: rgba($color: green, $alpha: 0.8);
           }
-
+        }
+        .orange{
+          background-color: orange;
+          &:hover{
+            background-color: rgba($color: orange, $alpha: 0.8);
+          }
+        }
+        .red{
+          background-color: #ea5549;
+          &:hover{
+            background-color: rgba($color: #ea5549, $alpha: 0.8);
+          }
         }
       }
     }

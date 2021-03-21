@@ -2,6 +2,12 @@
 <div class="top-height"></div>
 
 <div class="game-index-wrapper">
+  <%if flash[:alert] %>
+    <p class="flash-message2 alert"><%= flash[:alert] %></p>
+  <% elsif flash[:notice] %>
+    <p class="flash-message2 notice"><%= flash[:notice] %></p>
+  <%end%>
+
   <div class="game-index-container">
     <div class="game-index-title">
       <h1>試合日程画面</h1>
@@ -45,7 +51,12 @@
           <p>住所：<%= game.address%></p>
         </div>
         <div class="game-card-btn-container">
-          <%= link_to "対戦画面", "#", class: "game-card-btn" %>
+          <% if current_team.orders.where(game_id: game.id).present? %>
+            <%= link_to "オーダー詳細", team_game_order_path(current_team.id, game.id, game.orders.where(team_id: current_team.id).ids), class:"game-card-btn orange" %>
+          <% else %>
+            <%= link_to "オーダー作成", new_team_game_order_path(current_team.id, game.id), class: "game-card-btn green" %>
+          <% end %>
+          <%= link_to "対戦画面", team_game_results_path(current_team.id, game.id), class: "game-card-btn  red" %>
         </div>
       </div>
     <%end%>

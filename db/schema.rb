@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_19_023355) do
+ActiveRecord::Schema.define(version: 2021_03_20_124749) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -94,6 +94,19 @@ ActiveRecord::Schema.define(version: 2021_03_19_023355) do
     t.index ["team_id"], name: "index_messages_on_team_id"
   end
 
+  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "batting_order"
+    t.integer "position_id"
+    t.bigint "game_id"
+    t.bigint "team_id"
+    t.bigint "member_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_id"], name: "index_orders_on_game_id"
+    t.index ["member_id"], name: "index_orders_on_member_id"
+    t.index ["team_id"], name: "index_orders_on_team_id"
+  end
+
   create_table "pitching_results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "member_id"
     t.bigint "team_id"
@@ -165,6 +178,9 @@ ActiveRecord::Schema.define(version: 2021_03_19_023355) do
   add_foreign_key "members", "teams"
   add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "teams"
+  add_foreign_key "orders", "games"
+  add_foreign_key "orders", "members"
+  add_foreign_key "orders", "teams"
   add_foreign_key "pitching_results", "games"
   add_foreign_key "pitching_results", "members"
   add_foreign_key "pitching_results", "teams"

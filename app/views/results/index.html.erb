@@ -1,0 +1,61 @@
+<%= render "shared/main_header" %>
+<div class="top-height"></div>
+
+<div class="order-wrapper">
+  <div class="order-container">
+    <div class="order-container-inner">
+      <div class="order-team-wrapper">
+        <div class="order-team-container">
+          <%if @home_team.image.attached? %>
+            <%= image_tag @home_team.image, class: "order-team-logo" %>
+          <%else%>
+            <%= image_tag "noimage.png", class: "order-team-logo"%>
+          <%end%>
+          <div class="order-team-name">
+            <%= link_to @home_team.name, team_members_path(@away_team.id) %>
+          </div>
+        </div>
+        <div class="order-team-container">
+          <div class="order-color"></div>
+          <%if @home_team.image.attached? %>
+            <%= image_tag @away_team.image, class: "order-team-logo" %>
+          <%else%>
+            <%= image_tag "noimage.png", class: "order-team-logo"%>
+          <%end%>
+          <div class="order-team-name">
+            <%= link_to @away_team.name, team_members_path(@away_team.id) %>
+          </div>
+        </div>
+      </div>
+      <div class="order-title">
+        <p>スターティングメンバーの選出</p>
+      </div>
+      <div class="order-team-member-container">
+        <table border="1" class="order-table">
+          <tr class="order-title">
+            <th class="order-number">打順</th>
+            <th class="order-name">選手名</th>
+            <th class="order-position">ポジション</th>
+          </tr>
+          <%= form_with url: team_game_results_path(current_team.id, @game.id), method: :post, local: true do |f| %>
+          <% 9.times do | i |%>
+            <% i += 1%>
+              <tr>
+                  <td><%= i %></td>
+                  <td><%= f.collection_select "member_id[]", @home_team_mem, :id, :name, {prompt: "-----"}, {class: "member-select-form"}%> </td>
+                  <td><%= f.collection_select "position_id[]", Position.where.not(id: [7]), :id, :name,{prompt: "-----"}, {class: "position-select-form"}%></td>
+              </tr>
+            <% i += 1%>
+          <%end%>
+        </table>
+      </div>
+      <div class="submit-bt">
+        <%= f.submit "送信"%>
+      </div>
+          <%end%>
+    </div>
+  </div>
+</div>
+
+
+<%= render 'shared/footer' %>
