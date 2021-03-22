@@ -1,13 +1,14 @@
 <%= render "shared/main_header" %>
 <div class="top-height"></div>
+ 
+<%if flash[:alert] %>
+  <p class="flash-message2 alert"><%= flash[:alert] %></p>
+<% elsif flash[:notice] %>
+  <p class="flash-message2 notice"><%= flash[:notice] %></p>
+<%end%>
 
 <div class="game-index-wrapper">
-  <%if flash[:alert] %>
-    <p class="flash-message2 alert"><%= flash[:alert] %></p>
-  <% elsif flash[:notice] %>
-    <p class="flash-message2 notice"><%= flash[:notice] %></p>
-  <%end%>
-
+ 
   <div class="game-index-container">
     <div class="game-index-title">
       <h1>試合日程画面</h1>
@@ -50,13 +51,22 @@
           <p>球場：<%= game.stadium%></p>
           <p>住所：<%= game.address%></p>
         </div>
+        <% unless current_team.games.find(game.id).orders.present? == true  && away_team.games.find(game.id).orders.present? == true %> 
+          <p class="caution">両チームのオーダー作成後に対戦画面が表示されます</p>
+        <%end%>
+
         <div class="game-card-btn-container">
+          <%# ------ オーダーボタンの条件分岐 %>
           <% if current_team.orders.where(game_id: game.id).present? %>
             <%= link_to "オーダー詳細", team_game_order_path(current_team.id, game.id, game.orders.where(team_id: current_team.id).ids), class:"game-card-btn orange" %>
           <% else %>
             <%= link_to "オーダー作成", new_team_game_order_path(current_team.id, game.id), class: "game-card-btn green" %>
           <% end %>
-          <%= link_to "対戦画面", team_game_results_path(current_team.id, game.id), class: "game-card-btn  red" %>
+          
+          <%# ------ 対戦ボタンの条件分岐 %>
+          <% if current_team.games.find(game.id).orders.present? == true  && away_team.games.find(game.id).orders.present? == true %>
+            <%= link_to "対戦画面", game_results_path(game.id), class: "game-card-btn  red" %>
+          <% end%>
         </div>
       </div>
     <%end%>

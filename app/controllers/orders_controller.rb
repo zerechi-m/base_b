@@ -16,13 +16,11 @@ class OrdersController < ApplicationController
       redirect_to action: :new
     else
       @order = order_params
-
       9.times do | i | 
         order = Order.new(batting_order: @order[:batting_order][i], game_id: @order[:game_id], team_id: @order[:team_id], member_id: @order[:member_id][i],  position_id: @order[:position_id][i])
         order.save
         i += 1
       end
-
       flash[:notice] = "オーダーが保存されました！！"
       redirect_to controller: :games, action: :index
     end

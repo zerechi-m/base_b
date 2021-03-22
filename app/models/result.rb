@@ -3,6 +3,6 @@ class Result < ApplicationRecord
 
   with_options presence: true do
     validates :batting_first
-    validates :batting_first
+    validates :fielding_first
   end
 end
