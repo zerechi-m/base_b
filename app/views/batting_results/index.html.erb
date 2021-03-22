@@ -1,0 +1,109 @@
+<%= render "shared/main_header" %>
+<div class="top-height"></div>
+
+<div class="result-order-wrapper">
+  <div class="result-order-container">
+    <%if flash[:alert] %>
+      <p class="flash-message2 alert"><%= flash[:alert] %></p>
+    <%end%>
+    <div class="result-order-title">
+      <h2>【先攻・後攻】を選択して試合を開始</h2>
+    </div>
+    <%= form_with model: @result, url: game_results_path(@game.id), method: :post, local: true do |f| %>
+      <div class="first-batting-container">
+        <div class="select"> 
+          <p>先攻</p>
+          <%= f.collection_select :batting_first, @game.teams, :name, :name, {include_blank: "----"}, {class: "select-form", id: "first-batting"} %>
+        </div>
+        <div class="select"> 
+          <p>後攻</p>
+          <%= f.collection_select :fielding_first, @game.teams, :name, :name, {include_blank: "----"}, {class: "select-form",id: "first-fielding"} %>
+        </div>
+      </div>
+      <div class="result-btn-container">
+        <%= f.submit "試合開始", class: "result-submit-btn"%>
+      </div>
+    <%end%>
+    <div class="order-flex-inner">
+      <%# ----home team %>
+      <div class="result-order-container-inner">
+        <div class="result-order-team-wrapper">
+          <div class="result-order-team-container">
+          <div class="order-color green"></div>
+            <%if @home_team.image.attached? %>
+              <%= image_tag @home_team.image, class: "order-team-logo" %>
+            <%else%>
+              <%= image_tag "noimage.png", class: "order-team-logo"%>
+            <%end%>
+            <div class="order-team-name">
+              <%= link_to @home_team.name, team_members_path(@home_team.id) %>
+            </div>
+          </div>
+        </div>
+        <div class="order-team-member-container">
+          <table border="1" class="result-table">
+            <tr class="order-title">
+              <th class="order-number">打順</th>
+              <th colspan="2" class="order-name">選手名</th>
+              <th class="order-position">ポジション</th>
+            </tr>
+            <% @home_order.each do |order|%>
+              <% i = 1%>
+                <tr>
+                  <td><%= order.batting_order%></td>
+                <% if @home_team.members.where(id: order.member_id)[0].mem_image.attached? %>
+                  <td class="mem-logo"><%=image_tag @home_team.members.where(id: order.member_id)[0].mem_image, class: "result-mem-logo"%></td>
+                <% else %>
+                  <td class="mem-logo"><%=image_tag "noimage.png", class: "result-mem-logo"%></td>
+                <% end%>
+                  <td><%= @home_team.members.where(id: order.member_id)[0].name%></td>
+                  <td class="position-record"><%=Position.find(order.position_id).name%></td>
+               </tr>
+              <% i += 1%>
+            <%end%>
+          </table>
+        </div>
+      </div>
+      <%# ----away team %>
+      <div class="result-order-container-inner">
+        <div class="result-order-team-wrapper">
+          <div class="result-order-team-container">
+          <div class="order-color"></div>
+            <%if @away_team.image.attached? %>
+              <%= image_tag @away_team.image, class: "order-team-logo" %>
+            <%else%>
+              <%= image_tag "noimage.png", class: "order-team-logo"%>
+            <%end%>
+            <div class="order-team-name">
+              <%= link_to @away_team.name, team_members_path(@away_team.id) %>
+            </div>
+          </div>
+        </div>
+        <div class="order-team-member-container">
+          <table border="1" class="result-table">
+            <tr class="order-title">
+              <th class="order-number">打順</th>
+              <th colspan="2" class="order-name">選手名</th>
+              <th class="order-position">ポジション</th>
+            </tr>
+            <% @away_order.each do |order|%>
+              <% i = 1%>
+                <tr>
+                  <td><%= order.batting_order%></td>
+                <% if @away_team.members.where(id: order.member_id)[0].mem_image.attached? %>
+                  <td class="mem-logo"><%=image_tag @away_team.members.where(id: order.member_id)[0].mem_image, class: "result-mem-logo"%></td>
+                <% else %>
+                  <td class="mem-logo"><%=image_tag "noimage.png", class: "result-mem-logo"%></td>
+                <% end%>
+                  <td><%= @away_team.members.where(id: order.member_id)[0].name%></td>
+                  <td class="position-record"><%=Position.find(order.position_id).name%></td>
+                </tr>
+              <% i += 1%>
+            <%end%>
+          </table>
+        </div>
+      </div>
+      <%# ----------------------------------- %>
+    </div>
+  </div>
+</div>
