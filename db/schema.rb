@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_20_124749) do
+ActiveRecord::Schema.define(version: 2021_03_23_090943) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -44,18 +44,19 @@ ActiveRecord::Schema.define(version: 2021_03_20_124749) do
 
   create_table "batting_results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "hit_id"
+    t.integer "out_id"
     t.integer "time_base_id"
-    t.integer "steal"
     t.integer "point"
-    t.integer "four_ball"
-    t.integer "dead_ball"
+    t.integer "four_deadball_id"
     t.bigint "game_id"
     t.bigint "team_id"
     t.bigint "member_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "order_id"
     t.index ["game_id"], name: "index_batting_results_on_game_id"
     t.index ["member_id"], name: "index_batting_results_on_member_id"
+    t.index ["order_id"], name: "index_batting_results_on_order_id"
     t.index ["team_id"], name: "index_batting_results_on_team_id"
   end
 
@@ -174,6 +175,7 @@ ActiveRecord::Schema.define(version: 2021_03_20_124749) do
   add_foreign_key "at_bats", "pitching_results"
   add_foreign_key "batting_results", "games"
   add_foreign_key "batting_results", "members"
+  add_foreign_key "batting_results", "orders"
   add_foreign_key "batting_results", "teams"
   add_foreign_key "members", "teams"
   add_foreign_key "messages", "rooms"

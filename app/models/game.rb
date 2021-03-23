@@ -5,6 +5,7 @@ class Game < ApplicationRecord
   has_many :pitching_results, dependent: :destroy
   has_many :batting_results, dependent: :destroy
   has_many :orders, dependent: :destroy
+
   with_options presence: true do
     validates :game_day
     validates :game_time

@@ -8,4 +8,8 @@ class BattingResultsController < ApplicationController
     @away_team = @teams.select{|team| team.id != current_team.id }[0]
     @away_order = @away_team.orders.where(team_id: @away_team.id, game_id: params[:game_id])
   end
+
+  def create
+    binding.pry
+  end
 end

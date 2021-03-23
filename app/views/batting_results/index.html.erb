@@ -1,29 +1,12 @@
 <%= render "shared/main_header" %>
 <div class="top-height"></div>
 
-<div class="result-order-wrapper">
+<div class="batting-result-order-wrapper">
   <div class="result-order-container">
     <%if flash[:alert] %>
       <p class="flash-message2 alert"><%= flash[:alert] %></p>
     <%end%>
-    <div class="result-order-title">
-      <h2>【先攻・後攻】を選択して試合を開始</h2>
-    </div>
-    <%= form_with model: @result, url: game_results_path(@game.id), method: :post, local: true do |f| %>
-      <div class="first-batting-container">
-        <div class="select"> 
-          <p>先攻</p>
-          <%= f.collection_select :batting_first, @game.teams, :name, :name, {include_blank: "----"}, {class: "select-form", id: "first-batting"} %>
-        </div>
-        <div class="select"> 
-          <p>後攻</p>
-          <%= f.collection_select :fielding_first, @game.teams, :name, :name, {include_blank: "----"}, {class: "select-form",id: "first-fielding"} %>
-        </div>
-      </div>
-      <div class="result-btn-container">
-        <%= f.submit "試合開始", class: "result-submit-btn"%>
-      </div>
-    <%end%>
+
     <div class="order-flex-inner">
       <%# ----home team %>
       <div class="result-order-container-inner">
@@ -41,13 +24,18 @@
           </div>
         </div>
         <div class="order-team-member-container">
-          <table border="1" class="result-table">
+          <table border="1" class="batting-result-table">
             <tr class="order-title">
-              <th class="order-number">打順</th>
+              <th class="order-number">打</th>
               <th colspan="2" class="order-name">選手名</th>
-              <th class="order-position">ポジション</th>
+              <th class="order-position">利</th>
+              <th class="order-position">守</th>
+              <th class="batting_result1">一打席</th>
+              <th class="batting_result1">二打席</th>
+              <th class="batting_result1">三打席</th>
             </tr>
-            <% @home_order.each do |order|%>
+              <% @home_order.each do |order|%>
+            <%= form_with  url: team_game_batting_results_path(@home_team.id, @game.id), method: :post, local: true do |f| %>
               <% i = 1%>
                 <tr>
                   <td><%= order.batting_order%></td>
@@ -56,54 +44,38 @@
                 <% else %>
                   <td class="mem-logo"><%=image_tag "noimage.png", class: "result-mem-logo"%></td>
                 <% end%>
-                  <td><%= @home_team.members.where(id: order.member_id)[0].name%></td>
-                  <td class="position-record"><%=Position.find(order.position_id).name%></td>
+                  
+                  <% if Position.find(order.position_id).id == 1%>
+                    <td class="pitcher"><%= @home_team.members.where(id: order.member_id)[0].name%></td>
+                    <td class="pitcher"><%= @home_team.members.where(id: order.member_id)[0].dominant_hand.name.slice(0, 2)%></td>
+                    <td class="pitcher"><%=Position.find(order.position_id).name.slice(0)%></td>
+                  <%else%>
+                    <td><%= @home_team.members.where(id: order.member_id)[0].name%></td>
+                    <td><%= @home_team.members.where(id: order.member_id)[0].dominant_hand.name.slice(-2, 2)%></td>
+                    <td class="position-record"><%=Position.find(order.position_id).name.slice(0)%></td>
+                  <%end%>
+                  <%# 打席の記述 %>
+                  <%if @home_team.members.find(order.member_id).batting_results.where(game_id: @game.id).count == 0 %>
+                    <td>ヒット<%= f.collection_select "hit_id", Hit.all, :id, :name,{prompt: "-----"}, {class: "hit-select-form"}%>
+                        アウト<%= f.collection_select "out_id", Out.all, :id, :name,{prompt: "-----"}, {class: "hit-select-form"}%>
+                        エラー<%= f.collection_select "time_base_id", FieldError.all, :id, :name,{prompt: "-----"}, {class: "hit-select-form"}%>
+                        打点<%= f.collection_select "point", Point.all, :name, :name,{prompt: "-----"}, {class: "hit-select-form"}%>
+                        四死球<%= f.collection_select "four_deadball_id", FourDeadball.all, :name, :name,{prompt: "-----"}, {class: "hit-select-form"}%></td>
+                        <%= f.hidden_field :member_id, value: order.member_id %>
+                    <td><%= f.submit "送信"%></td>
+                  <%end%>
                </tr>
               <% i += 1%>
+              <%end%>
             <%end%>
           </table>
         </div>
       </div>
       <%# ----away team %>
-      <div class="result-order-container-inner">
-        <div class="result-order-team-wrapper">
-          <div class="result-order-team-container">
-          <div class="order-color"></div>
-            <%if @away_team.image.attached? %>
-              <%= image_tag @away_team.image, class: "order-team-logo" %>
-            <%else%>
-              <%= image_tag "noimage.png", class: "order-team-logo"%>
-            <%end%>
-            <div class="order-team-name">
-              <%= link_to @away_team.name, team_members_path(@away_team.id) %>
-            </div>
-          </div>
-        </div>
-        <div class="order-team-member-container">
-          <table border="1" class="result-table">
-            <tr class="order-title">
-              <th class="order-number">打順</th>
-              <th colspan="2" class="order-name">選手名</th>
-              <th class="order-position">ポジション</th>
-            </tr>
-            <% @away_order.each do |order|%>
-              <% i = 1%>
-                <tr>
-                  <td><%= order.batting_order%></td>
-                <% if @away_team.members.where(id: order.member_id)[0].mem_image.attached? %>
-                  <td class="mem-logo"><%=image_tag @away_team.members.where(id: order.member_id)[0].mem_image, class: "result-mem-logo"%></td>
-                <% else %>
-                  <td class="mem-logo"><%=image_tag "noimage.png", class: "result-mem-logo"%></td>
-                <% end%>
-                  <td><%= @away_team.members.where(id: order.member_id)[0].name%></td>
-                  <td class="position-record"><%=Position.find(order.position_id).name%></td>
-                </tr>
-              <% i += 1%>
-            <%end%>
-          </table>
-        </div>
-      </div>
+
       <%# ----------------------------------- %>
+    </div>
+    <div class="s">
     </div>
   </div>
 </div>

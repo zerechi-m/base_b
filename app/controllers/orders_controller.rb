@@ -6,7 +6,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    binding.pry
     position_blank = params[:position_id].map{|n| n.present? }
     member_blank = params[:member_id].map{|n| n.present?}
 
@@ -33,7 +32,6 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    binding.pry
     order_ids = Order.where(team_id: params[:team_id], game_id: params[:game_id])
     order_ids.each do | order_id |
       order = Order.find(order_id.id)

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :members
     resources :games, only: [:index, :create, :destroy] do
       resources :orders, only: [:new, :create, :show, :destroy]
-      resources :batting_results, only: [:index]
+      resources :batting_results, only: [:index, :create]
     end
     resources :rooms, only: [:index, :create, :destroy] do
       resources :messages, only: [:index, :create, :destroy]
