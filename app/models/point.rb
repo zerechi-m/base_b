@@ -5,4 +5,6 @@ class Point < ActiveHash::Base
     {id: 3, name: 3},
     {id: 4, name: 4}
   ]
+  include ActiveHash::Associations
+  has_many :batting_results
 end

@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2021_03_23_090943) do
     t.integer "hit_id"
     t.integer "out_id"
     t.integer "time_base_id"
-    t.integer "point"
+    t.integer "point_id"
     t.integer "four_deadball_id"
     t.bigint "game_id"
     t.bigint "team_id"

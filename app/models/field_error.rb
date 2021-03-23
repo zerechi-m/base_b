@@ -5,6 +5,6 @@ class FieldError < ActiveHash::Base
     {id: 3, name: "捕失"},
   ]
 
-  include ActiveHash::Association
+  include ActiveHash::Associations
   has_many :batting_results
 end

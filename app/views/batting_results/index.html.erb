@@ -7,7 +7,6 @@
       <p class="flash-message2 alert"><%= flash[:alert] %></p>
     <%end%>
 
-    <div class="order-flex-inner">
       <%# ----home team %>
       <div class="result-order-container-inner">
         <div class="result-order-team-wrapper">
@@ -23,6 +22,39 @@
             </div>
           </div>
         </div>
+
+        <%# 打席の記述 %>
+        <div class="batter-container">
+          <%= form_with model: @batting_result, url: team_game_batting_results_path(@home_team.id, @game.id), method: :post, local: true do |f| %>
+           <table border="1" class="batter-table">
+              <tr><th class="order-number">打</th>
+              <th colspan="2" class="order-name">打者</th>
+              <th class="batting_result1">打席</th>
+              <th class="batting_result1">送 信</th>
+            </tr>
+            <tr>
+              <td><%= @batter[0].batting_order%></td>
+              <% if @home_team.members.where(id: @batter[0].member_id)[0].mem_image.attached? %>
+                <td class="mem-logo"><%= image_tag @home_team.members.where(id: @batter[0].member_id)[0].mem_image, class: "result-mem-logo"%></td>
+              <% else %>
+                <td class="mem-logo"><%=image_tag "noimage.png", class: "result-mem-logo"%></td>
+              <% end%>
+              
+              <td><%= @home_team.members.where(id: @batter[0].member_id)[0].name%></td>
+              <td>ヒット<%= f.collection_select "hit_id", Hit.all, :id, :name,{prompt: "-----"}, {class: "hit-select-form"}%>
+                        アウト<%= f.collection_select "out_id", Out.all, :id, :name,{prompt: "-----"}, {class: "hit-select-form"}%>
+                        エラー<%= f.collection_select "time_base_id", FieldError.all, :id, :name,{prompt: "-----"}, {class: "hit-select-form"}%>
+                        打点<%= f.collection_select :point_id, Point.all, :name, :name,{prompt: "-----"}, {class: "hit-select-form"}%>
+                        四死球<%= f.collection_select "four_deadball_id", FourDeadball.all, :name, :name,{prompt: "-----"}, {class: "hit-select-form"}%></td>
+                  <%= f.hidden_field :member_id, value: @batter[0].member_id %>
+                  <%= f.hidden_field :order_id, value: @batter[0].id %>
+              <td><%= f.submit "送信", class: "submit"%></td>
+            </tr>
+          <%end%>
+          </table>
+        </div>
+        <%# ----ここまで %>
+
         <div class="order-team-member-container">
           <table border="1" class="batting-result-table">
             <tr class="order-title">
@@ -34,8 +66,7 @@
               <th class="batting_result1">二打席</th>
               <th class="batting_result1">三打席</th>
             </tr>
-              <% @home_order.each do |order|%>
-            <%= form_with  url: team_game_batting_results_path(@home_team.id, @game.id), method: :post, local: true do |f| %>
+            <% @home_order.each do |order|%>
               <% i = 1%>
                 <tr>
                   <td><%= order.batting_order%></td>
@@ -54,19 +85,8 @@
                     <td><%= @home_team.members.where(id: order.member_id)[0].dominant_hand.name.slice(-2, 2)%></td>
                     <td class="position-record"><%=Position.find(order.position_id).name.slice(0)%></td>
                   <%end%>
-                  <%# 打席の記述 %>
-                  <%if @home_team.members.find(order.member_id).batting_results.where(game_id: @game.id).count == 0 %>
-                    <td>ヒット<%= f.collection_select "hit_id", Hit.all, :id, :name,{prompt: "-----"}, {class: "hit-select-form"}%>
-                        アウト<%= f.collection_select "out_id", Out.all, :id, :name,{prompt: "-----"}, {class: "hit-select-form"}%>
-                        エラー<%= f.collection_select "time_base_id", FieldError.all, :id, :name,{prompt: "-----"}, {class: "hit-select-form"}%>
-                        打点<%= f.collection_select "point", Point.all, :name, :name,{prompt: "-----"}, {class: "hit-select-form"}%>
-                        四死球<%= f.collection_select "four_deadball_id", FourDeadball.all, :name, :name,{prompt: "-----"}, {class: "hit-select-form"}%></td>
-                        <%= f.hidden_field :member_id, value: order.member_id %>
-                    <td><%= f.submit "送信"%></td>
-                  <%end%>
                </tr>
               <% i += 1%>
-              <%end%>
             <%end%>
           </table>
         </div>
@@ -74,8 +94,5 @@
       <%# ----away team %>
 
       <%# ----------------------------------- %>
-    </div>
-    <div class="s">
-    </div>
   </div>
 </div>
