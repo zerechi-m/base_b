@@ -6,28 +6,71 @@
     <%if flash[:alert] %>
       <p class="flash-message2 alert"><%= flash[:alert] %></p>
     <%end%>
+      <div class="result-order-container-inner">
+      
+        <%# 得点掲示板--- %>
+       <div class="score-board-container">
+        <table border="1" class="score-table">
+          <tr>
+            <th colspan="2" class="score-team-name"></th>
+            <th class="count">一</th>
+            <th>二</th>
+            <th>三</th>
+            <th>四</th>
+            <th>五</th>
+            <th>六</th>
+            <th>七</th>
+            <th>八</th>
+            <th>九</th>
+            <th>R</th>
+            <th>H</th>
+            <th>E</th>
+          </tr>
+          <tr>
+            <td class="score-logo"><%= image_tag @game.teams.where(name: @game.result.batting_first)[0].image, class: "score-logo"%></td>
+            <td class="score-team-name-td"><%= @game.result.batting_first%></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr> 
+            <td class="score-logo"><%= image_tag @game.teams.where(name: @game.result.fielding_first)[0].image, class: "score-logo"%></td>
+            <td class="score-team-name-td"><%= @game.result.fielding_first%></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+        </table>
+       </div>
+      <%# 得点掲示板  ここまで--- %>
 
       <%# ----home team %>
-      <div class="result-order-container-inner">
-        <div class="result-order-team-wrapper">
-          <div class="result-order-team-container">
-          <div class="order-color green"></div>
-            <%if @home_team.image.attached? %>
-              <%= image_tag @home_team.image, class: "order-team-logo" %>
-            <%else%>
-              <%= image_tag "noimage.png", class: "order-team-logo"%>
-            <%end%>
-            <div class="order-team-name">
-              <%= link_to @home_team.name, team_members_path(@home_team.id) %>
-            </div>
-          </div>
-        </div>
+       
 
         <%# 打席の記述 %>
         <div class="batter-container">
           <%= form_with model: @batting_result, url: team_game_batting_results_path(@home_team.id, @game.id), method: :post, local: true do |f| %>
-           <table border="1" class="batter-table">
-              <tr><th class="order-number">打</th>
+          <table border="1" class="batter-table">
+            <tr>
+              <th class="order-number">打</th>
               <th colspan="2" class="order-name">打者</th>
               <th class="batting_result1">打席</th>
               <th class="batting_result1">送 信</th>
@@ -50,8 +93,8 @@
                   <%= f.hidden_field :order_id, value: @batter[0].id %>
               <td><%= f.submit "送信", class: "submit"%></td>
             </tr>
-          <%end%>
           </table>
+          <%end%>
         </div>
         <%# ----ここまで %>
 
@@ -77,7 +120,7 @@
                 <% end%>
                   
                   <% if Position.find(order.position_id).id == 1%>
-                    <td class="pitcher"><%= @home_team.members.where(id: order.member_id)[0].name%></td>
+                    <td ><%= @home_team.members.where(id: order.member_id)[0].name%></td>
                     <td class="pitcher"><%= @home_team.members.where(id: order.member_id)[0].dominant_hand.name.slice(0, 2)%></td>
                     <td class="pitcher"><%=Position.find(order.position_id).name.slice(0)%></td>
                   <%else%>
