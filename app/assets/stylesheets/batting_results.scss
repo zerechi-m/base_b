@@ -247,7 +247,7 @@
   }
 
   tr:nth-child(odd){
-    background-color: lightgrey;
+    background-color: #ffefd5;
   }
   tr:nth-child(even){
     background-color: whitesmoke;
@@ -255,7 +255,7 @@
 
   th{
     text-align: center;
-    background-color: darkslategray;
+    background-color: darkgreen;
     color: white;
     
   }
@@ -305,5 +305,44 @@
   }
   .pitcher{
     background-color: rgba($color: #ea5549, $alpha: 0.7);
+  }
+
+  p{
+    display: inline;
+  }
+  .point{
+    background-color: #d9e367;
+    border-radius: 3px;
+  }
+  .hit{
+    padding: 9px;
+    border: 1px solid hotpink;
+    background-color: #ea5532;
+    color: white;
+    border-radius: 5px;
+    margin: 5px;
+  }
+  .out{
+    padding: 9px;
+    border: 1px solid blue;
+    background-color: #0075c2;
+    color: white;
+    border-radius: 5px;
+    margin: 5px;
+  }
+  .f-error{
+    padding: 9px;
+    border: 1px solid blue;
+    background-color: #dcd6d2;
+    border-radius: 5px;
+    margin: 5px;
+  }
+  .four-ball{
+    padding: 9px;
+    border: 1px solid blue;
+    background-color: #fcc800;
+    color: white;
+    border-radius: 5px;
+    margin: 5px;
   }
 }

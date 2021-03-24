@@ -2,6 +2,7 @@ class BattingResultsController < ApplicationController
   def index
     set_batting_results
     @at_bat_batting_result = AtBatBattingResult.new  # form_objectを使用
+    @no = num_params # 1 ~ 9番まで順番に打席を作る
   end
 
   def create
@@ -19,6 +20,7 @@ class BattingResultsController < ApplicationController
       redirect_to action: :index
     else
       set_batting_results
+      @no = num_params
       flash[:alert] = "出塁欄空白があります"
       render action: :index
     end
@@ -49,4 +51,20 @@ class BattingResultsController < ApplicationController
     array_count = array.select{|num| num.present?}.count
     return array_count
   end
+
+  def num_params
+    if @home_order.where(game_id: @game.id, batting_order: 1)[0].batting_results.present? == false
+      return 1
+    end
+    
+    last_order_id = @game.batting_results.where(team_id: @home_team.id).last.order.batting_order
+    
+    if last_order_id == 9
+      return 1
+    else
+       return last_order_id + 1
+    end
+  end
+
 end
+

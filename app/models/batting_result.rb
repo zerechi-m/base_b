@@ -9,25 +9,8 @@ class BattingResult < ApplicationRecord
   belongs_to :game
   belongs_to :member
   belongs_to :order
+  belongs_to :team
 
-  validates :hit_id, presence: true, unless: :hit?
-  validates :out_id, presence: true, unless: :out?
-  validates :time_base_id, presence: true, unless: :time_base?
-  validates :four_deadball_id, presence: true, unless: :four_deadball?
+# at_bat_batting_result.rb : form_objectを使用
 
-  
-  private 
-  
-  def hit?
-    self.out_id? || self.time_base_id? || self.four_deadball_id?
-  end
-  def out? 
-    self.hit_id? || self.time_base_id? || self.four_deadball_id?
-  end
-  def time_base?
-    self.hit_id? || self.out_id? || self.four_deadball_id?
-  end
-  def four_deadball? 
-    self.hit_id? || self.out_id? || self.time_base_id?
-  end
 end

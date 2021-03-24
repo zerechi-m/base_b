@@ -9,7 +9,7 @@ class AtBatBattingResult
   validates :four_deadball_id, presence: true, unless: :four_deadball?
 
   def save
-    batting_result = BattingResult.create(hit_id: hit_id, out_id: out_id, time_base_id: time_base_id, four_deadball_id: four_deadball_id, game_id: game_id, team_id: team_id, member_id: member_id, order_id: order_id)
+    batting_result = BattingResult.create(hit_id: hit_id, out_id: out_id, time_base_id: time_base_id, four_deadball_id: four_deadball_id, point_id: point_id, game_id: game_id, team_id: team_id, member_id: member_id, order_id: order_id)
     AtBat.create(member_id: pitcher_id, team_id: away_team_id, game_id: game_id, batting_result_id: batting_result.id )
   end
   
