@@ -4,14 +4,15 @@
 .batting-result-order-wrapper{
   width: 100%;
   height: calc(100vh - 10vh);
-  background-image: url("dagout.jpg");
+  background-color: darkgreen;
+  background-image: url("top.jpg");
   background-position: center;
   background-size: cover;
   .result-order-container{
     width: 80vw;
     height: 100%;
     margin: 0 auto;
-    background-color: rgba($color: #fafdff, $alpha: 0.9);
+    background-color: rgba($color: #f8f8ff, $alpha: 0.9);
     overflow: scroll;
 
     .result-order-title{
@@ -170,6 +171,9 @@
   tr:nth-child(odd){
     background-color: lightgrey;
   }
+  tr:nth-child(even){
+    background-color: white;
+  }
 
   th{
     text-align: center;
@@ -207,6 +211,10 @@
       }
     }
   }
+  .batter-select-form{
+    width: 10%;
+    height: 30px;
+  }
   .result-mem-logo{
     height: 55px;
     width: 50px;
@@ -221,6 +229,11 @@
   .submit{
     background-color: orangered;
     color: white;
+    width: 100%;
+    &:hover{
+      background-color: rgba($color: orangered, $alpha: 0.7);
+      cursor: pointer;
+    }
   }
 }
 // バッターテーブル ここまで-------------
@@ -235,6 +248,9 @@
 
   tr:nth-child(odd){
     background-color: lightgrey;
+  }
+  tr:nth-child(even){
+    background-color: whitesmoke;
   }
 
   th{

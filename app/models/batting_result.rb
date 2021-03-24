@@ -9,10 +9,6 @@ class BattingResult < ApplicationRecord
   belongs_to :game
   belongs_to :member
   belongs_to :order
-  
-  has_many :at_bats
-  has_many :pitching_results, through: :at_bats
-
 
   validates :hit_id, presence: true, unless: :hit?
   validates :out_id, presence: true, unless: :out?

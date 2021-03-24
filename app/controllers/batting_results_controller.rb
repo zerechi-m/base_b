@@ -1,26 +1,30 @@
 class BattingResultsController < ApplicationController
   def index
     set_batting_results
-    @batting_result = BattingResult.new
+    @at_bat_batting_result = AtBatBattingResult.new  # form_objectを使用
   end
 
   def create
-    binding.pry
-    @batting_result = BattingResult.new(batting_params)
+    # form_objectを使用
+    @at_bat_batting_result = AtBatBattingResult.new(batting_params)
 
-    if overlapping == 1
-      @batting_result.valid?
-      @batting_result.save
+    unless overlapping <= 1
+      set_batting_results
+      flash[:alert] = "出塁欄に重複があります"
+      render action: :index and return
+    end
+
+    if @at_bat_batting_result.valid?
+      @at_bat_batting_result.save
       redirect_to action: :index
     else
       set_batting_results
-      flash[:alert] = "空白もしく重複があります"
+      flash[:alert] = "出塁欄空白があります"
       render action: :index
     end
   end
 
   private
-  
   def set_batting_results
     @game = Game.find(params[:game_id])
     @teams = @game.teams.includes(:members)
@@ -33,15 +37,15 @@ class BattingResultsController < ApplicationController
   end
 
   def batting_params
-    params.require(:batting_result).permit(:hit_id, :out_id, :time_base_id, :four_deadball_id, :point_id, :member_id, :order_id).merge(game_id: params[:game_id], team_id: params[:team_id])
+    params.require(:at_bat_batting_result).permit(:hit_id, :out_id, :time_base_id, :four_deadball_id, :point_id, :member_id, :order_id, :pitcher_id, :away_team_id).merge(game_id: params[:game_id], team_id: params[:team_id])
   end
 
   def overlapping
     array = []
-    array <<  @batting_result.hit_id
-    array <<  @batting_result.out_id
-    array <<  @batting_result.time_base_id
-    array <<  @batting_result.four_deadball_id
+    array <<  @at_bat_batting_result.hit_id
+    array <<  @at_bat_batting_result.out_id
+    array <<  @at_bat_batting_result.time_base_id
+    array <<  @at_bat_batting_result.four_deadball_id
     array_count = array.select{|num| num.present?}.count
     return array_count
   end

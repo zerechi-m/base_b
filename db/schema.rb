@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_23_090943) do
+ActiveRecord::Schema.define(version: 2021_03_24_033926) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -34,12 +34,16 @@ ActiveRecord::Schema.define(version: 2021_03_23_090943) do
   end
 
   create_table "at_bats", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "member_id"
+    t.bigint "game_id"
+    t.bigint "team_id"
     t.bigint "batting_result_id"
-    t.bigint "pitching_result_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["batting_result_id"], name: "index_at_bats_on_batting_result_id"
-    t.index ["pitching_result_id"], name: "index_at_bats_on_pitching_result_id"
+    t.index ["game_id"], name: "index_at_bats_on_game_id"
+    t.index ["member_id"], name: "index_at_bats_on_member_id"
+    t.index ["team_id"], name: "index_at_bats_on_team_id"
   end
 
   create_table "batting_results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -108,17 +112,6 @@ ActiveRecord::Schema.define(version: 2021_03_23_090943) do
     t.index ["team_id"], name: "index_orders_on_team_id"
   end
 
-  create_table "pitching_results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "member_id"
-    t.bigint "team_id"
-    t.bigint "game_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["game_id"], name: "index_pitching_results_on_game_id"
-    t.index ["member_id"], name: "index_pitching_results_on_member_id"
-    t.index ["team_id"], name: "index_pitching_results_on_team_id"
-  end
-
   create_table "results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "win"
     t.string "lose"
@@ -172,7 +165,9 @@ ActiveRecord::Schema.define(version: 2021_03_23_090943) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "at_bats", "batting_results"
-  add_foreign_key "at_bats", "pitching_results"
+  add_foreign_key "at_bats", "games"
+  add_foreign_key "at_bats", "members"
+  add_foreign_key "at_bats", "teams"
   add_foreign_key "batting_results", "games"
   add_foreign_key "batting_results", "members"
   add_foreign_key "batting_results", "orders"
@@ -183,9 +178,6 @@ ActiveRecord::Schema.define(version: 2021_03_23_090943) do
   add_foreign_key "orders", "games"
   add_foreign_key "orders", "members"
   add_foreign_key "orders", "teams"
-  add_foreign_key "pitching_results", "games"
-  add_foreign_key "pitching_results", "members"
-  add_foreign_key "pitching_results", "teams"
   add_foreign_key "room_teams", "rooms"
   add_foreign_key "room_teams", "teams"
 end

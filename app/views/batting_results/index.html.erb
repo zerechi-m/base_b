@@ -13,7 +13,7 @@
         <table border="1" class="score-table">
           <tr>
             <th colspan="2" class="score-team-name"></th>
-            <th class="count">一</th>
+            <th>一</th>
             <th>二</th>
             <th>三</th>
             <th>四</th>
@@ -27,7 +27,11 @@
             <th>E</th>
           </tr>
           <tr>
+           <% if @game.teams.where(name: @game.result.batting_first)[0].image.attached? %>
             <td class="score-logo"><%= image_tag @game.teams.where(name: @game.result.batting_first)[0].image, class: "score-logo"%></td>
+           <% else %>
+            <td class="score-logo"><%=image_tag "noimage.png", class: "score-logo"%></td>
+           <% end%>
             <td class="score-team-name-td"><%= @game.result.batting_first%></td>
             <td></td>
             <td></td>
@@ -43,7 +47,11 @@
             <td>0</td>
           </tr>
           <tr> 
+           <% if @game.teams.where(name: @game.result.fielding_first)[0].image.attached? %>
             <td class="score-logo"><%= image_tag @game.teams.where(name: @game.result.fielding_first)[0].image, class: "score-logo"%></td>
+           <% else %>
+            <td class="score-logo"><%=image_tag "noimage.png", class: "score-logo"%></td>
+           <% end%>
             <td class="score-team-name-td"><%= @game.result.fielding_first%></td>
             <td></td>
             <td></td>
@@ -67,7 +75,7 @@
 
         <%# 打席の記述 %>
         <div class="batter-container">
-          <%= form_with model: @batting_result, url: team_game_batting_results_path(@home_team.id, @game.id), method: :post, local: true do |f| %>
+          <%= form_with model: @at_bat_batting_result, url: team_game_batting_results_path(@home_team.id, @game.id), method: :post, local: true do |f| %>
           <table border="1" class="batter-table">
             <tr>
               <th class="order-number">打</th>
@@ -84,13 +92,15 @@
               <% end%>
               
               <td><%= @home_team.members.where(id: @batter[0].member_id)[0].name%></td>
-              <td>ヒット<%= f.collection_select "hit_id", Hit.all, :id, :name,{prompt: "-----"}, {class: "hit-select-form"}%>
-                        アウト<%= f.collection_select "out_id", Out.all, :id, :name,{prompt: "-----"}, {class: "hit-select-form"}%>
-                        エラー<%= f.collection_select "time_base_id", FieldError.all, :id, :name,{prompt: "-----"}, {class: "hit-select-form"}%>
-                        打点<%= f.collection_select :point_id, Point.all, :name, :name,{prompt: "-----"}, {class: "hit-select-form"}%>
-                        四死球<%= f.collection_select "four_deadball_id", FourDeadball.all, :name, :name,{prompt: "-----"}, {class: "hit-select-form"}%></td>
+              <td>ヒット<%= f.collection_select "hit_id", Hit.all, :id, :name,{include_blank: "-----"}, {class: "batter-select-form"}%>
+                        アウト<%= f.collection_select "out_id", Out.all, :id, :name,{include_blank: "-----"}, {class: "batter-select-form"}%>
+                        エラー<%= f.collection_select "time_base_id", FieldError.all, :id, :name,{include_blank: "-----"}, {class: "batter-select-form"}%>
+                        打点<%= f.collection_select :point_id, Point.all, :name, :name,{include_blank: "-----"}, {class: "batter-select-form"}%>
+                        四死球<%= f.collection_select "four_deadball_id", FourDeadball.all, :name, :name,{include_blank: "-----"}, {class: "batter-select-form"}%></td>
                   <%= f.hidden_field :member_id, value: @batter[0].member_id %>
                   <%= f.hidden_field :order_id, value: @batter[0].id %>
+                  <%= f.hidden_field :pitcher_id, value: @away_order.where(position_id: 1)[0].member_id %>
+                  <%= f.hidden_field :away_team_id, value: @away_team.id %>
               <td><%= f.submit "送信", class: "submit"%></td>
             </tr>
           </table>
