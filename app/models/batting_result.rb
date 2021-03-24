@@ -13,12 +13,15 @@ class BattingResult < ApplicationRecord
   has_many :at_bats
   has_many :pitching_results, through: :at_bats
 
+
   validates :hit_id, presence: true, unless: :hit?
   validates :out_id, presence: true, unless: :out?
   validates :time_base_id, presence: true, unless: :time_base?
   validates :four_deadball_id, presence: true, unless: :four_deadball?
-  private 
 
+  
+  private 
+  
   def hit?
     self.out_id? || self.time_base_id? || self.four_deadball_id?
   end

@@ -7,17 +7,20 @@ class BattingResultsController < ApplicationController
   def create
     binding.pry
     @batting_result = BattingResult.new(batting_params)
-    if @batting_result.valid?
+
+    if overlapping == 1
+      @batting_result.valid?
       @batting_result.save
       redirect_to action: :index
     else
       set_batting_results
-      flash[:alert] = "打撃成績を記載してください"
+      flash[:alert] = "空白もしく重複があります"
       render action: :index
     end
   end
 
   private
+  
   def set_batting_results
     @game = Game.find(params[:game_id])
     @teams = @game.teams.includes(:members)
@@ -33,4 +36,13 @@ class BattingResultsController < ApplicationController
     params.require(:batting_result).permit(:hit_id, :out_id, :time_base_id, :four_deadball_id, :point_id, :member_id, :order_id).merge(game_id: params[:game_id], team_id: params[:team_id])
   end
 
+  def overlapping
+    array = []
+    array <<  @batting_result.hit_id
+    array <<  @batting_result.out_id
+    array <<  @batting_result.time_base_id
+    array <<  @batting_result.four_deadball_id
+    array_count = array.select{|num| num.present?}.count
+    return array_count
+  end
 end
