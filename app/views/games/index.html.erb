@@ -64,7 +64,9 @@
           <% end %>
 
           <%# ------ 対戦ボタンの条件分岐 %>
-          <% if game.result.present? && current_team.games.find(game.id).orders.present? && away_team.games.find(game.id).orders.present?%>
+          <%if game.result.present? && game.result.win.present?%>
+            <%= link_to "試合結果", game_result_path(game.id, game.result.id), class: "game-card-btn  red"%>
+          <% elsif game.result.present? && current_team.games.find(game.id).orders.present? && away_team.games.find(game.id).orders.present?%>
             <%= link_to "試合画面", team_game_batting_results_path(current_team.id, game.id), class: "game-card-btn  red" %>
           <% elsif current_team.games.find(game.id).orders.present? == true  && away_team.games.find(game.id).orders.present? == true %>
             <%= link_to "対戦画面", game_results_path(game.id), class: "game-card-btn  red" %>

@@ -3,6 +3,60 @@
 
 <div class="batting-result-order-wrapper">
   <div class="result-order-container-last">
+
+
+      <div class="game-card-wrapper">
+        <div class="card-title">
+          <p><%= @game.game_day.strftime( "%Y年%m月%d日") %>(<%= %w(日 月 火 水 木 金 土)[@game.game_day.wday] %>)</p>
+        </div>
+        <div class="game-card-upper-container">
+          <div class="card-inner">      <%# --- カード左 %>        
+            <% if @batting_first.image.attached? %>
+              <%= image_tag @batting_first.image, class: "card-icon" %>
+            <%else%>
+              <%= image_tag "noimage.png", class: "card-icon" %>
+            <%end%>
+            <div class="card-team-name">
+              <%= @batting_first.name%>
+            </div>
+          </div>
+          <div class="card-middle">
+            <p><%= @batting_first_point %></p>
+            <p>ー</p>
+            <p><%= @fielding_first_point %></p>
+          </div>
+          <div class="card-inner">      <%# --- カード右 %>
+            <% if @fielding_first.image.attached? %>
+              <%= image_tag @fielding_first.image, class: "card-icon" %>
+            <%else%>
+              <%= image_tag "noimage.png", class: "card-icon" %>
+            <%end%>
+              <div class="card-team-name">
+                <%= link_to @fielding_first.name, team_members_path(@fielding_first.id) %> 
+              </div>
+          </div>
+        </div>
+        <div class="game-card-bottom-container">
+          <div class="pitcher-container">
+            <%= image_tag @batting_first_pitcher.mem_image, class: "pitcher-logo"%>
+            <p><%= @batting_first_pitcher.name%></p>
+            <div class="pitcher-result">
+              <p>被安打<%= @game.batting_results.where(game_id: @game.id, team_id: @fielding_first.id).count(:hit_id)%></p>
+              <p>自責点<%= @game.batting_results.where(game_id: @game.id, team_id: @fielding_first.id).sum(:point_id)%></p>
+            </div>
+          </div>
+          <div class="pitcher-container">
+            <%= image_tag @fielding_first_pitcher.mem_image, class: "pitcher-logo"%>
+            <p><%= @fielding_first_pitcher.name%></p>
+            <div class="pitcher-result">
+              <p>被安打<%= @game.batting_results.where(game_id: @game.id, team_id: @batting_first.id).count(:hit_id)%></p>
+              <p>自責点<%= @game.batting_results.where(game_id: @game.id, team_id: @batting_first.id).sum(:point_id)%></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     <%if flash[:alert] %>
       <p class="flash-message2 alert"><%= flash[:alert] %></p>
     <%end%>

@@ -34,20 +34,22 @@ class ResultsController < ApplicationController
   def set_result
     @game = Game.find(params[:game_id])
     @teams = @game.teams.includes(:members, :batting_results)
-    # @home_team = @teams.select{|team| team.id == current_team.id }[0]
-    # @home_order = @home_team.orders.where(team_id: @home_team.id, game_id: params[:game_id])
-    # @home_team_mem = @home_team.members
-    # @away_team = @teams.select{|team| team.id != current_team.id }[0]
-    # @away_order = @away_team.orders.where(team_id: @away_team.id, game_id: params[:game_id])
 
+    #------ 先攻チームと後攻チームを作成
     @batting_first = @game.teams.where(name: @game.result.batting_first)[0]
     @fielding_first = @game.teams.where(name: @game.result.fielding_first)[0]
     @batting_first_order = @batting_first.orders.where(team_id: @batting_first.id, game_id: params[:game_id])
     @fielding_first_order = @fielding_first.orders.where(team_id:  @fielding_first.id, game_id: params[:game_id])
-
+    #------ 先攻チームと後攻チームのピッチャー結果
+    @batting_first_pitcher = @batting_first.members.where(id: @batting_first_order.where(position_id: 1)[0].member_id)[0]
+    @fielding_first_pitcher = @fielding_first.members.where(id: @fielding_first_order.where(position_id: 1)[0].member_id)[0]
+    #------ 先攻チームと後攻チームの得点
+    @batting_first_point = @batting_first.batting_results.where(game_id: @game.id).sum(:point_id)
+    @fielding_first_point = @fielding_first.batting_results.where(game_id: @game.id).sum(:point_id)
+    
+    #------ 各イニングの得点
     @first_num_of_times = first_num_of_times()
     @second_num_of_times = second_num_of_times()
-    
     
   end
 
