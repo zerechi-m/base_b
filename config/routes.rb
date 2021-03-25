@@ -12,6 +12,6 @@ Rails.application.routes.draw do
     end
   end
   resources :games, only: [:index] do
-    resources :results, only: [:index, :create]
+    resources :results, only: [:index, :create, :update, :show]
   end
 end

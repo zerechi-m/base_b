@@ -74,6 +74,34 @@
           }
         }
       }
+      .game-set{    // 試合終了ボタン
+        width: 80%;
+        height: 80px;
+        margin: 40px auto 40px;
+        a{
+          height: 50px;
+          width: 50%;
+          padding: 10px;
+          font-size: 20px;
+          letter-spacing: 3px;
+          font-weight: bold;
+          background-color: #ea5549;
+          border: 1px solid black;
+          border-radius: 8px;
+          color: white;
+          margin: 0 auto;
+          text-align: center;
+          display: block;
+          &:hover{
+            background-color: rgba($color: #ea5549, $alpha: 0.8);
+          }
+        }
+        p{
+          margin-top: 10px;
+          font-size: 18px;
+          text-align: center;
+        }
+      }// ------ 試合終了ボタン ここまで
 
       .batter-container{
         margin: 50px 0;
@@ -125,7 +153,7 @@
     
   }
 }
-// スコアテーブル --------------
+// 得点板テーブル --------------
 .score-table{
   width: 100%;
   text-align: center;
@@ -255,7 +283,7 @@
 
   th{
     text-align: center;
-    background-color: darkgreen;
+    background-color: #043c78;
     color: white;
     
   }
