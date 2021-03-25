@@ -1,6 +1,9 @@
 // Place all the styles related to the results controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+//  先攻後攻選択画面の css
 .result-order-wrapper{
   width: 100%;
   height: calc(100vh - 10vh - 8vh);
@@ -236,4 +239,128 @@
   .order-position{
     width: 100px;
   }
+}
+
+
+//  試合結果画面のcss
+
+.batting-result-order-wrapper{
+  width: 100%;
+  height: calc(100vh - 10vh);
+  background-color: darkgreen;
+  background-image: url("top.jpg");
+  background-position: center;
+  background-size: cover;
+
+  .result-order-container-last{
+    width: 100vw;
+    height: 100%;
+    margin: 0 auto;
+    background-color: rgba($color: #f8f8ff, $alpha: 0.9);
+    overflow: scroll;
+    
+    .score-board-container{
+      padding: 10px;
+    }
+    .result-order-container-inner{
+      width:90%;
+      padding: 8px;
+      margin: 0 auto;
+
+      .result-order-team-wrapper{ // 各チームの打撃成績を横に配置
+        margin: 15px;
+        display: flex;
+        justify-content: space-around;
+
+      }
+
+      .order-title{
+        width: 100%;
+        height: 50px;
+        margin: 10px 0;
+        p{
+          height: 100%;
+          text-align: center;
+          padding: 10px 0;
+          font-size: 20px;
+          font-weight: bold;
+        }
+      }
+      
+      .order-team-member-container{
+        width: 45%;
+        margin: 30px auto;
+      }
+      .order-btn-container{
+        width: 100%;
+        margin: 25px;
+        .order-submit-btn{
+          width: 20%;
+          padding: 10px;
+          height: 50px;
+          text-align: center;
+          display: block;
+          margin: 0 auto;
+          cursor: pointer;
+          letter-spacing: 2px;
+          border-radius: 6px;
+          color: white;
+          background-color: orange;
+          &:hover{
+            background-color: rgba($color: orange, $alpha: 0.8);
+          }
+        }
+        .red{
+          background-color: #ea5549;
+          border: 1px solid black;
+        }
+        
+      }
+    }
+
+    // 得点板テーブル --------------
+    .score-table{
+      width: 70%;
+      margin: 0 auto;
+      text-align: center;
+      background-color: darkgreen;
+      border: 2px solid lightgrey;
+  
+      th{
+        font-weight: bold;
+        text-align: center;
+        color: white;
+        height: 50px;
+        .score-team-name{
+          width: 50px;
+        }
+      }
+
+      td{
+        color: whitesmoke;
+        width:50px;
+        font-size: 20px;
+        .score-logo{
+          width: 50px;
+          height: 50px;
+        }
+      }
+      .score-team-name-td{
+        width: 200px;
+        font-size: 16px;
+        a{
+          color: white;
+          &:hover{
+            background-color: rgba($color: #ffdc00, $alpha: 0.6);
+          }
+        }
+      }
+    }
+    // スコアテーブル ---ここまで-----------
+  }
+}
+
+.order-team-wrapper{
+  width: 100%;
+  display: flex;
 }

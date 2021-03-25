@@ -1,3 +1,247 @@
-<h1>試合結果画面への遷移</h1>
+<%= render "shared/main_header" %>
+<div class="top-height"></div>
 
-<%= @game.result%>
+<div class="batting-result-order-wrapper">
+  <div class="result-order-container-last">
+    <%if flash[:alert] %>
+      <p class="flash-message2 alert"><%= flash[:alert] %></p>
+    <%end%>
+      <div class="result-order-container-inner">
+      
+        <%# 得点掲示板--- %>
+        <div class="score-board-container">
+          <table border="1" class="score-table">
+            <tr>
+              <th colspan="2" class="score-team-name"></th>
+              <th>一</th>
+              <th>二</th>
+              <th>三</th>
+              <th>四</th>
+              <th>五</th>
+              <th>六</th>
+              <th>七</th>
+              <th>R</th>
+              <th>H</th>
+              <th>E</th>
+            </tr>
+            <tr>
+              <% if @batting_first.image.attached? %>
+              <td class="score-logo"><%= image_tag @batting_first.image, class: "score-logo"%></td>
+              <% else %>
+              <td class="score-logo"><%=image_tag "noimage.png", class: "score-logo"%></td>
+              <% end%>
+              <td class="score-team-name-td"><%= link_to @game.result.batting_first, team_game_batting_results_path(@batting_first.id, @game.id)%></td>
+              <td><%= @first_num_of_times[0] %></td>
+              <td><%= @first_num_of_times[1] %></td>
+              <td><%= @first_num_of_times[2] %></td>
+              <td><%= @first_num_of_times[3] %></td>
+              <td><%= @first_num_of_times[4] %></td>
+              <td><%= @first_num_of_times[5] %></td>
+              <td><%= @first_num_of_times[6] %></td>
+              <%# 先攻得点 %>
+              <td><%= @batting_first.batting_results.where(game_id: @game.id).sum(:point_id)%></td>
+              <%# 先攻ヒット数 %>
+              <td><%= @batting_first.batting_results.where(game_id: @game.id).count(:hit_id)%></td>
+              <%# 先攻エラー数 %>
+              <td><%= @fielding_first.batting_results.where(game_id: @game.id).count(:time_base_id)%></td>
+            </tr>
+            <tr> 
+              <% if @fielding_first.image.attached? %>
+              <td class="score-logo"><%= image_tag @game.teams.where(name: @game.result.fielding_first)[0].image, class: "score-logo"%></td>
+              <% else %>
+              <td class="score-logo"><%=image_tag "noimage.png", class: "score-logo"%></td>
+              <% end%>
+              <td class="score-team-name-td"><%= link_to @game.result.fielding_first, team_game_batting_results_path(@fielding_first.id, @game.id)%></td>
+              <td><%= @second_num_of_times[0] %></td>
+              <td><%= @second_num_of_times[1] %></td>
+              <td><%= @second_num_of_times[2] %></td>
+              <td><%= @second_num_of_times[3] %></td>
+              <td><%= @second_num_of_times[4] %></td>
+              <td><%= @second_num_of_times[5] %></td>
+              <td><%= @second_num_of_times[6] %></td>
+              <%# 後攻得点 %>
+              <td><%= @fielding_first.batting_results.where(game_id: @game.id).sum(:point_id)%></td>
+              <%# 後攻ヒット数 %>
+              <td><%= @fielding_first.batting_results.where(game_id: @game.id).count(:hit_id)%></td>
+              <%# 後攻エラー数 %>
+              <td><%= @batting_first.batting_results.where(game_id: @game.id).count(:time_base_id)%></td>
+            </tr>
+          </table>
+          <%# 5回試合終了の条件分岐 --- %>
+          <% if @fielding_first.batting_results.where(game_id: @game.id).count(:out_id) != 15 %> 
+            <div class="game-set">
+              <%= link_to "試合終了", game_result_path(@game.id, @game.result.id), method: :put %>
+              <p>【 試合終了ボタン 】を押して先に試合結果の画面に移動してください </p>
+            </div>
+          <%end%>
+        </div>
+        <%# 得点掲示板  ここまで--- %>
+
+       <div class="order-team-wrapper">
+        <%# 先攻チームの打撃結果 --- %>
+        <div class="order-team-member-container">
+          <table border="1" class="batting-result-table">
+            <tr class="order-title">
+              <th class="order-number">打</th>
+              <th colspan="2" class="order-name">選手名</th>
+              <th class="order-position">利</th>
+              <th class="order-position">守</th>
+              <th class="batting_result1">一打席</th>
+              <th class="batting_result1">二打席</th>
+              <th class="batting_result1">三打席</th>
+            </tr>
+            <% @batting_first_order.each do |order|%>
+              <% i = 1%>
+                <tr>
+                  <td><%= order.batting_order%></td>
+                <% if @batting_first.members.where(id: order.member_id)[0].mem_image.attached? %>
+                  <td class="mem-logo"><%=image_tag @batting_first.members.where(id: order.member_id)[0].mem_image, class: "result-mem-logo"%></td>
+                <% else %>
+                  <td class="mem-logo"><%=image_tag "noimage.png", class: "result-mem-logo"%></td>
+                <% end%>
+                  
+                <% if Position.find(order.position_id).id == 1%>
+                  <td ><%= @batting_first.members.where(id: order.member_id)[0].name%></td>
+                  <td class="pitcher"><%= @batting_first.members.where(id: order.member_id)[0].dominant_hand.name.slice(0, 2)%></td>
+                  <td class="pitcher"><%=Position.find(order.position_id).name.slice(0)%></td>
+                <%else%>
+                  <td><%= @batting_first.members.where(id: order.member_id)[0].name%></td>
+                  <td><%= @batting_first.members.where(id: order.member_id)[0].dominant_hand.name.slice(-2, 2)%></td>
+                  <td class="position-record"><%=Position.find(order.position_id).name.slice(0)%></td>
+                <%end%>
+                <%#  第一打席の記録-----ここから------- %>
+                <% record1 = order.batting_results[0] %>
+                <% if record1.present?%>
+                  <% if record1.hit_id? %>
+                    <td><p class="hit"><%= Hit.find(record1.hit_id).name%></p><p class="point"><%=Point.find(record1.point_id).name if record1.point_id?%></p></td>
+                  <% elsif record1.out_id? %>
+                    <td><p class="out"><%= Out.find(record1.out_id).name%></p><p class="point"><%=Point.find(record1.point_id).name if record1.point_id? %></p></td>
+                  <% elsif record1.time_base_id? %>
+                    <td><p class="f-error"><%= FieldError.find(record1.time_base_id).name%></p><p class="point"><%=Point.find(record1.point_id).name if record1.point_id? %></p></td>
+                  <% elsif record1.four_deadball_id? %>
+                    <td><p class="four-ball"><%= FourDeadball.find(record1.four_deadball_id).name%></p><p class="point"><%=Point.find(record1.point_id).name if record1.point_id? %></p></td>
+                  <%end%>
+                <% end %>
+                <%#  第一打席の記録-----ここまで------- %>
+                    
+                <%#  第二打席の記録-----ここから------- %>
+                <% record2 = order.batting_results[1]  %>
+                <% if record2.present?%>
+                  <% if record2.hit_id? %>
+                    <td><p class="hit"><%= Hit.find(record2.hit_id).name%></p><p class="point"><%=Point.find(record2.point_id).name if record2.point_id? %></p></td>
+                  <% elsif record2.out_id? %>
+                    <td><p class="out"><%= Out.find(record2.out_id).name%></p><p class="point"><%=Point.find(record2.point_id).name if record2.point_id? %></p></td>
+                  <% elsif record2.time_base_id? %>
+                    <td><p class="f-error"><%= FieldError.find(record2.time_base_id).name%></p><p class="point"><%=Point.find(record2.point_id).name if record2.point_id? %></p></td>
+                  <% elsif record2.four_deadball_id? %>
+                    <td><p class="four-ball"><%= FourDeadball.find(record2.four_deadball_id).name%></p><p class="point"><%= Point.find(record2.point_id).name if record2.point_id? %></p></td>
+                  <%end%>
+                <% end %>
+                <%#  第二打席の記録-----ここまで------- %>
+
+                <%#  第三打席の記録-----ここから------- %>
+                <% record3 = order.batting_results[2]  %>
+                <% if record3.present?%>
+                  <% if record3.hit_id? %>
+                    <td><p class="hit"><%= Hit.find(record3.hit_id).name%></p><p class="point"><%=Point.find(record3.point_id).name if record3.point_id? %></p></td>
+                  <% elsif record3.out_id? %>
+                    <td><p class="out"><%= Out.find(record3.out_id).name%></p><p class="point"><%=Point.find(record3.point_id).name if record3.point_id? %></p></td>
+                  <% elsif record3.time_base_id? %>
+                    <td><p class="f-error"><%= FieldError.find(record3.time_base_id).name%></p><p class="point"><%=Point.find(record3.point_id).name if record3.point_id? %></p></td>
+                  <% elsif record3.four_deadball_id? %>
+                    <td><p class="four-ball"><%= FourDeadball.find(record3.four_deadball_id).name%></p><p class="point"><%=Point.find(record3.point_id).name if record3.point_id? %></p></td>
+                  <%end%>
+                <% end %>
+                <%#  第三打席の記録-----ここまで------- %>
+                </tr>
+              <% i += 1%>
+            <%end%>
+          </table>
+        </div>
+        <%# 先攻チームの打撃結果 ---ここまで--- %>
+
+        <%# 後攻チームの打撃結果 ---ここから--- %>
+        <div class="order-team-member-container">
+          <table border="1" class="batting-result-table">
+            <tr class="order-title">
+              <th class="order-number">打</th>
+              <th colspan="2" class="order-name">選手名</th>
+              <th class="order-position">利</th>
+              <th class="order-position">守</th>
+              <th class="batting_result1">一打席</th>
+              <th class="batting_result1">二打席</th>
+              <th class="batting_result1">三打席</th>
+            </tr>
+            <% @fielding_first_order.each do |order|%>
+              <% i = 1%>
+                <tr>
+                  <td><%= order.batting_order%></td>
+                <% if @fielding_first.members.where(id: order.member_id)[0].mem_image.attached? %>
+                  <td class="mem-logo"><%=image_tag @fielding_first.members.where(id: order.member_id)[0].mem_image, class: "result-mem-logo"%></td>
+                <% else %>
+                  <td class="mem-logo"><%=image_tag "noimage.png", class: "result-mem-logo"%></td>
+                <% end%>
+                  
+                <% if Position.find(order.position_id).id == 1%>
+                  <td ><%= @fielding_first.members.where(id: order.member_id)[0].name%></td>
+                  <td class="pitcher"><%= @fielding_first.members.where(id: order.member_id)[0].dominant_hand.name.slice(0, 2)%></td>
+                  <td class="pitcher"><%=Position.find(order.position_id).name.slice(0)%></td>
+                <%else%>
+                  <td><%= @fielding_first.members.where(id: order.member_id)[0].name%></td>
+                  <td><%= @fielding_first.members.where(id: order.member_id)[0].dominant_hand.name.slice(-2, 2)%></td>
+                  <td class="position-record"><%=Position.find(order.position_id).name.slice(0)%></td>
+                <%end%>
+                <%#  第一打席の記録-----ここから------- %>
+                <% record1 = order.batting_results[0] %>
+                <% if record1.present?%>
+                  <% if record1.hit_id? %>
+                    <td><p class="hit"><%= Hit.find(record1.hit_id).name%></p><p class="point"><%=Point.find(record1.point_id).name if record1.point_id?%></p></td>
+                  <% elsif record1.out_id? %>
+                    <td><p class="out"><%= Out.find(record1.out_id).name%></p><p class="point"><%=Point.find(record1.point_id).name if record1.point_id? %></p></td>
+                  <% elsif record1.time_base_id? %>
+                    <td><p class="f-error"><%= FieldError.find(record1.time_base_id).name%></p><p class="point"><%=Point.find(record1.point_id).name if record1.point_id? %></p></td>
+                  <% elsif record1.four_deadball_id? %>
+                    <td><p class="four-ball"><%= FourDeadball.find(record1.four_deadball_id).name%></p><p class="point"><%=Point.find(record1.point_id).name if record1.point_id? %></p></td>
+                  <%end%>
+                <% end %>
+                <%#  第一打席の記録-----ここまで------- %>
+                    
+                <%#  第二打席の記録-----ここから------- %>
+                <% record2 = order.batting_results[1]  %>
+                <% if record2.present?%>
+                  <% if record2.hit_id? %>
+                    <td><p class="hit"><%= Hit.find(record2.hit_id).name%></p><p class="point"><%=Point.find(record2.point_id).name if record2.point_id? %></p></td>
+                  <% elsif record2.out_id? %>
+                    <td><p class="out"><%= Out.find(record2.out_id).name%></p><p class="point"><%=Point.find(record2.point_id).name if record2.point_id? %></p></td>
+                  <% elsif record2.time_base_id? %>
+                    <td><p class="f-error"><%= FieldError.find(record2.time_base_id).name%></p><p class="point"><%=Point.find(record2.point_id).name if record2.point_id? %></p></td>
+                  <% elsif record2.four_deadball_id? %>
+                    <td><p class="four-ball"><%= FourDeadball.find(record2.four_deadball_id).name%></p><p class="point"><%= Point.find(record2.point_id).name if record2.point_id? %></p></td>
+                  <%end%>
+                <% end %>
+                <%#  第二打席の記録-----ここまで------- %>
+
+                <%#  第三打席の記録-----ここから------- %>
+                <% record3 = order.batting_results[2]  %>
+                <% if record3.present?%>
+                  <% if record3.hit_id? %>
+                    <td><p class="hit"><%= Hit.find(record3.hit_id).name%></p><p class="point"><%=Point.find(record3.point_id).name if record3.point_id? %></p></td>
+                  <% elsif record3.out_id? %>
+                    <td><p class="out"><%= Out.find(record3.out_id).name%></p><p class="point"><%=Point.find(record3.point_id).name if record3.point_id? %></p></td>
+                  <% elsif record3.time_base_id? %>
+                    <td><p class="f-error"><%= FieldError.find(record3.time_base_id).name%></p><p class="point"><%=Point.find(record3.point_id).name if record3.point_id? %></p></td>
+                  <% elsif record3.four_deadball_id? %>
+                    <td><p class="four-ball"><%= FourDeadball.find(record3.four_deadball_id).name%></p><p class="point"><%=Point.find(record3.point_id).name if record3.point_id? %></p></td>
+                  <%end%>
+                <% end %>
+                <%#  第三打席の記録-----ここまで------- %>
+                </tr>
+              <% i += 1%>
+            <%end%>
+          </table>
+        </div>
+        <%# 後攻チームの打撃結果 ---ここまで--- %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -12,6 +12,7 @@ class BattingResultsController < ApplicationController
 
     unless overlapping <= 1
       set_batting_results
+      @no = num_params
       flash[:alert] = "出塁欄に重複があります"
       render action: :index and return
     end

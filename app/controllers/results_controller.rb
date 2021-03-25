@@ -33,18 +33,22 @@ class ResultsController < ApplicationController
 
   def set_result
     @game = Game.find(params[:game_id])
-    @teams = @game.teams.includes(:members)
-    @home_team = @teams.select{|team| team.id == current_team.id }[0]
-    @home_order = @home_team.orders.where(team_id: @home_team.id, game_id: params[:game_id])
-    @home_team_mem = @home_team.members
-    @away_team = @teams.select{|team| team.id != current_team.id }[0]
-    @away_order = @away_team.orders.where(team_id: @away_team.id, game_id: params[:game_id])
+    @teams = @game.teams.includes(:members, :batting_results)
+    # @home_team = @teams.select{|team| team.id == current_team.id }[0]
+    # @home_order = @home_team.orders.where(team_id: @home_team.id, game_id: params[:game_id])
+    # @home_team_mem = @home_team.members
+    # @away_team = @teams.select{|team| team.id != current_team.id }[0]
+    # @away_order = @away_team.orders.where(team_id: @away_team.id, game_id: params[:game_id])
 
     @batting_first = @game.teams.where(name: @game.result.batting_first)[0]
     @fielding_first = @game.teams.where(name: @game.result.fielding_first)[0]
+    @batting_first_order = @batting_first.orders.where(team_id: @batting_first.id, game_id: params[:game_id])
+    @fielding_first_order = @fielding_first.orders.where(team_id:  @fielding_first.id, game_id: params[:game_id])
 
-    # @first_num_of_times = first_num_of_times()
-    # @second_num_of_times = second_num_of_times()
+    @first_num_of_times = first_num_of_times()
+    @second_num_of_times = second_num_of_times()
+    
+    
   end
 
   def result_update
@@ -64,5 +68,58 @@ class ResultsController < ApplicationController
 
   def result_params
     params.permit(:batting_first, :fielding_first).merge(game_id: params[:game_id])
+  end
+
+  def first_num_of_times # 先攻チームの点数
+    point_array = []
+    @batting_first_results = @batting_first.batting_results.where(game_id: @game.id)
+    batting_first_out = @batting_first_results.where(out_id: [1..6])
+    batting_first_1st = @batting_first_results[0].id
+    count = batting_first_out.length / 3
+    i = 0
+    
+    count.times do
+      i += 2
+      three_out = batting_first_out[i].id
+      point = @batting_first_results.where(id: [batting_first_1st..three_out]).sum(:point_id)
+      point_array <<  point
+      if  @batting_first_results.find_by("id > ?", three_out).present?
+        batting_first_1st = @batting_first_results.find_by("id > ?", three_out).id
+      end
+      i += 1
+    end
+
+    last = @batting_first_results.last.id
+    point = @batting_first_results.where(id: [batting_first_1st..last]).sum(:point_id)
+    point_array << point
+
+    return point_array
+  end
+
+  def second_num_of_times  # 後攻チームの点数
+    point_array = []
+    @fielding_first_results = @fielding_first.batting_results.where(game_id: @game.id)
+    fielding_first_out = @fielding_first_results.where(out_id: [1..6])
+    fielding_first_1st = @fielding_first_results[0].id
+    count = fielding_first_out.length / 3
+    i = 0
+    
+    count.times do
+      i += 2
+      three_out = fielding_first_out[i].id
+      point = @fielding_first_results.where(id: [fielding_first_1st..three_out]).sum(:point_id)
+      point_array <<  point
+
+      if @fielding_first_results.find_by("id > ?", three_out).present?
+        fielding_first_1st = @fielding_first_results.find_by("id > ?", three_out).id
+      end
+      i += 1
+    end
+
+      last = @fielding_first_results.last.id
+      point = @fielding_first_results.where(id: [fielding_first_1st..last]).sum(:point_id)
+      point_array << point
+
+    return point_array
   end
 end
