@@ -42,7 +42,7 @@ class BattingResultsController < ApplicationController
 
     @batting_first = @game.teams.where(name: @game.result.batting_first)[0]
     @fielding_first = @game.teams.where(name: @game.result.fielding_first)[0]
-
+    
     @first_num_of_times = first_num_of_times()
     @second_num_of_times = second_num_of_times()
   end
@@ -82,7 +82,7 @@ class BattingResultsController < ApplicationController
     batting_first_out = @batting_first_results.where(out_id: [1..6])
 
     batting_first_1st = @batting_first_results[0].id if @batting_first_results[0].present? # 初回のバッター表示分岐
-    
+
     count = batting_first_out.length / 3
     i = 0
     
@@ -97,10 +97,12 @@ class BattingResultsController < ApplicationController
       i += 1
     end
 
-    last = @batting_first_results.last.id if @batting_first_results.last.present? # 初回のバッター表示分岐
-
-    point = @batting_first_results.where(id: [batting_first_1st..last]).sum(:point_id)
-    point_array << point
+    unless count == 5
+      last = @batting_first_results.last.id if @batting_first_results.last.present? # 初回のバッター表示分岐
+  
+      point = @batting_first_results.where(id: [batting_first_1st..last]).sum(:point_id)
+      point_array << point
+    end
 
     return point_array
   end
@@ -126,11 +128,13 @@ class BattingResultsController < ApplicationController
       end
       i += 1
     end
-
+    
+    unless count == 5
       last = @fielding_first_results.last.id if @fielding_first_results.last.present? # 初回のバッター表示分岐
 
       point = @fielding_first_results.where(id: [fielding_first_1st..last]).sum(:point_id)
       point_array << point
+    end
 
     return point_array
   end

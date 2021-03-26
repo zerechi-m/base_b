@@ -78,7 +78,7 @@
       <%# 得点掲示板  ここまで--- %>
 
       <%# 5回ゲームセットの条件分岐 %>
-      <% if @home_team.batting_results.where(game_id: @game.id).count(:out_id) != 15 && @home_team.id == current_team.id%>
+      <% if @home_team.batting_results.where(game_id: @game.id).count(:out_id) != 15 && @home_team.id == current_team.id %>
         <%# 打席の記述 %>
         <div class="batter-container">
           <%= form_with model: @at_bat_batting_result, url: team_game_batting_results_path(@home_team.id, @game.id), method: :post, local: true do |f| %>
