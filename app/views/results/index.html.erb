@@ -9,7 +9,7 @@
     <div class="result-order-title">
       <h2>【先攻・後攻】を選択して試合を開始</h2>
     </div>
-    <%= form_with model: @result, url: game_results_path(@game.id), method: :post, local: true do |f| %>
+    <%= form_with  url: game_results_path(@game.id), method: :post, local: true do |f| %>
       <div class="first-batting-container">
         <div class="select"> 
           <p>先攻</p>

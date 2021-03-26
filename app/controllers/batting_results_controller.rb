@@ -76,10 +76,13 @@ class BattingResultsController < ApplicationController
   end
 
   def first_num_of_times # 先攻チームの点数
+    
     point_array = []
     @batting_first_results = @batting_first.batting_results.where(game_id: @game.id)
     batting_first_out = @batting_first_results.where(out_id: [1..6])
-    batting_first_1st = @batting_first_results[0].id
+
+    batting_first_1st = @batting_first_results[0].id if @batting_first_results[0].present? # 初回のバッター表示分岐
+    
     count = batting_first_out.length / 3
     i = 0
     
@@ -94,7 +97,8 @@ class BattingResultsController < ApplicationController
       i += 1
     end
 
-    last = @batting_first_results.last.id
+    last = @batting_first_results.last.id if @batting_first_results.last.present? # 初回のバッター表示分岐
+
     point = @batting_first_results.where(id: [batting_first_1st..last]).sum(:point_id)
     point_array << point
 
@@ -105,7 +109,9 @@ class BattingResultsController < ApplicationController
     point_array = []
     @fielding_first_results = @fielding_first.batting_results.where(game_id: @game.id)
     fielding_first_out = @fielding_first_results.where(out_id: [1..6])
-    fielding_first_1st = @fielding_first_results[0].id
+    
+    fielding_first_1st = @fielding_first_results[0].id if @fielding_first_results[0].present? # 初回のバッター表示分岐
+
     count = fielding_first_out.length / 3
     i = 0
     
@@ -121,7 +127,8 @@ class BattingResultsController < ApplicationController
       i += 1
     end
 
-      last = @fielding_first_results.last.id
+      last = @fielding_first_results.last.id if @fielding_first_results.last.present? # 初回のバッター表示分岐
+
       point = @fielding_first_results.where(id: [fielding_first_1st..last]).sum(:point_id)
       point_array << point
 
