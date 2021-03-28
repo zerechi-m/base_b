@@ -9,7 +9,7 @@ class ResultsController < ApplicationController
     @result = Result.new(result_params)
     if @result.valid?
       @result.save
-      redirect_to root_path
+      redirect_to team_game_batting_results_path(current_team.id, params[:game_id])
     else
       set_result_first           # 変数をセット
       flash[:alert] = "先攻・後攻を選択してください"
@@ -82,10 +82,13 @@ class ResultsController < ApplicationController
   end
 
   def first_num_of_times # 先攻チームの点数
+    
     point_array = []
     @batting_first_results = @batting_first.batting_results.where(game_id: @game.id)
     batting_first_out = @batting_first_results.where(out_id: [1..6])
-    batting_first_1st = @batting_first_results[0].id
+
+    batting_first_1st = @batting_first_results[0].id if @batting_first_results[0].present? # 初回のバッター表示分岐
+
     count = batting_first_out.length / 3
     i = 0
     
@@ -100,9 +103,12 @@ class ResultsController < ApplicationController
       i += 1
     end
 
-    last = @batting_first_results.last.id
-    point = @batting_first_results.where(id: [batting_first_1st..last]).sum(:point_id)
-    point_array << point
+    unless count == 5
+      last = @batting_first_results.last.id if @batting_first_results.last.present? # 初回のバッター表示分岐
+  
+      point = @batting_first_results.where(id: [batting_first_1st..last]).sum(:point_id)
+      point_array << point
+    end
 
     return point_array
   end
@@ -111,7 +117,9 @@ class ResultsController < ApplicationController
     point_array = []
     @fielding_first_results = @fielding_first.batting_results.where(game_id: @game.id)
     fielding_first_out = @fielding_first_results.where(out_id: [1..6])
-    fielding_first_1st = @fielding_first_results[0].id
+    
+    fielding_first_1st = @fielding_first_results[0].id if @fielding_first_results[0].present? # 初回のバッター表示分岐
+
     count = fielding_first_out.length / 3
     i = 0
     
@@ -126,10 +134,13 @@ class ResultsController < ApplicationController
       end
       i += 1
     end
+    
+    unless count == 5
+      last = @fielding_first_results.last.id if @fielding_first_results.last.present? # 初回のバッター表示分岐
 
-      last = @fielding_first_results.last.id
       point = @fielding_first_results.where(id: [fielding_first_1st..last]).sum(:point_id)
       point_array << point
+    end
 
     return point_array
   end

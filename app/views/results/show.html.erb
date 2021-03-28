@@ -110,7 +110,11 @@
               <td><%= @second_num_of_times[1] %></td>
               <td><%= @second_num_of_times[2] %></td>
               <td><%= @second_num_of_times[3] %></td>
+              <% if @batting_first.batting_results.where(game_id: @game.id).count(:out_id) == 15 && @fielding_first.batting_results.where(game_id: @game.id).count(:out_id) == 12 && @fielding_first.batting_results.where(game_id: @game.id).sum(:point_id) > @batting_first.batting_results.where(game_id: @game.id).sum(:point_id) %>
+              <td><%= @second_num_of_times[4] if @second_num_of_times[4] > 1%>x</td>
+              <% else %>
               <td><%= @second_num_of_times[4] %></td>
+              <% end %>
               <td><%= @second_num_of_times[5] %></td>
               <td><%= @second_num_of_times[6] %></td>
               <%# 後攻得点 %>
@@ -121,14 +125,6 @@
               <td><%= @batting_first.batting_results.where(game_id: @game.id).count(:time_base_id)%></td>
             </tr>
           </table>
-          <%# 5回試合終了の条件分岐 --- %>
-          <% if @fielding_first.batting_results.where(game_id: @game.id).count(:out_id) != 15 %> 
-            <div class="game-set">
-              <%= link_to "試合終了", game_result_path(@game.id, @game.result.id), method: :put %>
-              <p>【 試合終了ボタン 】を押して先に試合結果の画面に移動してください </p>
-            </div>
-          <%end%>
-        </div>
         <%# 得点掲示板  ここまで--- %>
 
        <div class="order-team-wrapper">

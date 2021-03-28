@@ -51,7 +51,7 @@
           <p>球場：<%= game.stadium%></p>
           <p>住所：<%= game.address%></p>
         </div>
-        <% unless current_team.games.find(game.id).orders.present? == true  && away_team.games.find(game.id).orders.present? == true %> 
+        <% unless current_team.orders.where(game_id: game.id).present? && away_team.orders.where(game_id: game.id).present? %> 
           <p class="caution">両チームのオーダー作成後に対戦画面が表示されます</p>
         <%end%>
 
@@ -66,9 +66,9 @@
           <%# ------ 対戦ボタンの条件分岐 %>
           <%if game.result.present? && game.result.win.present?%>
             <%= link_to "試合結果", game_result_path(game.id, game.result.id), class: "game-card-btn  red"%>
-          <% elsif game.result.present? && current_team.games.find(game.id).orders.present? && away_team.games.find(game.id).orders.present?%>
+          <% elsif game.result.present? %>
             <%= link_to "試合画面", team_game_batting_results_path(current_team.id, game.id), class: "game-card-btn  red" %>
-          <% elsif current_team.games.find(game.id).orders.present? == true  && away_team.games.find(game.id).orders.present? == true %>
+          <% elsif current_team.orders.where(game_id: game.id).present? && away_team.orders.where(game_id: game.id).present? %>
             <%= link_to "対戦画面", game_results_path(game.id), class: "game-card-btn  red" %>
           <% end%>
         </div>

@@ -10,7 +10,6 @@ class Position < ActiveHash::Base
     { id: 8, name: 'レフト' },
     { id: 9, name: 'センター' },
     { id: 10, name: 'ライト' },
-    { id: 11, name: 'DH' },
   ]
 
   include ActiveHash::Associations
