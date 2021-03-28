@@ -1,4 +1,8 @@
 class BattingResultsController < ApplicationController
+  before_action :authenticate_team!
+  before_action :team_auth
+  
+
   def index
     set_batting_results
     @at_bat_batting_result = AtBatBattingResult.new  # form_objectを使用
@@ -28,7 +32,17 @@ class BattingResultsController < ApplicationController
     end
   end
 
-  private
+  private 
+  def team_auth
+    game = Game.find(params[:game_id])
+    team1 = game.teams.ids[0]
+    team2 = game.teams.ids[1]
+    unless current_team.id == team1 || current_team.id == team2
+      redirect_to root_path
+    end
+  end
+
+
   def set_batting_results
 
     @game = Game.find(params[:game_id])

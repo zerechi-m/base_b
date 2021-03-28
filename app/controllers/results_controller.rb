@@ -1,4 +1,6 @@
 class ResultsController < ApplicationController
+  before_action :authenticate_team!
+  before_action :team_auth
 
   def index
     @result = Result.new
@@ -31,6 +33,15 @@ class ResultsController < ApplicationController
   end
 
   private
+  def team_auth
+    game = Game.find(params[:game_id])
+    team1 = game.teams.ids[0]
+    team2 = game.teams.ids[1]
+    unless current_team.id == team1 || current_team.id == team2
+      redirect_to root_path
+    end
+  end
+
   def set_result_first
     @game = Game.find(params[:game_id])
     @teams = @game.teams.includes(:members, :batting_results)
