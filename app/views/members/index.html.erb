@@ -35,10 +35,9 @@
     <%end%>
 
     <div class="team-grades">
-      <div>対戦回数</div>
-      <div>勝敗</div>
-      <div>チーム打率</div>
-      <div>チーム盗塁数</div>
+      <div>対戦回数  <%=Result.where(win: @team.name).count + Result.where(lose: @team.name).count %></div>
+      <div><%=Result.where(win: @team.name).count%>勝 <%= Result.where(lose: @team.name).count%>敗</div>
+      <div>チーム打率 <%= sprintf("%.3f", (@team.batting_results.count(:hit_id).to_f / @team.batting_results.count).round(3) )%></div>
       <div>チーム奪三振数</div>
       <div>高校野球出身者</div>
     </div>
@@ -118,19 +117,16 @@
               </div>
               <div class="person-profile-right">
                 <div class="profile-tag">
-                  打率
+                  打率 <%= sprintf("%.3f", (member.batting_results.count(:hit_id).to_f / member.batting_results.count).round(3))%>
                 </div>
                 <div class="profile-tag">
-                  打席数
+                  打席数 <%= member.batting_results.count %>
                 </div>
                 <div class="profile-tag">
-                  打点
+                  打点 <%= member.batting_results.sum(:point_id) %>
                 </div>
                 <div class="profile-tag">
-                  本塁打
-                </div>
-                <div class="profile-tag">
-                  盗塁
+                  本塁打 <%= member.batting_results.where(hit_id: 12).count %>
                 </div>
               </div>
             </div>
