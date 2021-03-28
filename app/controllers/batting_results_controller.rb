@@ -99,9 +99,9 @@ class BattingResultsController < ApplicationController
 
     unless count == 5
       last = @batting_first_results.last.id if @batting_first_results.last.present? # 初回のバッター表示分岐
-  
+      
       point = @batting_first_results.where(id: [batting_first_1st..last]).sum(:point_id)
-      point_array << point
+      point_array << point if last != batting_first_1st #前の回の点数を保持を防ぐ
     end
 
     return point_array
@@ -133,7 +133,7 @@ class BattingResultsController < ApplicationController
       last = @fielding_first_results.last.id if @fielding_first_results.last.present? # 初回のバッター表示分岐
 
       point = @fielding_first_results.where(id: [fielding_first_1st..last]).sum(:point_id)
-      point_array << point
+      point_array << point if last != fielding_first_1st #前の回の点数を保持を防ぐ
     end
 
     return point_array
