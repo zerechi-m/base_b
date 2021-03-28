@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_team!
+  before_action :team_match
 
   def new
     order_set           # order_setで 変数をセット
@@ -42,6 +44,9 @@ class OrdersController < ApplicationController
   end
 
   private
+  def team_match
+    redirect_to root_path unless current_team.id == params[:team_id].to_i
+  end
 
   def order_set
     @game = Game.find(params[:game_id])

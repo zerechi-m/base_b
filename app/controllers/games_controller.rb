@@ -1,5 +1,7 @@
 class GamesController < ApplicationController
+  before_action :authenticate_team!
   before_action :team_match
+
   def index
     @games = Team.find(params[:team_id]).games
   end
