@@ -110,7 +110,7 @@
               <td><%= @second_num_of_times[1] %></td>
               <td><%= @second_num_of_times[2] %></td>
               <td><%= @second_num_of_times[3] %></td>
-              <% if @batting_first.batting_results.where(game_id: @game.id).count(:out_id) == 15 && @fielding_first.batting_results.where(game_id: @game.id).count(:out_id) == 12 && @fielding_first.batting_results.where(game_id: @game.id).sum(:point_id) > @batting_first.batting_results.where(game_id: @game.id).sum(:point_id) %>
+              <% if @batting_first.batting_results.where(game_id: @game.id).count(:out_id) == 15 && @fielding_first.batting_results.where(game_id: @game.id).count(:out_id) >= 12 && @fielding_first.batting_results.where(game_id: @game.id).sum(:point_id) > @batting_first.batting_results.where(game_id: @game.id).sum(:point_id) %>
               <td><%= @second_num_of_times[4] if @second_num_of_times[4] > 1%>x</td>
               <% else %>
               <td><%= @second_num_of_times[4] %></td>
