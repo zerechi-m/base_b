@@ -31,21 +31,21 @@ https://base-b.herokuapp.com/
  
 ## DEMO
 
-** トップページ **
+**トップページ**
 
 '![demo](https://raw.github.com/wiki/zerechi-m/base_b/gif/top_page.gif)'
 
 - 登録された草野球チームが一覧に表示されており、各チームをクリックすることで
   メンバー詳細・チーム情報詳細・対戦申し込み画面へ遷移することができる。
 
-** メンバー詳細画面 **
+**メンバー詳細画面**
 
 '![demo](https://raw.github.com/wiki/zerechi-m/base_b/gif/member.gif)'
 
 - チームに登録された選手の打率や打点、野球部歴を確認することができる。
 - チームの情報を閲覧した上で対戦申し込みボタンを押すとメッセージ画面へ遷移する
 
-** メッセージ画面 **
+**メッセージ画面**
 
 '![demo](https://raw.github.com/wiki/zerechi-m/base_b/gif/message.gif)'
 
@@ -53,7 +53,7 @@ https://base-b.herokuapp.com/
   対戦オファーは独自のフォームに「試合予定日・球場・住所」を記載して送信することで、送信相手に「承諾・辞退」のボタンが現れる。
 - 承諾ボタンを押すと試合日程画面に遷移し、辞退ボタンを押すとオファー自体が削除される。
 
-** 試合日程画面 **
+**試合日程画面**
 
 '![demo](https://raw.github.com/wiki/zerechi-m/base_b/gif/game.gif)'
 
@@ -61,7 +61,7 @@ https://base-b.herokuapp.com/
 - 両チームがオーダを作成することで試合開始のボタンが出現する。
 - 試合開始ボタンへ遷移後に先攻と後攻を選択して試合開始
 
-** 試合中の画面遷移 **
+**試合中の画面遷移**
 
 - 作成したオーダー順に打席の結果を記載して送信
   送信後に、下記に打席結果が反映されて結果ごとに色を変えています。
@@ -69,7 +69,7 @@ https://base-b.herokuapp.com/
 - 対戦相手の打撃結果も閲覧できるので、打者に応じた守備体系を行うことができます。
 - 試合終了の条件分岐（サヨナラ・引き分けなど）を行い、試合が終わると打席の記入を終了し、試合終了ボタンが出現
 
-** 試合終了画面 **
+**試合終了画面**
 
 '![demo](https://raw.github.com/wiki/zerechi-m/base_b/gif/result.gif)'
 
