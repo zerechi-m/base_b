@@ -1,5 +1,7 @@
 # README
 
+
+'![demo](https://raw.github.com/wiki/zerechi-m/base_b/gif/game.gif)'
 ## 概要
 - 草野球チームの対戦マッチング・試合結果の集計アプリです。
   チームと選手を登録し、アプリ内のメッセージ機能を使用することで他の登録チームから対戦のオファーや
