@@ -1,14 +1,21 @@
 <%= render "shared/main_header" %>
 <div class="top-height"></div>
+ 
+<%if flash[:alert] %>
+  <p class="flash-message2 alert"><%= flash[:alert] %></p>
+<% elsif flash[:notice] %>
+  <p class="flash-message2 notice"><%= flash[:notice] %></p>
+<%end%>
 
 <div class="game-index-wrapper">
+ 
   <div class="game-index-container">
     <div class="game-index-title">
       <h1>試合日程画面</h1>
     </div>
 
     <%# --- ここからは試合の日程 ----  %>
-    <% current_team.games.each do |game|%>
+    <% @games.each do |game|%>
       <% away_team = game.teams.select{|team| team != current_team}[0] %> <%# ログインチーム以外を away_teamに格納 %>
       <div class="game-card-wrapper">
         <div class="card-title">
@@ -44,13 +51,29 @@
           <p>球場：<%= game.stadium%></p>
           <p>住所：<%= game.address%></p>
         </div>
+        <% unless current_team.orders.where(game_id: game.id).present? && away_team.orders.where(game_id: game.id).present? %> 
+          <p class="caution">両チームのオーダー作成後に対戦画面が表示されます</p>
+        <%end%>
+
         <div class="game-card-btn-container">
-          <%= link_to "対戦画面", "#", class: "game-card-btn" %>
+          <%# ------ オーダーボタンの条件分岐 %>
+          <% if current_team.orders.where(game_id: game.id).present? %>
+            <%= link_to "オーダー詳細", team_game_order_path(current_team.id, game.id, game.orders.where(team_id: current_team.id).ids), class:"game-card-btn orange" unless game.result.present?%>
+          <% else %>
+            <%= link_to "オーダー作成", new_team_game_order_path(current_team.id, game.id), class: "game-card-btn green" %>
+          <% end %>
+
+          <%# ------ 対戦ボタンの条件分岐 %>
+          <%if game.result.present? && game.result.win.present?%>
+            <%= link_to "試合結果", game_result_path(game.id, game.result.id), class: "game-card-btn  red"%>
+          <% elsif game.result.present? %>
+            <%= link_to "試合画面", team_game_batting_results_path(current_team.id, game.id), class: "game-card-btn  red" %>
+          <% elsif current_team.orders.where(game_id: game.id).present? && away_team.orders.where(game_id: game.id).present? %>
+            <%= link_to "対戦画面", game_results_path(game.id), class: "game-card-btn  red" %>
+          <% end%>
         </div>
       </div>
     <%end%>
-    <%# --- ここからは試合の日程 ----  %>
-
   </div>
 </div>
 

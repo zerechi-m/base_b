@@ -17,4 +17,6 @@ class Team < ApplicationRecord
   has_one_attached :image, dependent: :destroy
   has_many :team_games
   has_many :games, through: :team_games
+  has_many :orders
+  has_many :batting_results
 end

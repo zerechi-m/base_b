@@ -1,0 +1,382 @@
+// Place all the styles related to the batting_results controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.batting-result-order-wrapper{
+  width: 100%;
+  height: calc(100vh - 10vh);
+  background-color: darkgreen;
+  background-image: url("top.jpg");
+  background-position: center;
+  background-size: cover;
+  .result-order-container{
+    width: 80vw;
+    height: 100%;
+    margin: 0 auto;
+    background-color: rgba($color: #f8f8ff, $alpha: 0.9);
+    overflow: scroll;
+
+    .result-order-title{
+      height: 50px;
+      width: 100%;
+      margin: 20px 0;
+      h2{
+        font-weight: bold;
+        font-size: 22px;
+        text-align: center;
+        padding: 14px;
+        letter-spacing: 2px;
+      }
+    }
+    
+    .score-board-container{
+      padding: 10px;
+    }
+    .result-order-container-inner{
+      width:80%;
+      padding: 8px;
+      margin: 0 auto;
+
+      .result-order-team-wrapper{
+        margin: 15px;
+        display: flex;
+
+        .result-order-team-container{
+          width: 80%;
+          height: 80px;
+          margin: 15px auto;
+          border: 1px solid ;
+          display: flex;
+          background-color: white;
+          .order-color{
+            width: 10%;
+            background-color: midnightblue;
+          }
+          .green{
+            background-color: green;
+          }
+          .order-team-logo{
+            width: 70px;
+            height: 100%;
+          }
+          .order-team-name{
+            margin-left: 10px;
+            width: calc( 100% - 60px);
+            a{
+              display: block;
+              color: black;
+              padding: 15px 5px;
+              margin: 10px;
+              height: 70%;
+              &:hover{
+                background-color: rgba($color: lightblue, $alpha: 0.4);
+              }
+            }
+          }
+        }
+      }
+      .game-set{    // 試合終了ボタン
+        width: 80%;
+        height: 80px;
+        margin: 40px auto 40px;
+        a{
+          height: 50px;
+          width: 50%;
+          padding: 10px;
+          font-size: 20px;
+          letter-spacing: 3px;
+          font-weight: bold;
+          background-color: #ea5549;
+          border: 1px solid black;
+          border-radius: 8px;
+          color: white;
+          margin: 0 auto;
+          text-align: center;
+          display: block;
+          &:hover{
+            background-color: rgba($color: #ea5549, $alpha: 0.8);
+          }
+        }
+        p{
+          margin-top: 10px;
+          font-size: 18px;
+          text-align: center;
+        }
+      }// ------ 試合終了ボタン ここまで
+
+      .batter-container{
+        margin: 50px 0;
+
+      }
+
+      .order-title{
+        width: 100%;
+        height: 50px;
+        margin: 10px 0;
+        p{
+          height: 100%;
+          text-align: center;
+          padding: 10px 0;
+          font-size: 20px;
+          font-weight: bold;
+        }
+      }
+      
+      .order-team-member-container{
+        width: 100%;
+      }
+      .order-btn-container{
+        width: 100%;
+        margin: 25px;
+        .order-submit-btn{
+          width: 20%;
+          padding: 10px;
+          height: 50px;
+          text-align: center;
+          display: block;
+          margin: 0 auto;
+          cursor: pointer;
+          letter-spacing: 2px;
+          border-radius: 6px;
+          color: white;
+          background-color: orange;
+          &:hover{
+            background-color: rgba($color: orange, $alpha: 0.8);
+          }
+        }
+        .red{
+          background-color: #ea5549;
+          border: 1px solid black;
+        }
+        
+      }
+    }
+    
+  }
+}
+// 得点板テーブル --------------
+.score-table{
+  width: 100%;
+  text-align: center;
+  background-color: darkgreen;
+  border: 2px solid lightgrey;
+  
+  th{
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    height: 50px;
+    .score-team-name{
+      width: 50px;
+    }
+    
+  }
+  td{
+    color: whitesmoke;
+    width:50px;
+    font-size: 20px;
+    .score-logo{
+      width: 50px;
+      height: 50px;
+    }
+  }
+  .score-team-name-td{
+    width: 200px;
+    font-size: 16px;
+    a{
+      color: white;
+      &:hover{
+        background-color: rgba($color: #ffdc00, $alpha: 0.6);
+      }
+    }
+  }
+  
+}
+// スコアテーブル ---ここまで-----------
+
+// バッターテーブル --------------
+
+.batter-table{
+  width: 100%;
+  tr{
+    height: 60px;
+    text-align: center;   
+  }
+
+  tr:nth-child(odd){
+    background-color: lightgrey;
+  }
+  tr:nth-child(even){
+    background-color: white;
+  }
+
+  th{
+    text-align: center;
+    background-color: orange;
+    color: white;
+    
+  }
+
+  td {
+    letter-spacing: 2px;
+
+    .member-select-form{
+      margin: 2px;
+      width: 80%;
+      height: 60px;
+      padding-left: 10px;
+      padding: 2px;
+      font-size: 18px;
+      font-weight: bold;
+      &:hover{
+        border: 1px solid #00a1e9;
+      }
+    }
+  
+    .position-select-form{
+      margin: 2px;
+      width: 20%;
+      height: 60px;
+      padding-left: 10px;
+      padding: 2px;
+      font-size: 18px;
+      font-weight: bold;
+      &:hover{
+        border: 1px solid #00a1e9;
+      }
+    }
+  }
+  .batter-select-form{
+    width: 10%;
+    height: 30px;
+  }
+  .result-mem-logo{
+    height: 55px;
+    width: 50px;
+  }
+  .mem-logo{
+    width: 65px;
+  }
+
+  .order-number{
+    width: 30px;
+  }
+  .submit{
+    background-color: orangered;
+    color: white;
+    width: 100%;
+    &:hover{
+      background-color: rgba($color: orangered, $alpha: 0.7);
+      cursor: pointer;
+    }
+  }
+}
+// バッターテーブル ここまで-------------
+
+// 各打席成績のテーブル
+.batting-result-table{
+  width: 100%;
+  tr{
+    height: 60px;
+    text-align: center;   
+  }
+
+  tr:nth-child(odd){
+    background-color: #ffefd5;
+  }
+  tr:nth-child(even){
+    background-color: whitesmoke;
+  }
+
+  th{
+    text-align: center;
+    background-color: #043c78;
+    color: white;
+    
+  }
+
+  td {
+    letter-spacing: 2px;
+
+    .member-select-form{
+      margin: 2px;
+      width: 80%;
+      height: 60px;
+      padding-left: 10px;
+      padding: 2px;
+      font-size: 18px;
+      font-weight: bold;
+      &:hover{
+        border: 1px solid #00a1e9;
+      }
+    }
+  
+    .position-select-form{
+      margin: 2px;
+      width: 20%;
+      height: 60px;
+      padding-left: 10px;
+      padding: 2px;
+      font-size: 18px;
+      font-weight: bold;
+      &:hover{
+        border: 1px solid #00a1e9;
+      }
+    }
+  }
+  .result-mem-logo{
+    height: 55px;
+    width: 50px;
+  }
+  .mem-logo{
+    width: 65px;
+  }
+
+  .order-number{
+    width: 30px;
+  }
+  .order-position{
+    width: 30px;
+  }
+  .pitcher{
+    background-color: rgba($color: #ea5549, $alpha: 0.7);
+  }
+
+  p{
+    display: inline;
+  }
+  .point{
+    background-color: #d9e367;
+    border-radius: 3px;
+  }
+  .hit{
+    padding: 9px;
+    border: 1px solid hotpink;
+    background-color: #ea5532;
+    color: white;
+    border-radius: 5px;
+    margin: 5px;
+  }
+  .out{
+    padding: 9px;
+    border: 1px solid blue;
+    background-color: #0075c2;
+    color: white;
+    border-radius: 5px;
+    margin: 5px;
+  }
+  .f-error{
+    padding: 9px;
+    border: 1px solid blue;
+    background-color: #dcd6d2;
+    border-radius: 5px;
+    margin: 5px;
+  }
+  .four-ball{
+    padding: 9px;
+    border: 1px solid blue;
+    background-color: #fcc800;
+    color: white;
+    border-radius: 5px;
+    margin: 5px;
+  }
+}

@@ -8,6 +8,12 @@
   background-image: url("game_index.jpg");
   background-size: cover;
   background-position: center;
+  .caution{
+    width: 100%;
+    height: 30px;
+    background-color: rgba($color: orange, $alpha: 0.8);
+    text-align: center;
+  }
  
 
   .game-index-title{
@@ -39,7 +45,7 @@
     .game-card-wrapper{
       width: 73%;
       height: 350px;
-      margin: 25px auto;
+      margin: 50px auto 70px;
       border: 1px solid;
       border-radius: 6px;
       background-color: #fffaf0;
@@ -116,6 +122,7 @@
       .game-card-btn-container{
         height: 20%;
         width: 100%;
+        margin-bottom: 20px;
         background-color: #001e43;
         border-radius: 0 0 6px 6px;
         display: flex;
@@ -131,12 +138,25 @@
           margin: 0 auto;
           text-align: center;
           color: white;
-          background-color: #f39800;
           border-radius: 6px;
+        }
+        .green{
+          background-color: green;
           &:hover{
-            background-color: rgba($color: #f39800, $alpha: 0.8);
+            background-color: rgba($color: green, $alpha: 0.8);
           }
-
+        }
+        .orange{
+          background-color: orange;
+          &:hover{
+            background-color: rgba($color: orange, $alpha: 0.8);
+          }
+        }
+        .red{
+          background-color: #ea5549;
+          &:hover{
+            background-color: rgba($color: #ea5549, $alpha: 0.8);
+          }
         }
       }
     }

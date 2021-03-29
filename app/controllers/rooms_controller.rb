@@ -3,7 +3,8 @@ class RoomsController < ApplicationController
   before_action :team_match
 
   def index 
-    
+    @team = Team.find(params[:team_id])
+    @rooms = @team.rooms
   end
   
   def create

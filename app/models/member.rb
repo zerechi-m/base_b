@@ -13,5 +13,6 @@ class Member < ApplicationRecord
   end
 
   belongs_to :team
+  has_many :batting_results
   has_one_attached :mem_image, dependent: :destoroy
 end

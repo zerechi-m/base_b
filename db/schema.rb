@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_17_064413) do
+ActiveRecord::Schema.define(version: 2021_03_24_033926) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -31,6 +31,37 @@ ActiveRecord::Schema.define(version: 2021_03_17_064413) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "at_bats", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "member_id"
+    t.bigint "game_id"
+    t.bigint "team_id"
+    t.bigint "batting_result_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["batting_result_id"], name: "index_at_bats_on_batting_result_id"
+    t.index ["game_id"], name: "index_at_bats_on_game_id"
+    t.index ["member_id"], name: "index_at_bats_on_member_id"
+    t.index ["team_id"], name: "index_at_bats_on_team_id"
+  end
+
+  create_table "batting_results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "hit_id"
+    t.integer "out_id"
+    t.integer "time_base_id"
+    t.integer "point_id"
+    t.integer "four_deadball_id"
+    t.bigint "game_id"
+    t.bigint "team_id"
+    t.bigint "member_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "order_id"
+    t.index ["game_id"], name: "index_batting_results_on_game_id"
+    t.index ["member_id"], name: "index_batting_results_on_member_id"
+    t.index ["order_id"], name: "index_batting_results_on_order_id"
+    t.index ["team_id"], name: "index_batting_results_on_team_id"
   end
 
   create_table "games", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -66,6 +97,32 @@ ActiveRecord::Schema.define(version: 2021_03_17_064413) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["room_id"], name: "index_messages_on_room_id"
     t.index ["team_id"], name: "index_messages_on_team_id"
+  end
+
+  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "batting_order"
+    t.integer "position_id"
+    t.bigint "game_id"
+    t.bigint "team_id"
+    t.bigint "member_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_id"], name: "index_orders_on_game_id"
+    t.index ["member_id"], name: "index_orders_on_member_id"
+    t.index ["team_id"], name: "index_orders_on_team_id"
+  end
+
+  create_table "results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "win"
+    t.string "lose"
+    t.string "batting_first"
+    t.string "fielding_first"
+    t.integer "batting_first_point"
+    t.integer "fielding_first_point"
+    t.bigint "game_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_id"], name: "index_results_on_game_id"
   end
 
   create_table "room_teams", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -107,9 +164,20 @@ ActiveRecord::Schema.define(version: 2021_03_17_064413) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "at_bats", "batting_results"
+  add_foreign_key "at_bats", "games"
+  add_foreign_key "at_bats", "members"
+  add_foreign_key "at_bats", "teams"
+  add_foreign_key "batting_results", "games"
+  add_foreign_key "batting_results", "members"
+  add_foreign_key "batting_results", "orders"
+  add_foreign_key "batting_results", "teams"
   add_foreign_key "members", "teams"
   add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "teams"
+  add_foreign_key "orders", "games"
+  add_foreign_key "orders", "members"
+  add_foreign_key "orders", "teams"
   add_foreign_key "room_teams", "rooms"
   add_foreign_key "room_teams", "teams"
 end

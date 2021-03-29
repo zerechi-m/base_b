@@ -29,7 +29,7 @@
         </div>
         <div class='field-input'>
           <span class="span-form-label">ポジション</span>
-          <%= f.collection_select :position_id, Position.where.not(id: 8), :id, :name, {include_blank: "----"}, class: "select-input" %>
+          <%= f.collection_select :position_id, Position.where(id: [1,2,3,4,5,6,7]), :id, :name, {include_blank: "----"}, class: "select-input" %>
         </div>
         <div class='field-input'>
           <span class="span-form-label">最終野球歴</span>

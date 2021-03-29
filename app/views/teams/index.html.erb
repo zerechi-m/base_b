@@ -35,13 +35,13 @@
                 <%= team.name%>
               </div>
               <div class="team-tag">
-                勝敗
+                <%= Result.where(win: team.name).count%>勝<%= Result.where(lose: team.name).count%>敗
               </div>
               <div class="team-tag">
-                チーム打率
+                チーム打率 <%= sprintf("%.3f", (team.batting_results.count(:hit_id).to_f / team.batting_results.count).round(3) )%>
               </div>
               <div class="team-tag">
-                チーム打点
+                チーム打点 <%= team.batting_results.sum(:point_id)%>
               </div>
               <div class="team-tag">
                 選手人数<%= team.members.count%>人 投手:<%= team.members.where(position_id: 1).count%>人  野手:<%= team.members.where.not(position_id: 1).count%>人
