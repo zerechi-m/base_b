@@ -1,7 +1,7 @@
 # README
 
 
-'![demo](https://raw.github.com/wiki/zerechi-m/base_b/gif/top_page.gif)'
+'![demo](https://raw.github.com/wiki/zerechi-m/base_b/gif/game.gif)'
 ## 概要
 - 草野球チームの対戦相手を見つけるマッチングアプリ
 - 試合毎に選手の結果をつけるので、各チームの所属人数や所属選手の打撃成績・投手成績を見ることができる
