@@ -15,8 +15,8 @@
 https://base-b.herokuapp.com/
 
 basic認証
-- admin@
-- 2234
+- ユーザー名：admin@
+- パスワード：2234
 
 ログイン情報（テストユーザー1)
 - Email : test@test
