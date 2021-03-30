@@ -3,40 +3,39 @@
 <div class="top-height"></div>
 <div class='account-page' id='account-page'>
   <div class='account-page__inner clearfix'>
-    <div class='account-page__inner--left account-page__header'>
-      <h2>Sign-in Acount</h2>
+    <div class='account-page__inner'>
       <h5>アカウントのサインイン</h5>
     </div>
-    <div class='account-page__inner--right user-form'>
+    <div class='account-page__inner'>
+      <% if flash[:alert].present?%>
+      <div class="errors-container">
+        <%= flash[:alert] %>
+      </div>
+      <%end%>
       <%= form_with model: @team, url: team_session_path, method: :post, local: true do |f|%>
-        <%= devise_error_messages!%>
-        <div class='field'>
+
           <div class='field-label'>
             <%= f.label :email%>
           </div>
           <div class='field-input'>
             <%= f.email_field :email%>
           </div>
-        </div>
-        <div class='field'>
           <div class='field-label'>
             <%= f.label :password%>
           </div>
           <div class='field-input'>
             <%= f.password_field :password, autocomplete: "off"%>
           </div>
-        </div>
-        <div class='field'>
           <div class='field-label'>
             <%= f.label :password_confirmation%>
           </div>
           <div class='field-input'>
             <%= f.password_field :password_confirmation, autocomplete: "off"%>
           </div>
-        </div>
-        <div class='actions'>
-          <%= f.submit "Login", class: 'btn'%>
-        </div>
+          <div class='action'>
+          <%= f.submit "ログイン", class: 'btn'%>
+          </div>
+
       </div>
     <% end %>
   </div>

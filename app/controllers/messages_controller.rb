@@ -17,6 +17,7 @@ class MessagesController < ApplicationController
       flash.now[:notice] = "メッセージが送信されました"
       redirect_to action: :index
     else
+      @rooms = Team.find(params[:team_id]).rooms
       @messages = @room.messages.includes(:team)
       flash.now[:alert] = "メッセージの送信が失敗しました! 空白を無くしてください"
       render :index

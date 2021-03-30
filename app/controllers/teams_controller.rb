@@ -20,8 +20,9 @@ class TeamsController < ApplicationController
   def edit
   end
 
+  # set_teamで @teamを作成
   def update
-    if current_team.update(update_params)
+    if @team.update(update_params)
       redirect_to action: :show
     else
       render action: :edit

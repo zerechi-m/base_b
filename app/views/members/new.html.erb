@@ -1,7 +1,7 @@
 <%= render "shared/main_header" %>
 
-<div class="show-main-wrapper">
 <div class="top-height"></div>
+<div class="show-main-wrapper">
 
   <%if flash[:alert] %>
     <p class="flash-message2 alert"><%= flash[:alert] %></p>
@@ -9,7 +9,12 @@
 
   <div class="new-container">
     <div class="field-container">
-    <h2 class="title">選手登録 : <%= @team.name %></h2>
+      <h2 class="title">選手登録 : <%= @team.name %></h2>
+      <% if @member.errors.any? %>
+        <div class="member-errors-container">
+          <%= render "devise/shared/error_messages", resource: @member%>
+        </div>
+        <%end%>
       <%= form_with model: @member, url: team_members_path(@team.id), method: :post,  local: true do |f|%>
         <div class='field-input'>
           選手名を入力<i> ＊空白を含めない＊</i>
