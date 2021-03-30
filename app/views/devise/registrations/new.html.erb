@@ -8,7 +8,7 @@
     </div>
     <div class='account-page__inner--right user-form'>
       <%= form_with model: @team, url: team_registration_path, local: true do |f|%>
-        <% if devise_error_messages! %>
+        <% if @team.errors.any? %>
           <div class="errors-container">
             <%= devise_error_messages!%>
           </div>
