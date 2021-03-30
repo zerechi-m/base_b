@@ -13,17 +13,26 @@
 }
 
 .account-page  {
-  width: 70vw;
+  width: 100vw;
   height: calc(100vh - 10vh - 8vh);
   margin: 0 auto ;
-  background-color: lightgrey;
   overflow: scroll;
+  background-image:url("game.jpg");
+  background-size: cover;
+  background-position: center;
+
+  .background-c{
+    background-color: rgba($color: lightgrey, $alpha: 0.8);
+  }
+
   .account-page__inner{
-    margin: 30px;
+    margin: 30px auto;
+    width: 70vw;
+    padding: 10px 0;
     text-align: center;
     h5{
       width: 100%;
-      margin: 50px 0;
+      margin: 10px 0;
       font-size: 25px;
     }
     .field-label{

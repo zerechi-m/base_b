@@ -20,7 +20,7 @@
           選手名を入力<i> ＊空白を含めない＊</i>
         </div>
         <div class='field-input'>
-          <%= f.text_field :name, placeholder: "入力例 : 田中太郎" %>
+          <%= f.text_field :name, placeholder: "入力例 : 田中太郎" , maxlength: 8%>
         </div>
         <div class='field-input'>
           写真を登録
@@ -30,7 +30,7 @@
         </div>
         <div class='field-input'>
           <span class="span-form-label">背番号入力</span>
-          <%= f.text_field :uni_no, placeholder: "0 ~ 100", class: "select-input"%>
+          <%= f.text_field :uni_no, placeholder: "0 ~ 100", maxlength: 3,class: "select-input"%>
           <span class="span-form-label">番</span>
         </div>
         <div class='field-input'>

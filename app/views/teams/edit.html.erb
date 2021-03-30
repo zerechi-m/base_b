@@ -2,11 +2,11 @@
 
 <div class="top-height"></div>
 <div class='account-page' id='account-page'>
-  <div class='account-page__inner clearfix'>
+  <div class='account-page__inner background-c'>
     <div class='account-page__inner'>
       <h5>チームの編集</h5>
     </div>
-    <div class='account-page'>
+    <div class='account-page_inner'>
       <% if @team.errors.any? %>
         <div class="errors-container">
           <%= render "devise/shared/error_messages", resource: @team%>
