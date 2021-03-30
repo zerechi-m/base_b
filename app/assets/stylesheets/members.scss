@@ -16,6 +16,14 @@
   letter-spacing: 2px;
 }
 
+.member-errors-container{
+  margin: 0 auto;
+  padding: 10px;
+  border: solid 1px red;
+  color: red;
+  background-color:rgba($color: #f5b2b2, $alpha: 0.6);
+}
+
 // member#index 
 .mem-index-main-wrapper{
   width: 100vw;

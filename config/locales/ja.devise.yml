@@ -29,6 +29,7 @@ ja:
         updated_at: 更新日
     models:
       team: チーム
+      member: 選手
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。
