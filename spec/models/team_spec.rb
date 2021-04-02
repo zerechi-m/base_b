@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Team, type: :model do
-  before do
-    @team = FactoryBot.build(:team)
-  end
-
-  describe 'チーム新規登録' do
+  describe "チームの新規登録時のテスト" do
+    before do
+      @team = FactoryBot.build(:team)
+    end
+    
     context 'チームの新規登録ができる' do
       it '全ての値が正しければ登録できる' do 
         expect(@team).to be_valid
@@ -141,5 +141,6 @@ RSpec.describe Team, type: :model do
        expect(@team.errors.full_messages).to include("パスワード（確認用）とパスワードの入力が一致しません")
       end
     end
+  
   end
 end
