@@ -21,6 +21,11 @@ RSpec.describe Team, type: :model do
         expect(@team).to be_valid
       end
 
+      it 'チーム名に半角・全角のスペースが入っていても削除して登録できる' do 
+        @team.name = "22　ソフト 野球"
+        expect(@team).to be_valid
+      end
+
       it '代表者名にカタカナが入っていても登録ができる' do
         @team.rep_name = "タナカ"
         expect(@team).to be_valid

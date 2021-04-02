@@ -1,6 +1,8 @@
 class Team < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  before_validation :delete_space
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -22,4 +24,10 @@ class Team < ApplicationRecord
   has_many :games, through: :team_games
   has_many :orders
   has_many :batting_results
+
+  private
+  def delete_space
+    self.name = name.gsub(/[[:space:]]/,"")
+    self.rep_name = rep_name.gsub(/[[:space:]]/,"")
+  end
 end
