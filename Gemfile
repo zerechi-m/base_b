@@ -32,8 +32,13 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   
-  # Rspec の追加
+  # Rspec関連の追加
   gem 'rspec-rails', '~>4.0.0'
+  gem 'factory_bot_rails'
+
+  # テスト入力用のgem
+  gem 'gimei'
+  gem 'faker'
 end
 
 group :development do
@@ -68,5 +73,3 @@ gem "image_processing", "~> 1.2"
 
 # Active_Hashの追加
 gem "active_hash"
-
-# Rspec
