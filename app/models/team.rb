@@ -5,8 +5,8 @@ class Team < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   with_options presence: true do
-    validates :name, length: { in: 4..15 }, uniqueness: true
-    validates :rep_name, length: { minimum: 2, maximum: 8 }, format: { with: /\A[ぁ-んヶ々一-龥]+\z/ }
+    validates :name, length: { in: 4..15 }, uniqueness: {case_sensitive: false }
+    validates :rep_name, length: { minimum: 2, maximum: 8 }, format: { with: /\A[ぁ-んァ-ヶ々一-龥]+\z/ }
   end
   validates :password, 
       format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i, message: 'は半角英数字の混合で入力してください'},

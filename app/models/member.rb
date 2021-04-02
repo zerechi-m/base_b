@@ -5,7 +5,7 @@ class Member < ApplicationRecord
   belongs_to :dominant_hand
 
   with_options presence: true do
-    validates :name,     format: { with: /\A[ぁ-んヶ々一-龥]+\z/ }
+    validates :name,     format: { with: /\A[ぁ-んァ-ヶ々一-龥]+\z/ }
     validates :uni_no,     numericality: { in: 0..100 }
     validates :dominant_hand
     validates :position_id
