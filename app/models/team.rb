@@ -5,9 +5,12 @@ class Team < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   with_options presence: true do
-    validates :name, length: { in: 4..20 }, uniqueness: true
-    validates :rep_name, length: { minimum: 2, maximum: 15 }, format: { with: /\A[ぁ-んヶ々一-龥]+\z/ }
+    validates :name, length: { in: 4..15 }, uniqueness: true
+    validates :rep_name, length: { minimum: 2, maximum: 8 }, format: { with: /\A[ぁ-んヶ々一-龥]+\z/ }
   end
+  validates :password, 
+      format: { with: /\A[0-9a-z]+\z/, message: 'は半角英数字の混合で入力してください'},
+      length: {minimum: 6, maximum: 10, message: 'は6文字以上10文字以下で設定してください'}
 
   has_many :members, dependent: :destroy
 
