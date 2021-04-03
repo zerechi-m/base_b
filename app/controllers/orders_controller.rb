@@ -8,6 +8,9 @@ class OrdersController < ApplicationController
   end
 
   def create
+    
+    binding.pry
+    
     position_blank = params[:position_id].map{|n| n.present? }
     member_blank = params[:member_id].map{|n| n.present?}
 

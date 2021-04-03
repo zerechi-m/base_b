@@ -7,7 +7,7 @@ FactoryBot.define do
     position_id       {rand(1..7)}
     base_hist_id      {rand(1..4)}
     association       :team
-    
+
     after(:build) do |member|
       member.mem_image.attach(io: File.open("public/images/sonbu.png"), filename: 'sonbu.png')
     end
