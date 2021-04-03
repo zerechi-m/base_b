@@ -5,8 +5,16 @@ ja:
       member:
         name: 選手名
         uni_no: 背番号
-        position: ポジション
+        position_id: ポジション
         dominant_hand: 利投/利打
+      message:
+        content: メッセージ
+        game_day: 試合予定日
+        game_time: 試合開始時間
+        address: 球場住所
+        stadium: 球場名
+      models: 
+        message: メッセージ
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

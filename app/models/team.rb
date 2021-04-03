@@ -1,13 +1,18 @@
 class Team < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  before_validation :delete_space
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
   with_options presence: true do
-    validates :name, length: { in: 4..20 }, uniqueness: true
-    validates :rep_name, length: { minimum: 2, maximum: 15 }, format: { with: /\A[ぁ-んヶ々一-龥]+\z/ }
+    validates :name, length: { in: 4..15 }, uniqueness: {case_sensitive: false }
+    validates :rep_name, length: { minimum: 2, maximum: 8 }, format: { with: /\A[ぁ-んァ-ヶ々一-龥]+\z/ }
   end
+  validates :password, 
+      format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i, message: 'は半角英数字の混合で入力してください'},
+      length: {minimum: 6, maximum: 10, message: 'は6文字以上10文字以下で設定してください'}
 
   has_many :members, dependent: :destroy
 
@@ -19,4 +24,10 @@ class Team < ApplicationRecord
   has_many :games, through: :team_games
   has_many :orders
   has_many :batting_results
+
+  private
+  def delete_space
+    self.name = name.gsub(/[[:space:]]/,"")
+    self.rep_name = rep_name.gsub(/[[:space:]]/,"")
+  end
 end
