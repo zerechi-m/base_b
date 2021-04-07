@@ -112,7 +112,7 @@ Heroku
 
 # テスト
 ** 未実装 **
-RSpecでのテスト実装予定
+RSpecでのモデル単体テスト実装
 
 # ソース管理
 GitHub, GitHubDesktop
