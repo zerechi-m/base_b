@@ -22,6 +22,6 @@ class Member < ApplicationRecord
 
   private
   def delete_space
-    self.name = name.gsub(/[[:space:]]/,"")
+    self.name = name.gsub(/[[:space:]]/,"") unless self.name.blank?
   end
 end

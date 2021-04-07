@@ -27,7 +27,7 @@ class Team < ApplicationRecord
 
   private
   def delete_space
-    self.name = name.gsub(/[[:space:]]/,"")
-    self.rep_name = rep_name.gsub(/[[:space:]]/,"")
+    self.name = name.gsub(/[[:space:]]/,"") unless self.name.blank?
+    self.rep_name = rep_name.gsub(/[[:space:]]/,"") unless self.rep_name.blank?
   end
 end
